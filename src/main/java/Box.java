@@ -4,27 +4,31 @@ public class Box {
     private boolean bomb;
     private boolean reveal;
 
-    public Box (int adjacentBombs, boolean bomb, boolean reveal) {
-        this.flag = false;
+    public Box (boolean flag, int adjacentBombs, boolean bomb, boolean reveal) {
+        this.flag = flag;
         this.adjacentBombs = adjacentBombs;
         this.bomb = bomb;
         this.reveal = reveal;
     }
 
-    private boolean getFlag(){
+    public boolean getFlag(){
         return this.flag;
     }
 
-    private int getAdjacentBombs(){
+    public int getAdjacentBombs(){
         return this.adjacentBombs;
     }
 
-    private boolean getBomb(){
+    public boolean getBomb(){
         return this.bomb;
     }
 
-    private boolean getReveal(){
+    public boolean getReveal(){
         return this.reveal;
+    }
+
+    public void setReveal(boolean reveal) {
+        this.reveal = reveal;
     }
 
     private String printAdjacentBombs(){
@@ -35,15 +39,12 @@ public class Box {
         }
     }
 
-    @Override
-    public String toString() {
-        if (this.getFlag()) {
-            return "F";
-        } else if (this.getBomb()) {
+
+    public String solutionDisplay() {
+        if (this.getBomb()) {
             return "B";
-        } else if (this.getReveal()) {
+        } else {
             return this.printAdjacentBombs();
         }
-        return " ";
     }
 }

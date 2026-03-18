@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClass.set("minesweeper")
+    mainClass.set("Minesweeper")
 }
 
 shadowJar {
