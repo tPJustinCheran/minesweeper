@@ -1,5 +1,6 @@
 public class minesweeper {
     public static void main(String[] args) {
-        System.out.println("Hello from\n" + "TEST");
+        Gameboard g = new Gameboard();
+        System.out.println(g.toString());
     }
 }
