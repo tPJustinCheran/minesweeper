@@ -55,7 +55,7 @@ public class Gameboard {
      * Randomly generates bombs and stores the grid in solution.txt
      *
      */
-    public Gameboard(Storage storage) throws MinesweeperException {
+    public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
         this.gameboard = new Box[10][10];
         List<Integer> bombPlacements = this.generateBombPlacements();
         for (int i = 0; i < 10; i++) {
@@ -70,6 +70,7 @@ public class Gameboard {
         }
         this.storeSolution(storage);  // store solution to solution.txt file
         this.storeGame(storage);   // store existing gameplay to game.txt file
+        customTimer.startTime(); // start timer
     }
 
     private boolean revealInGameboard(String marker) {
@@ -89,7 +90,7 @@ public class Gameboard {
      * @param gameGrid
      * @throws MinesweeperException
      */
-    public Gameboard(Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
+    public Gameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
         this.gameboard = new Box[10][10];
         for (int i = 0; i < 10; i++) {
             String currRowSoln = solutionGrid.get(i);
@@ -106,6 +107,7 @@ public class Gameboard {
                 }
             }
         }
+        customTimer.startTime();
     }
 
 

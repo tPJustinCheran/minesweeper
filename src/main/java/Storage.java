@@ -94,6 +94,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Load Solution from solution.txt file.
+     * Shows Location of Bombs, and numberOfAdjacentBombs for each box in grid.
+     *
+     * @return A List of Strings (which represents the gameboard).
+     * @throws MinesweeperException
+     */
     public List<String> loadSolution() throws MinesweeperException {
         try {
             List<String> solution = Files.readAllLines(this.solutionFilePath);
@@ -106,6 +113,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Load Gameplay from game.txt file.
+     * For each box in grid, shows if the box has been flagged, revealed or not revealed.
+     *
+     * @return A List of Strings (which represents the gameboard).
+     * @throws MinesweeperException
+     */
     public List<String> loadGame() throws MinesweeperException {
         try {
             List<String> gameplay = Files.readAllLines(this.gameFilePath);
@@ -115,6 +129,40 @@ public class Storage {
             return gameplay;
         } catch (IOException loadError) {
             throw new MinesweeperException("No Existing Gameplay");
+        }
+    }
+
+    /**
+     * Load time from time.txt file.
+     * Time is an integer value (represents seconds).
+     *
+     * @return Time (integer value).
+     * @throws MinesweeperException
+     */
+    public int loadTime() throws MinesweeperException {
+        try {
+            List<String> lines = Files.readAllLines(this.timeFilePath);
+            if (lines.isEmpty()) {
+                throw new MinesweeperException("No Existing Timing");
+            }
+            return Integer.parseInt(lines.getFirst().trim());
+        } catch (IOException loadError) {
+            throw new MinesweeperException("No Existing Timing");
+        }
+    }
+
+    /**
+     * Stores time to time.txt file.
+     * Time is an integer value (represents seconds).
+     *
+     * @param timeSeconds value to be stored to time.txt file.
+     * @throws MinesweeperException
+     */
+    public void storeTime(String timeSeconds) throws MinesweeperException {
+        try {
+            Files.write(this.timeFilePath, timeSeconds.getBytes());
+        } catch (IOException writeError) {
+            throw new MinesweeperException("Unable to store time: " + writeError.getMessage());
         }
     }
 

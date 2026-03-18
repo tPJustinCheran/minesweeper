@@ -4,6 +4,14 @@ public class Box {
     private boolean bomb;
     private boolean reveal;
 
+    /**
+     * Constructor Class for Box.
+     *
+     * @param flag boolean.
+     * @param adjacentBombs integer.
+     * @param bomb boolean.
+     * @param reveal boolean.
+     */
     public Box (boolean flag, int adjacentBombs, boolean bomb, boolean reveal) {
         this.flag = flag;
         this.adjacentBombs = adjacentBombs;
@@ -40,6 +48,11 @@ public class Box {
     }
 
 
+    /**
+     * Print Grid such that each box indicates: 1) Bomb ; 2) Number of Adjacent Bombs.
+     *
+     * @return String.
+     */
     public String solutionDisplay() {
         if (this.getBomb()) {
             return "B";
