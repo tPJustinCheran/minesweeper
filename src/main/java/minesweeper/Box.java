@@ -1,3 +1,5 @@
+package minesweeper;
+
 public class Box {
     private boolean flag;
     private int adjacentBombs;
@@ -5,7 +7,7 @@ public class Box {
     private boolean reveal;
 
     /**
-     * Constructor Class for Box.
+     * Constructor Class for minesweeper.Box.
      *
      * @param flag boolean.
      * @param adjacentBombs integer.
@@ -21,6 +23,10 @@ public class Box {
 
     public boolean getFlag(){
         return this.flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     public int getAdjacentBombs(){
@@ -59,5 +65,14 @@ public class Box {
         } else {
             return this.printAdjacentBombs();
         }
+    }
+
+    public String toString() {
+        if (this.getFlag()) {
+            return "F";
+        } else if (this.getReveal()) {
+            return this.printAdjacentBombs();
+        }
+        return "X";
     }
 }

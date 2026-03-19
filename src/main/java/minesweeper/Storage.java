@@ -1,3 +1,7 @@
+package minesweeper;
+
+import minesweeper.exception.StorageException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,9 +27,9 @@ public class Storage {
      * Calls onStartup() to initialise all required files
      *
      * @param home current directory (e.g. src/main/java)
-     * @throws MinesweeperException
+     * @throws StorageException
      */
-    public Storage(String home) throws MinesweeperException {
+    public Storage(String home) throws StorageException {
         this.folderPath = Paths.get(home, FOLDER_NAME);
         this.gameFilePath = this.folderPath.resolve(GAME_FILE_NAME);
         this.solutionFilePath = this.folderPath.resolve(SOLUTION_FILE_NAME);
@@ -38,9 +42,9 @@ public class Storage {
      *
      * @param filepath File/folder to be checked / created
      * @param isDirectory True if folder to be created, false if file to be created
-     * @throws MinesweeperException Error while creating File
+     * @throws StorageException Error while creating File
      */
-    private void checkAndCreateFileFolder(Path filepath, boolean isDirectory) throws MinesweeperException {
+    private void checkAndCreateFileFolder(Path filepath, boolean isDirectory) throws StorageException {
         boolean fileExists = Files.exists(filepath);
         if (!fileExists) {
             // directory/file does not exist -- create folder/file
@@ -51,7 +55,7 @@ public class Storage {
                     Files.createFile(filepath);
                 }
             } catch (IOException fileError) {
-                throw new MinesweeperException("Unable to create directory/file: " + fileError.getMessage());
+                throw new StorageException("Unable to create directory/file: " + fileError.getMessage());
             }
         }
     }
@@ -59,7 +63,7 @@ public class Storage {
     /**
      * Check if directory and file exists. If not, create empty directory and file.
      */
-    public void onStartup() throws MinesweeperException {
+    public void onStartup() throws StorageException {
         checkAndCreateFileFolder(this.folderPath, true);
         checkAndCreateFileFolder(this.gameFilePath, false);
         checkAndCreateFileFolder(this.solutionFilePath, false);
@@ -70,13 +74,13 @@ public class Storage {
      * Store solution to solution.txt file
      *
      * @param solutionString Solution Grid as a string
-     * @throws MinesweeperException
+     * @throws StorageException
      */
-    public void storeSolution(String solutionString) throws MinesweeperException {
+    public void storeSolution(String solutionString) throws StorageException {
         try {
             Files.write(this.solutionFilePath, solutionString.getBytes());
         } catch (IOException writeError) {
-            throw new MinesweeperException("Unable to store solution: " + writeError.getMessage());
+            throw new StorageException("Unable to store solution: " + writeError.getMessage());
         }
     }
 
@@ -84,13 +88,13 @@ public class Storage {
      * Store existing game to game.txt file.
      *
      * @param gameString Game Grid as a string
-     * @throws MinesweeperException
+     * @throws StorageException
      */
-    public void storeGame(String gameString) throws MinesweeperException {
+    public void storeGame(String gameString) throws StorageException {
         try {
             Files.write(this.gameFilePath, gameString.getBytes());
         } catch (IOException writeError) {
-            throw new MinesweeperException("Unable to store game: " + writeError.getMessage());
+            throw new StorageException("Unable to store game: " + writeError.getMessage());
         }
     }
 
@@ -99,17 +103,17 @@ public class Storage {
      * Shows Location of Bombs, and numberOfAdjacentBombs for each box in grid.
      *
      * @return A List of Strings (which represents the gameboard).
-     * @throws MinesweeperException
+     * @throws StorageException
      */
-    public List<String> loadSolution() throws MinesweeperException {
+    public List<String> loadSolution() throws StorageException {
         try {
             List<String> solution = Files.readAllLines(this.solutionFilePath);
             if (solution.isEmpty()) {
-                throw new MinesweeperException("No Existing Solution");
+                throw new StorageException("No Existing Solution");
             }
             return solution;
         } catch (IOException loadError) {
-            throw new MinesweeperException("No Existing Solution");
+            throw new StorageException("No Existing Solution");
         }
     }
 
@@ -118,17 +122,17 @@ public class Storage {
      * For each box in grid, shows if the box has been flagged, revealed or not revealed.
      *
      * @return A List of Strings (which represents the gameboard).
-     * @throws MinesweeperException
+     * @throws StorageException
      */
-    public List<String> loadGame() throws MinesweeperException {
+    public List<String> loadGame() throws StorageException {
         try {
             List<String> gameplay = Files.readAllLines(this.gameFilePath);
             if (gameplay.isEmpty()) {
-                throw new MinesweeperException("No Existing Gameplay");
+                throw new StorageException("No Existing Gameplay");
             }
             return gameplay;
         } catch (IOException loadError) {
-            throw new MinesweeperException("No Existing Gameplay");
+            throw new StorageException("No Existing Gameplay");
         }
     }
 
@@ -137,17 +141,17 @@ public class Storage {
      * Time is an integer value (represents seconds).
      *
      * @return Time (integer value).
-     * @throws MinesweeperException
+     * @throws StorageException
      */
-    public int loadTime() throws MinesweeperException {
+    public int loadTime() throws StorageException {
         try {
             List<String> lines = Files.readAllLines(this.timeFilePath);
             if (lines.isEmpty()) {
-                throw new MinesweeperException("No Existing Timing");
+                throw new StorageException("No Existing Timing");
             }
             return Integer.parseInt(lines.getFirst().trim());
         } catch (IOException loadError) {
-            throw new MinesweeperException("No Existing Timing");
+            throw new StorageException("No Existing Timing");
         }
     }
 
@@ -156,13 +160,13 @@ public class Storage {
      * Time is an integer value (represents seconds).
      *
      * @param timeSeconds value to be stored to time.txt file.
-     * @throws MinesweeperException
+     * @throws StorageException
      */
-    public void storeTime(String timeSeconds) throws MinesweeperException {
+    public void storeTime(String timeSeconds) throws StorageException {
         try {
             Files.write(this.timeFilePath, timeSeconds.getBytes());
         } catch (IOException writeError) {
-            throw new MinesweeperException("Unable to store time: " + writeError.getMessage());
+            throw new StorageException("Unable to store time: " + writeError.getMessage());
         }
     }
 

@@ -1,3 +1,7 @@
+package minesweeper;
+
+import minesweeper.exception.MinesweeperException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -5,7 +9,7 @@ import java.util.Random;
 
 public class Gameboard {
 
-    private final Box[][] gameboard;
+    private Box[][] gameboard;
 
     /**
      * Randomly generate up to 20 bomb placements
@@ -50,12 +54,13 @@ public class Gameboard {
     }
 
     /**
-     * Constructor Class if no pre-existing data from hard disk
-     * Creates empty 10 x 10 grid with each cell containing a Box Object.
-     * Randomly generates bombs and stores the grid in solution.txt
+     * Restart a Gameboard.
      *
+     * @param customTimer Timer Class.
+     * @param storage Storage Class. To store data to game.txt and solution.txt files.
+     * @throws MinesweeperException Handle Errors.
      */
-    public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
+    public void restartGameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
         this.gameboard = new Box[10][10];
         List<Integer> bombPlacements = this.generateBombPlacements();
         for (int i = 0; i < 10; i++) {
@@ -70,27 +75,28 @@ public class Gameboard {
         }
         this.storeSolution(storage);  // store solution to solution.txt file
         this.storeGame(storage);   // store existing gameplay to game.txt file
-        customTimer.startTime(); // start timer
-    }
-
-    private boolean revealInGameboard(String marker) {
-        return Objects.equals(marker, "R");
-    }
-
-    private boolean flagInGameboard(String marker) {
-        return Objects.equals(marker, "F");
+        customTimer.restartTime(); // start timer
     }
 
     /**
-     * Constructor Class if there is pre-existing data from hard disk.
-     * Loads Previous Gameplay and Solutions (from game.txt and solution.txt files)
+     * Constructor Class if no pre-existing data from hard disk
+     * Creates empty 10 x 10 grid with each cell containing a minesweeper.Box Object.
+     * Randomly generates bombs and stores the grid in solution.txt
      *
-     * @param storage
-     * @param solutionGrid
-     * @param gameGrid
-     * @throws MinesweeperException
      */
-    public Gameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
+    public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
+        restartGameboard(customTimer, storage);
+    }
+
+    private boolean checkRevealInGameboard(String marker) {
+        return Objects.equals(marker, "R");
+    }
+
+    private boolean checkFlagInGameboard(String marker) {
+        return Objects.equals(marker, "F");
+    }
+
+    public void reloadGameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
         this.gameboard = new Box[10][10];
         for (int i = 0; i < 10; i++) {
             String currRowSoln = solutionGrid.get(i);
@@ -99,15 +105,29 @@ public class Gameboard {
             String[] partsGame = currRowGame.split("\\|");
             for (int j = 0; j < 10; j++) {
                 if (Objects.equals(partsSoln[j], "B")) {
-                    this.gameboard[i][j] = new Box(flagInGameboard(partsGame[j]), 0, true, revealInGameboard(partsGame[j]));
+                    this.gameboard[i][j] = new Box(checkFlagInGameboard(partsGame[j]), 0, true, checkRevealInGameboard(partsGame[j]));
                 } else if (Objects.equals(partsSoln[j], " ")) {
-                    this.gameboard[i][j] = new Box(flagInGameboard(partsGame[j]),0, false, revealInGameboard(partsGame[j]));
+                    this.gameboard[i][j] = new Box(checkFlagInGameboard(partsGame[j]), 0, false, checkRevealInGameboard(partsGame[j]));
                 } else {
-                    this.gameboard[i][j] = new Box(flagInGameboard(partsGame[j]), Integer.parseInt(partsSoln[j]), false, revealInGameboard(partsGame[j]));
+                    this.gameboard[i][j] = new Box(checkFlagInGameboard(partsGame[j]), Integer.parseInt(partsSoln[j]), false, checkRevealInGameboard(partsGame[j]));
                 }
             }
         }
         customTimer.startTime();
+    }
+
+    /**
+     * Constructor Class if there is pre-existing data from hard disk.
+     * Loads Previous Gameplay and Solutions (from game.txt and solution.txt files).
+     *
+     * @param customTimer Timer class.
+     * @param storage Storage Class.
+     * @param solutionGrid data from solution.txt.
+     * @param gameGrid data from game.txt.
+     * @throws MinesweeperException Error Handling.
+     */
+    public Gameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
+        reloadGameboard(customTimer, storage, solutionGrid, gameGrid);
     }
 
 
@@ -118,7 +138,7 @@ public class Gameboard {
      * @param storage storage class
      * @throws MinesweeperException
      */
-    private void storeSolution(Storage storage) throws MinesweeperException {
+    public void storeSolution(Storage storage) throws MinesweeperException {
         String totalStr = "";
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -136,7 +156,7 @@ public class Gameboard {
      * @param storage storage class.
      * @throws MinesweeperException
      */
-    private void storeGame(Storage storage) throws MinesweeperException {
+    public void storeGame(Storage storage) throws MinesweeperException {
         String totalStr = "";
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -147,10 +167,38 @@ public class Gameboard {
                 } else {
                     totalStr = totalStr + "N|";
                 }
-                totalStr += "\n";
             }
-            storage.storeGame(totalStr);
+            totalStr += "\n";
         }
+        storage.storeGame(totalStr);
+    }
+
+    public void setFlagInGameboard(int boxNumber, boolean isFlag) {
+        int row = boxNumber / 10;
+        int col = boxNumber % 10;
+        this.gameboard[row][col].setFlag(isFlag);
+    }
+
+    public String giveHint(int boxNumber) {
+        int row = boxNumber / 10;
+        int col = boxNumber % 10;
+        String output = this.gameboard[row][col].solutionDisplay();
+        if (Objects.equals(output, " ")) {
+            return "0";
+        } else {
+            return this.gameboard[row][col].solutionDisplay();
+        }
+    }
+
+    public String toString() {
+        String totalStr = "";
+        for (int i = 0; i < 10; i++) {
+            totalStr = totalStr + "\n";
+            for (int j = 0; j < 10; j++) {
+                totalStr = totalStr + this.gameboard[i][j].toString() + "|";
+            }
+        }
+        return totalStr;
     }
 
     public String printForChecking() {
