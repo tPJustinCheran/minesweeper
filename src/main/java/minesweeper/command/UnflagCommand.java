@@ -3,6 +3,7 @@ package minesweeper.command;
 import minesweeper.CustomTimer;
 import minesweeper.Gameboard;
 import minesweeper.Storage;
+import minesweeper.Ui;
 import minesweeper.exception.MinesweeperException;
 
 public class UnflagCommand extends Command{
@@ -14,10 +15,10 @@ public class UnflagCommand extends Command{
     }
 
     @Override
-    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
+    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
         gameboard.setFlagInGameboard(this.boxNumber, false);
-        gameboard.storeGame(storage);
+        gameboard.storeGame();
+        this.setResponse(ui.printGameboard());
         this.setCommandType(CommandType.Unflag);
-        System.out.println(gameboard);
     }
 }

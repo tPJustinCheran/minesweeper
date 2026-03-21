@@ -3,6 +3,7 @@ package minesweeper.command;
 import minesweeper.CustomTimer;
 import minesweeper.Gameboard;
 import minesweeper.Storage;
+import minesweeper.Ui;
 import minesweeper.exception.MinesweeperException;
 
 /**
@@ -19,10 +20,10 @@ public class ByeCommand extends Command {
      * @throws MinesweeperException
      */
     @Override
-    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
-        System.out.println("BYE!");
-        gameboard.storeGame(storage);  // store gameplay to game.txt file
+    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
+        gameboard.storeGame();  // store gameplay to game.txt file
         customTimer.pauseAndStopTime(storage); // store time to time.txt file
+        this.setResponse(ui.exitProgram());
         this.setCommandType(CommandType.Bye);
     }
 

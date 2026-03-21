@@ -1,15 +1,15 @@
 package minesweeper;
 
 import minesweeper.exception.MinesweeperException;
+import minesweeper.exception.StorageException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class Gameboard {
 
     private Box[][] gameboard;
+    private CustomTimer customTimer;
+    private Storage storage;
 
     /**
      * Randomly generate up to 20 bomb placements
@@ -56,11 +56,9 @@ public class Gameboard {
     /**
      * Restart a Gameboard.
      *
-     * @param customTimer Timer Class.
-     * @param storage Storage Class. To store data to game.txt and solution.txt files.
      * @throws MinesweeperException Handle Errors.
      */
-    public void restartGameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
+    public void restartGameboard() throws MinesweeperException {
         this.gameboard = new Box[10][10];
         List<Integer> bombPlacements = this.generateBombPlacements();
         for (int i = 0; i < 10; i++) {
@@ -73,9 +71,9 @@ public class Gameboard {
                 }
             }
         }
-        this.storeSolution(storage);  // store solution to solution.txt file
-        this.storeGame(storage);   // store existing gameplay to game.txt file
-        customTimer.restartTime(); // start timer
+        this.storeSolution();  // store solution to solution.txt file
+        this.storeGame();   // store existing gameplay to game.txt file
+        this.customTimer.restartTime(); // start timer
     }
 
     /**
@@ -83,9 +81,13 @@ public class Gameboard {
      * Creates empty 10 x 10 grid with each cell containing a minesweeper.Box Object.
      * Randomly generates bombs and stores the grid in solution.txt
      *
+     * @param customTimer Timer Class.
+     * @param storage Storage Class. To store data to game.txt and solution.txt files.
      */
     public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
-        restartGameboard(customTimer, storage);
+        this.customTimer = customTimer;
+        this.storage = storage;
+        restartGameboard();
     }
 
     private boolean checkRevealInGameboard(String marker) {
@@ -96,7 +98,7 @@ public class Gameboard {
         return Objects.equals(marker, "F");
     }
 
-    public void reloadGameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
+    public void reloadGameboard(List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
         this.gameboard = new Box[10][10];
         for (int i = 0; i < 10; i++) {
             String currRowSoln = solutionGrid.get(i);
@@ -113,7 +115,7 @@ public class Gameboard {
                 }
             }
         }
-        customTimer.startTime();
+        this.customTimer.startTime();
     }
 
     /**
@@ -127,7 +129,9 @@ public class Gameboard {
      * @throws MinesweeperException Error Handling.
      */
     public Gameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
-        reloadGameboard(customTimer, storage, solutionGrid, gameGrid);
+        this.customTimer = customTimer;
+        this.storage = storage;
+        reloadGameboard(solutionGrid, gameGrid);
     }
 
 
@@ -135,10 +139,9 @@ public class Gameboard {
      * Store Solution (Bombs + adjacent bombs) to solution.txt file
      * Called upon initialisation of new game board.
      *
-     * @param storage storage class
      * @throws MinesweeperException
      */
-    public void storeSolution(Storage storage) throws MinesweeperException {
+    public void storeSolution() throws MinesweeperException {
         String totalStr = "";
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -146,17 +149,16 @@ public class Gameboard {
             }
             totalStr += "\n";
         }
-        storage.storeSolution(totalStr);
+        this.storage.storeSolution(totalStr);
     }
 
     /**
      * Store Game Progress. Shows what has been revealed and what has not.
      * Called after every player move.
      *
-     * @param storage storage class.
      * @throws MinesweeperException
      */
-    public void storeGame(Storage storage) throws MinesweeperException {
+    public void storeGame() throws MinesweeperException {
         String totalStr = "";
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -170,13 +172,14 @@ public class Gameboard {
             }
             totalStr += "\n";
         }
-        storage.storeGame(totalStr);
+        this.storage.storeGame(totalStr);
     }
 
     public void setFlagInGameboard(int boxNumber, boolean isFlag) {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
         this.gameboard[row][col].setFlag(isFlag);
+
     }
 
     public String giveHint(int boxNumber) {
@@ -190,20 +193,37 @@ public class Gameboard {
         }
     }
 
-    public void revealBoxInGameboard(int boxNumber, CustomTimer customTimer, Storage storage) throws MinesweeperException {
+    public void revealBoxInGameboard(int boxNumber) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
         if (this.gameboard[row][col].getFlag()) {
-            System.out.println("Box has been flagged. Select a different Box!");
+            throw new MinesweeperException("Box has been flagged. Select a different Box!");
         } else {
             String boxValue = this.gameboard[row][col].solutionDisplay();
             if (Objects.equals(boxValue, "B")) {
-                this.gameover(customTimer, storage);
+                this.gameover();
             } else {
                 this.floodfill(row, col);
-                this.storeGame(storage);
+                this.storeGame();
+                if (this.checkWin()) {
+                    System.out.println("WIN");
+                    this.restartGameboard();
+                    // WIN FUNCTION -- leaderboard + restart game
+                }
             }
         }
+    }
+
+    public boolean checkWin() throws StorageException {
+        for (int i = 0; i < 100; i ++) {
+            int row = i / 10;
+            int col = i % 10;
+            Box currBox = this.gameboard[row][col];
+            if (!currBox.getBomb() && !currBox.getReveal()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void floodfill(int row, int col) {
@@ -231,9 +251,9 @@ public class Gameboard {
         }
     }
 
-    public void gameover(CustomTimer customTimer, Storage storage) throws MinesweeperException {
-        System.out.println("GAME OVER");
-        this.restartGameboard(customTimer, storage);
+    public void gameover() throws MinesweeperException {
+        this.restartGameboard();
+        throw new MinesweeperException("BOMB FOUND. GAME OVER");
     }
 
     public String toString() {
@@ -247,35 +267,4 @@ public class Gameboard {
         return totalStr;
     }
 
-    public String printForChecking() {
-        String totalStr = "FLAG: \n";
-        for (int i = 0; i < 10; i++) {
-            totalStr = totalStr + "\n";
-            for (int j = 0; j < 10; j++) {
-                totalStr = totalStr + this.gameboard[i][j].getFlag() + "|";
-            }
-        }
-        totalStr = totalStr + "\nBOMB: \n";
-        for (int i = 0; i < 10; i++) {
-            totalStr = totalStr + "\n";
-            for (int j = 0; j < 10; j++) {
-                totalStr = totalStr + this.gameboard[i][j].getBomb() + "|";
-            }
-        }
-        totalStr = totalStr + "\nADJ BOMB: \n";
-        for (int i = 0; i < 10; i++) {
-            totalStr = totalStr + "\n";
-            for (int j = 0; j < 10; j++) {
-                totalStr = totalStr + this.gameboard[i][j].getAdjacentBombs() + "|";
-            }
-        }
-        totalStr = totalStr + "\nREVEAL: \n";
-        for (int i = 0; i < 10; i++) {
-            totalStr = totalStr + "\n";
-            for (int j = 0; j < 10; j++) {
-                totalStr = totalStr + this.gameboard[i][j].getReveal() + "|";
-            }
-        }
-        return totalStr;
-    }
 }
