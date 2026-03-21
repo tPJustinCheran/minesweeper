@@ -10,7 +10,6 @@ public class Gameboard {
     private Box[][] gameboard;
     private CustomTimer customTimer;
     private Storage storage;
-    private int hintCount;
 
     /**
      * Randomly generate up to 20 bomb placements
@@ -75,6 +74,7 @@ public class Gameboard {
         this.storeSolution();  // store solution to solution.txt file
         this.storeGame();   // store existing gameplay to game.txt file
         this.customTimer.restartTime(); // start timer
+        this.storage.storeHint("0");
     }
 
     /**
@@ -186,8 +186,9 @@ public class Gameboard {
     }
 
     public String giveHint(int boxNumber) throws MinesweeperException {
-        if (this.hintCount < 3) {
-            this.hintCount++;
+        int hintCount = this.storage.loadHint();
+        if (hintCount < 3) {
+            this.storage.storeHint(String.valueOf(hintCount + 1));
             int row = boxNumber / 10;
             int col = boxNumber % 10;
             String boxValue = this.gameboard[row][col].solutionDisplay();

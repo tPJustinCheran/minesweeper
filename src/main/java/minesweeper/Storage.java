@@ -15,12 +15,14 @@ public class Storage {
     private static final String GAME_FILE_NAME = "game.txt";
     private static final String SOLUTION_FILE_NAME = "solution.txt";
     private static final String TIME_FILE_NAME = "time.txt";
+    private static final String HINT_FILE_NAME = "hint.txt";
 
     // Instance Attributes
     private Path folderPath;
     private Path gameFilePath;
     private Path solutionFilePath;
     private Path timeFilePath;
+    private Path hintFilePath;
 
     /**
      * Constructor class to define directories
@@ -34,6 +36,7 @@ public class Storage {
         this.gameFilePath = this.folderPath.resolve(GAME_FILE_NAME);
         this.solutionFilePath = this.folderPath.resolve(SOLUTION_FILE_NAME);
         this.timeFilePath = this.folderPath.resolve(TIME_FILE_NAME);
+        this.hintFilePath = this.folderPath.resolve(HINT_FILE_NAME);
         onStartup();
     }
 
@@ -68,6 +71,7 @@ public class Storage {
         checkAndCreateFileFolder(this.gameFilePath, false);
         checkAndCreateFileFolder(this.solutionFilePath, false);
         checkAndCreateFileFolder(this.timeFilePath, false);
+        checkAndCreateFileFolder(this.hintFilePath, false);
     }
 
     /**
@@ -167,6 +171,40 @@ public class Storage {
             Files.write(this.timeFilePath, timeSeconds.getBytes());
         } catch (IOException writeError) {
             throw new StorageException("Unable to store time: " + writeError.getMessage());
+        }
+    }
+
+    /**
+     * Stores hint count to hint.txt file.
+     * Hint Count is an integer value of the number of hints given thus far. (Max 3)
+     *
+     * @param count value to be stored to hint.txt file.
+     * @throws StorageException
+     */
+    public void storeHint(String count) throws StorageException {
+        try {
+            Files.write(this.hintFilePath, count.getBytes());
+        } catch (IOException writeError) {
+            throw new StorageException("Unable to store hint count: " + writeError.getMessage());
+        }
+    }
+
+    /**
+     * Load Hint Count from hint.txt file.
+     * Hint Count is an integer value of the number of hints given thus far. (Max 3)
+     *
+     * @return integer value representing hint count.
+     * @throws StorageException
+     */
+    public int loadHint() throws StorageException {
+        try {
+            List<String> lines = Files.readAllLines(this.hintFilePath);
+            if (lines.isEmpty()) {
+                return 0;
+            }
+            return Integer.parseInt(lines.getFirst().trim());
+        } catch (IOException loadError) {
+            throw new StorageException("Unable to Load Hint File");
         }
     }
 
