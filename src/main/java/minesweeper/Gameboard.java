@@ -10,6 +10,7 @@ public class Gameboard {
     private Box[][] gameboard;
     private CustomTimer customTimer;
     private Storage storage;
+    private int hintCount;
 
     /**
      * Randomly generate up to 20 bomb placements
@@ -175,21 +176,28 @@ public class Gameboard {
         this.storage.storeGame(totalStr);
     }
 
-    public void setFlagInGameboard(int boxNumber, boolean isFlag) {
+    public void setFlagInGameboard(int boxNumber, boolean isFlag) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
+        System.out.println(this.gameboard[row][col].getFlag());
+        System.out.println(isFlag);
         this.gameboard[row][col].setFlag(isFlag);
-
+        this.storeGame();
     }
 
-    public String giveHint(int boxNumber) {
-        int row = boxNumber / 10;
-        int col = boxNumber % 10;
-        String boxValue = this.gameboard[row][col].solutionDisplay();
-        if (Objects.equals(boxValue, " ")) {
-            return "0";
+    public String giveHint(int boxNumber) throws MinesweeperException {
+        if (this.hintCount < 3) {
+            this.hintCount++;
+            int row = boxNumber / 10;
+            int col = boxNumber % 10;
+            String boxValue = this.gameboard[row][col].solutionDisplay();
+            if (Objects.equals(boxValue, " ")) {
+                return "0";
+            } else {
+                return this.gameboard[row][col].solutionDisplay();
+            }
         } else {
-            return this.gameboard[row][col].solutionDisplay();
+            throw new MinesweeperException("Max 3 Hints!");
         }
     }
 
@@ -254,6 +262,11 @@ public class Gameboard {
     public void gameover() throws MinesweeperException {
         this.restartGameboard();
         throw new MinesweeperException("BOMB FOUND. GAME OVER");
+    }
+
+    public void closeProgram() throws MinesweeperException {
+        this.storeGame();  // store gameplay to game.txt file
+        this.customTimer.pauseAndStopTime(storage); // store time to time.txt file
     }
 
     public String toString() {

@@ -15,9 +15,8 @@ public class FlagCommand extends Command{
     }
 
     @Override
-    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
+    public void execute(Gameboard gameboard, Ui ui) throws MinesweeperException {
         gameboard.setFlagInGameboard(this.boxNumber, true);
-        gameboard.storeGame();
         this.setResponse(ui.printGameboard());
         this.setCommandType(CommandType.Flag);
     }

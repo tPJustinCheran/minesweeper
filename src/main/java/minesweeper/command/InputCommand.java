@@ -14,7 +14,7 @@ public class InputCommand extends Command {
     }
 
     @Override
-    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
+    public void execute(Gameboard gameboard, Ui ui) throws MinesweeperException {
         gameboard.revealBoxInGameboard(this.boxNumber);
         this.setResponse(ui.printGameboard());
         this.setCommandType(CommandType.Input);

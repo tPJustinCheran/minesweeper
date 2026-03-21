@@ -15,12 +15,10 @@ public class RestartCommand extends Command{
      * Restart Gameboard. Rewrites Solution.txt, Game.txt, Timer.txt.
      *
      * @param gameboard Gameboard Class.
-     * @param storage Storage Class.
-     * @param customTimer Timer Class.
      * @throws MinesweeperException
      */
     @Override
-    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
+    public void execute(Gameboard gameboard, Ui ui) throws MinesweeperException {
         gameboard.restartGameboard();
         this.setResponse(ui.restartGame());
         this.setCommandType(CommandType.Restart);

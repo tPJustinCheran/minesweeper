@@ -23,12 +23,12 @@ public class Parser {
             return new RestartCommand();
         } else if (userInput.contains("bye") || userInput.contains("end")) {
             return new ByeCommand();
-        } else if (userInput.contains("flag")) {
-            boxNumber = extractBoxNumber(userInput);
-            return new FlagCommand(boxNumber);
         } else if (userInput.contains("unflag")) {
             boxNumber = extractBoxNumber(userInput);
             return new UnflagCommand(boxNumber);
+        } else if (userInput.contains("flag")) {
+            boxNumber = extractBoxNumber(userInput);
+            return new FlagCommand(boxNumber);
         } else if (userInput.contains("hint")) {
             boxNumber = extractBoxNumber(userInput);
             return new HintCommand(boxNumber);

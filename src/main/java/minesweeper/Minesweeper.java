@@ -39,7 +39,7 @@ public class Minesweeper {
             System.out.println(input);
             try {
                 Command command = parser.parse(input);
-                command.execute(gameboard, storage, customTimer, ui);
+                command.execute(gameboard, ui);
                 this.setCommandType(command.getCommandType());
                 System.out.println(command.getResponse());
             } catch (MinesweeperException error) {

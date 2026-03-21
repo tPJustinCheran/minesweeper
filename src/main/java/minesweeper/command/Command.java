@@ -19,13 +19,11 @@ public abstract class Command {
      * Executes the Command.
      *
      * @param gameboard Gameboard Class.
-     * @param storage Storage Class.
-     * @param customTimer Timer Class.
      * @throws MinesweeperException Error raised.
      * @throws ParserException Error raised.
      * @throws StorageException Error raised.
      */
-    public abstract void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui)
+    public abstract void execute(Gameboard gameboard, Ui ui)
             throws MinesweeperException, ParserException, StorageException;
 
     public void setCommandType(CommandType commandType) {
