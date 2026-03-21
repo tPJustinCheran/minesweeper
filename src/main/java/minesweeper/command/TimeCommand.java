@@ -6,17 +6,10 @@ import minesweeper.Storage;
 import minesweeper.Ui;
 import minesweeper.exception.MinesweeperException;
 
-public class InputCommand extends Command {
-    private int boxNumber;
-
-    public InputCommand(int boxNumber) {
-        this.boxNumber = boxNumber;
-    }
+public class TimeCommand extends Command{
 
     @Override
     public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
-        gameboard.revealBoxInGameboard(this.boxNumber);
-        this.setResponse(ui.printGameboard());
-        this.setCommandType(CommandType.Input);
+        this.setResponse(ui.printTime());
     }
 }

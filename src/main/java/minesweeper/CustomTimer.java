@@ -64,9 +64,9 @@ public class CustomTimer{
      * Stop Timer. Used when game ends.
      */
     public void stopTime() {
-        if (timerRunning) {
+        if (this.getTimerRunning()) {
             timer.cancel();
-            timerRunning = false;
+            this.setTimerRunning(false);
         }
     }
 
@@ -91,8 +91,12 @@ public class CustomTimer{
         return String.format("%02d:%02d", this.getTimeSecs()/60, this.getTimeSecs()%60);
     }
 
-    public boolean isTimerRunning() {
+    public boolean getTimerRunning() {
         return timerRunning;
+    }
+
+    public void setTimerRunning(boolean isTimerRunning) {
+        this.timerRunning = isTimerRunning;
     }
 
 }

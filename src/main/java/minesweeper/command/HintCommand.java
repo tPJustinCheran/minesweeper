@@ -3,6 +3,7 @@ package minesweeper.command;
 import minesweeper.CustomTimer;
 import minesweeper.Gameboard;
 import minesweeper.Storage;
+import minesweeper.Ui;
 import minesweeper.exception.MinesweeperException;
 
 public class HintCommand extends Command {
@@ -13,8 +14,9 @@ public class HintCommand extends Command {
     }
 
     @Override
-    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
-        System.out.println(gameboard.giveHint(this.boxNumber));
+    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
+        String hint = gameboard.giveHint(this.boxNumber);
         this.setCommandType(CommandType.Hint);
+        this.setResponse(ui.printHint(hint));
     }
 }

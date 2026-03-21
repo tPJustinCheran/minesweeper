@@ -19,7 +19,6 @@ public class Parser {
 
     public Command parse(String userInput) throws ParserException {
         userInput = userInput.trim().toLowerCase();
-        System.out.println(userInput);
         if (userInput.contains("restart")) {
             return new RestartCommand();
         } else if (userInput.contains("bye") || userInput.contains("end")) {
@@ -38,6 +37,8 @@ public class Parser {
             return new InputCommand(boxNumber);
         } else if (userInput.contains("show")) {
             return new ShowCommand();
+        } else if (userInput.contains("time")) {
+            return new TimeCommand();
         } else {
             throw new ParserException("Invalid Command");
         }

@@ -12,6 +12,7 @@ public class Minesweeper {
     private Gameboard gameboard;
     private CustomTimer customTimer;
     private Parser parser;
+    private Ui ui;
     private CommandType commandType;
 
     public Minesweeper() throws MinesweeperException {
@@ -25,11 +26,10 @@ public class Minesweeper {
         }
         try {
             gameboard = new Gameboard(customTimer, storage, storage.loadSolution(), storage.loadGame());
-            System.out.println("LOAD OLD GAMEBOARD");
         } catch (MinesweeperException noPrevRecordError) {
             gameboard = new Gameboard(customTimer, storage);
-            System.out.println("LOAD NEW GAMEBOARD");
         }
+        ui = new Ui(gameboard, storage, customTimer);
 
 
         Scanner scanner = new Scanner(System.in);
@@ -39,10 +39,11 @@ public class Minesweeper {
             System.out.println(input);
             try {
                 Command command = parser.parse(input);
-                command.execute(gameboard, storage, customTimer);
+                command.execute(gameboard, storage, customTimer, ui);
                 this.setCommandType(command.getCommandType());
+                System.out.println(command.getResponse());
             } catch (MinesweeperException error) {
-                System.out.println(error.getMessage());
+                System.out.println(ui.printError(error));
             }
         }
     }

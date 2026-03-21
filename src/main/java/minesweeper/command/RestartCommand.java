@@ -3,6 +3,7 @@ package minesweeper.command;
 import minesweeper.CustomTimer;
 import minesweeper.Gameboard;
 import minesweeper.Storage;
+import minesweeper.Ui;
 import minesweeper.exception.MinesweeperException;
 
 /**
@@ -19,8 +20,9 @@ public class RestartCommand extends Command{
      * @throws MinesweeperException
      */
     @Override
-    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
-        gameboard.restartGameboard(customTimer, storage);
+    public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer, Ui ui) throws MinesweeperException {
+        gameboard.restartGameboard();
+        this.setResponse(ui.restartGame());
         this.setCommandType(CommandType.Restart);
     }
 
