@@ -33,9 +33,11 @@ public class Parser {
         } else if (userInput.contains("hint")) {
             boxNumber = extractBoxNumber(userInput);
             return new HintCommand(boxNumber);
-//        } else if (userInput.contains("input")) {  // check a single box
-//            boxNumber = extractBoxNumber(userInput);
-//            return new CheckBoxCommand(boxNumber);
+        } else if (userInput.contains("input")) {  // check a single box
+            boxNumber = extractBoxNumber(userInput);
+            return new InputCommand(boxNumber);
+        } else if (userInput.contains("show")) {
+            return new ShowCommand();
         } else {
             throw new ParserException("Invalid Command");
         }

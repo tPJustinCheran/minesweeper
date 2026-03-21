@@ -18,6 +18,7 @@ public class RestartCommand extends Command{
      * @param customTimer Timer Class.
      * @throws MinesweeperException
      */
+    @Override
     public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
         gameboard.restartGameboard(customTimer, storage);
         this.setCommandType(CommandType.Restart);

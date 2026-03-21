@@ -36,6 +36,7 @@ public class Minesweeper {
         this.setCommandType(CommandType.Restart);
         while (this.getCommandType() != CommandType.Bye) {
             String input = scanner.nextLine();
+            System.out.println(input);
             try {
                 Command command = parser.parse(input);
                 command.execute(gameboard, storage, customTimer);

@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/minesweeper/command/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/minesweeper/command/RestartCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -14,25 +12,29 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Box.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CustomTimer$1.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CustomTimer.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Gameboard.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Storage.class.uniqueId5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/minesweeper.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ByeCommand.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Command.class.uniqueId7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandType.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FlagCommand.class.uniqueId8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Gameboard.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/HintCommand.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Minesweeper.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Parser.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/RestartCommand.class.uniqueId3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/game.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/solution.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/time.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CustomTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/CustomTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Minesweeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MinesweeperException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/exception/MinesweeperException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/game.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/game.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/time.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/time.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Gameboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Minesweeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/ByeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/command/ByeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/FlagCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/command/FlagCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/HintCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/command/HintCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/RestartCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/command/RestartCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/UnflagCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/command/UnflagCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,41 +81,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;branch-Parser&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/chera/Desktop/minesweeper&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/chera/Desktop/minesweeper/settings.gradle/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "branch-Parser",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/chera/Desktop/minesweeper/settings.gradle/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chera\Desktop\minesweeper" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="minesweeper" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="minesweeper" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -137,7 +127,8 @@
       <workItem from="1773759723785" duration="32000" />
       <workItem from="1773798512740" duration="16666000" />
       <workItem from="1773911569823" duration="579000" />
-      <workItem from="1773912163671" duration="11391000" />
+      <workItem from="1773912163671" duration="11692000" />
+      <workItem from="1774063816345" duration="8465000" />
     </task>
     <servers />
   </component>
