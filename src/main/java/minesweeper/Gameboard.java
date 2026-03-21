@@ -182,12 +182,58 @@ public class Gameboard {
     public String giveHint(int boxNumber) {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
-        String output = this.gameboard[row][col].solutionDisplay();
-        if (Objects.equals(output, " ")) {
+        String boxValue = this.gameboard[row][col].solutionDisplay();
+        if (Objects.equals(boxValue, " ")) {
             return "0";
         } else {
             return this.gameboard[row][col].solutionDisplay();
         }
+    }
+
+    public void revealBoxInGameboard(int boxNumber, CustomTimer customTimer, Storage storage) throws MinesweeperException {
+        int row = boxNumber / 10;
+        int col = boxNumber % 10;
+        if (this.gameboard[row][col].getFlag()) {
+            System.out.println("Box has been flagged. Select a different Box!");
+        } else {
+            String boxValue = this.gameboard[row][col].solutionDisplay();
+            if (Objects.equals(boxValue, "B")) {
+                this.gameover(customTimer, storage);
+            } else {
+                this.floodfill(row, col);
+                this.storeGame(storage);
+            }
+        }
+    }
+
+    public void floodfill(int row, int col) {
+        Box currBox = this.gameboard[row][col];
+        if (!currBox.getReveal()) {
+            currBox.setReveal(true);
+            if (currBox.getAdjacentBombs() == 0) {
+                if (row > 0) {
+                    floodfill(row - 1, col);
+                }
+                if (row < 9) {
+                    floodfill(row + 1, col);
+                }
+                if (col > 0) {
+                    floodfill(row, col - 1);
+                }
+                if (col < 9) {
+                    floodfill(row, col + 1);
+                }
+            } else {
+                return;
+            }
+        } else {
+            return;
+        }
+    }
+
+    public void gameover(CustomTimer customTimer, Storage storage) throws MinesweeperException {
+        System.out.println("GAME OVER");
+        this.restartGameboard(customTimer, storage);
     }
 
     public String toString() {

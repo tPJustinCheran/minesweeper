@@ -13,6 +13,7 @@ public class FlagCommand extends Command{
         this.boxNumber = boxNumber;
     }
 
+    @Override
     public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
         gameboard.setFlagInGameboard(this.boxNumber, true);
         gameboard.storeGame(storage);

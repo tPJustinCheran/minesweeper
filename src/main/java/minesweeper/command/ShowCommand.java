@@ -4,17 +4,13 @@ import minesweeper.CustomTimer;
 import minesweeper.Gameboard;
 import minesweeper.Storage;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.exception.ParserException;
+import minesweeper.exception.StorageException;
 
-public class HintCommand extends Command {
-    private int boxNumber;
-
-    public HintCommand(int boxNumber) {
-        this.boxNumber = boxNumber;
-    }
+public class ShowCommand extends Command {
 
     @Override
     public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
-        System.out.println(gameboard.giveHint(this.boxNumber));
-        this.setCommandType(CommandType.Hint);
+        System.out.println(gameboard);
     }
 }

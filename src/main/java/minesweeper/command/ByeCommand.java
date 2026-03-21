@@ -18,6 +18,7 @@ public class ByeCommand extends Command {
      * @param customTimer Timer Class.
      * @throws MinesweeperException
      */
+    @Override
     public void execute(Gameboard gameboard, Storage storage, CustomTimer customTimer) throws MinesweeperException {
         System.out.println("BYE!");
         gameboard.storeGame(storage);  // store gameplay to game.txt file
