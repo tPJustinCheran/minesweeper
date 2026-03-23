@@ -28,6 +28,7 @@ public class GamePage {
     private Button[][] cellButtons = new Button[10][10];
     private Label timerLabel;
     private Timeline timerTimeline;
+    private boolean isFirstClick = true;
 
     /**
     * Constructor for the GamePage class, taking account if it is a new or continued game.
@@ -46,6 +47,7 @@ public class GamePage {
         if (isContinue) {
             gameboard = new Gameboard(customTimer, storage,
                     storage.loadSolution(), storage.loadGame());
+            isFirstClick = false;
         } else {
             gameboard = new Gameboard(customTimer, storage);
         }
@@ -63,17 +65,11 @@ public class GamePage {
         Button winBtn  = new Button("Win");
 
         hintBtn.setOnAction(e -> {
-            // does nothing for now
+            // TODO: does nothing for now
         });
 
         winBtn.setOnAction(e -> {
-            
-            Alert win = new Alert(Alert.AlertType.INFORMATION);
-            win.setTitle("You win!");
-            win.setHeaderText(null);
-            win.setContentText("You cleared the board!");
-            win.initOwner(primaryStage);
-            win.showAndWait();
+            handleWin();
         });
 
         HBox header = new HBox(10);
@@ -119,7 +115,10 @@ public class GamePage {
             )
         );
         timerTimeline.setCycleCount(Timeline.INDEFINITE);
-        timerTimeline.play();
+
+        if (!isFirstClick) {
+            timerTimeline.play();
+        }
 
         primaryStage.setOnCloseRequest(e -> {
             try {
@@ -140,33 +139,90 @@ public class GamePage {
      */
     private void onCellLeftClick(int boxNumber) {
         try {
-            gameboard.revealBoxInGameboard(boxNumber);
+            Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
             updateDisplay();
-            if (gameboard.checkWin()) {
-                customTimer.stopTime();
-                timerTimeline.stop();
-                Alert win = new Alert(Alert.AlertType.INFORMATION);
-                win.setTitle("You win!");
-                win.setHeaderText(null);
-                win.setContentText("You cleared the board!");
-                win.initOwner(primaryStage);
-                win.showAndWait();
-                gameboard.restartGameboard();
-                updateDisplay();
+            switch (result) {
+                case WIN  -> handleWin();
+                case BOMB -> handleLose();
+                case SAFE -> {}
             }
         } catch (MinesweeperException ex) {
-            customTimer.stopTime();
-            timerTimeline.stop();
-            updateDisplay();
-            Alert lose = new Alert(Alert.AlertType.ERROR);
-            lose.setTitle("Game Over");
-            lose.setHeaderText(null);
-            lose.setContentText("You hit a bomb!");
-            lose.initOwner(primaryStage);
-            lose.showAndWait();
+            showAlert("Error", ex.getMessage());  // only flagged cell or storage errors
         }
     }
- 
+
+    /**
+     * Handles the first click on the board. Regenerates the board until the
+     * clicked cell is not a bomb, then starts the timer and reveals the cell.
+     *
+     * @param boxNumber
+     * @throws MinesweeperException
+     */
+    private void handleFirstClick(int boxNumber) throws MinesweeperException {
+        int row = boxNumber / 10;
+        int col = boxNumber % 10;
+
+        while (gameboard.getBox(row, col).getBomb()) {
+            gameboard.restartGameboard();
+            customTimer.stopTime();
+        }
+
+        isFirstClick = false;
+        customTimer.restartTime();   // ← creates a fresh Timer, then starts it
+        timerTimeline.play();
+
+        gameboard.revealBoxInGameboard(boxNumber);
+        updateDisplay();
+
+        if (gameboard.checkWin()) {
+            handleWin();
+        }
+    }
+
+    /**
+     * Handles the win condition. Stops the timer, shows the win dialog,
+     * then resets the board for a new game.
+     */
+    private void handleWin() {
+        customTimer.stopTime();
+        timerTimeline.stop();
+
+        Alert win = new Alert(Alert.AlertType.INFORMATION);
+        win.setTitle("You win!");
+        win.setHeaderText(null);
+        win.setContentText("You cleared the board in " + customTimer.displayTimeMinSecs() + "!");
+        win.initOwner(primaryStage);
+        win.showAndWait();
+
+        try {
+            gameboard.restartGameboard();
+            customTimer.stopTime();  // counteract restartTime() inside restartGameboard()
+        } catch (MinesweeperException ex) {
+            showAlert("Error", ex.getMessage());
+        }
+        isFirstClick = true;
+        updateDisplay();
+    }
+
+    /**
+     * Handles the lose condition. Stops the timer, shows the lose dialog.
+     * gameover() in Gameboard already restarted the board.
+     */
+    private void handleLose() {
+        customTimer.stopTime();
+        timerTimeline.stop();
+
+        Alert lose = new Alert(Alert.AlertType.ERROR);
+        lose.setTitle("Game Over");
+        lose.setHeaderText(null);
+        lose.setContentText("You hit a bomb! Board has been reset.");
+        lose.initOwner(primaryStage);
+        lose.showAndWait();
+
+        isFirstClick = true;
+        updateDisplay();
+    }
+
     /**
      * Handles right click on a cell, toggling the flag state of the box.
      * 

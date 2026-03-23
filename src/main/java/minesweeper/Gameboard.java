@@ -11,6 +11,10 @@ public class Gameboard {
     private CustomTimer customTimer;
     private Storage storage;
 
+    public enum MoveResult {
+        SAFE, BOMB, WIN
+    }
+
     /**
      * Randomly generate up to 20 bomb placements
      *
@@ -202,24 +206,22 @@ public class Gameboard {
         }
     }
 
-    public void revealBoxInGameboard(int boxNumber) throws MinesweeperException {
+    public MoveResult revealBoxInGameboard(int boxNumber) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
         if (this.gameboard[row][col].getFlag()) {
             throw new MinesweeperException("Box has been flagged. Select a different Box!");
-        } else {
-            String boxValue = this.gameboard[row][col].solutionDisplay();
-            if (Objects.equals(boxValue, "B")) {
-                this.gameover();
-            } else {
-                this.floodfill(row, col);
-                this.storeGame();
-                if (this.checkWin()) {
-                    System.out.println("WIN");
-                    // WIN FUNCTION -- leaderboard + restart game
-                }
-            }
         }
+        if (this.gameboard[row][col].getBomb()) {
+            gameover();
+            return MoveResult.BOMB;
+        }
+        this.floodfill(row, col);
+        this.storeGame();
+        if (this.checkWin()) {
+            return MoveResult.WIN;
+        }
+        return MoveResult.SAFE;
     }
 
     public boolean checkWin() throws StorageException {
@@ -273,7 +275,6 @@ public class Gameboard {
 
     public void gameover() throws MinesweeperException {
         this.restartGameboard();
-        throw new MinesweeperException("BOMB FOUND. GAME OVER");
     }
 
     public void closeProgram() throws MinesweeperException {
