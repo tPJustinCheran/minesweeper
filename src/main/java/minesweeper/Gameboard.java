@@ -270,6 +270,10 @@ public class Gameboard {
         this.customTimer.pauseAndStopTime(storage); // store time to time.txt file
     }
 
+    public Box getBox(int row, int col) {
+        return this.gameboard[row][col];
+    }
+
     public String toString() {
         String totalStr = "";
         for (int i = 0; i < 10; i++) {
