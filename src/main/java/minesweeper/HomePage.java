@@ -57,7 +57,12 @@ public class HomePage extends Application {
 
         // Button actions
         newGameBtn.setOnAction(e -> {
-            showInfo(primaryStage, "New Game button works!");
+            try {
+                GamePage gamePage = new GamePage(primaryStage, storage, false);
+                gamePage.show();
+            } catch (MinesweeperException ex) {
+                showError(primaryStage, ex.getMessage());
+            }
         });
 
         continueBtn.setOnAction(e -> {
