@@ -252,6 +252,18 @@ public class Gameboard {
                 if (col < 9) {
                     floodfill(row, col + 1);
                 }
+                if (row > 0 && col > 0)  {
+                    floodfill(row - 1, col - 1);
+                }
+                if (row > 0 && col < 9)  {
+                    floodfill(row - 1, col + 1);
+                }
+                if (row < 9 && col > 0)  {
+                    floodfill(row + 1, col - 1);
+                }
+                if (row < 9 && col < 9)  {
+                    floodfill(row + 1, col + 1);
+                }
             } else {
                 return;
             }
