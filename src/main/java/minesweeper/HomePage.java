@@ -66,7 +66,12 @@ public class HomePage extends Application {
         });
 
         continueBtn.setOnAction(e -> {
-            showInfo(primaryStage, "Continue Game button works!");
+            try {
+                GamePage gamePage = new GamePage(primaryStage, storage, true);
+                gamePage.show();
+            } catch (MinesweeperException ex) {
+                showError(primaryStage, ex.getMessage());
+            }
         });
 
         leaderboardBtn.setOnAction(e -> {

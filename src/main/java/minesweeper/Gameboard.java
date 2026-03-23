@@ -216,7 +216,6 @@ public class Gameboard {
                 this.storeGame();
                 if (this.checkWin()) {
                     System.out.println("WIN");
-                    this.restartGameboard();
                     // WIN FUNCTION -- leaderboard + restart game
                 }
             }
