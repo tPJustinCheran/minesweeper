@@ -216,19 +216,28 @@ public class GamePage {
      * gameover() in Gameboard already restarted the board.
      */
     private void handleLose() {
-        customTimer.stopTime();
+        String finalTime = customTimer.displayTimeMinSecs();
         timerTimeline.stop();
+        customTimer.stopTime();
+        timerLabel.setText(finalTime);
+
+        gameboard.revealAllBombs();  // show all bomb locations
+        updateDisplay();              // draw them before dialog opens
 
         Alert lose = new Alert(Alert.AlertType.ERROR);
         lose.setTitle("Game Over");
         lose.setHeaderText(null);
-        lose.setContentText("You hit a bomb! Board has been reset.");
+        lose.setContentText("You hit a bomb! Time: " + finalTime);
         lose.initOwner(primaryStage);
         lose.showAndWait();
 
+        try {
+            gameboard.gameover();  // restart board after player dismisses dialog
+        } catch (MinesweeperException ex) {
+            showAlert("Error", ex.getMessage());
+        }
         isFirstClick = true;
         updateDisplay();
-        timerTimeline.play();
     }
 
     /**
@@ -268,7 +277,7 @@ public class GamePage {
             }
         }
     }
-    
+
     /**
      * Utility method to show an alert dialog with a given title and message.
      * 

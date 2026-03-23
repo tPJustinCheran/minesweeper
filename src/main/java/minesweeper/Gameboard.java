@@ -213,7 +213,6 @@ public class Gameboard {
             throw new MinesweeperException("Box has been flagged. Select a different Box!");
         }
         if (this.gameboard[row][col].getBomb()) {
-            gameover();
             return MoveResult.BOMB;
         }
         this.floodfill(row, col);
@@ -270,6 +269,20 @@ public class Gameboard {
             }
         } else {
             return;
+        }
+    }
+
+    /**
+     * Reveals all bombs on the board. Called when the player loses,
+     * so the player can see where all the bombs were.
+     */
+    public void revealAllBombs() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (this.gameboard[i][j].getBomb()) {
+                    this.gameboard[i][j].setReveal(true);
+                }
+            }
         }
     }
 
