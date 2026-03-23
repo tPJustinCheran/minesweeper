@@ -22,10 +22,10 @@ public class GamePage {
     private final Stage primaryStage;
     private final Storage storage;
  
-    private Gameboard gameboard;
-    private CustomTimer customTimer;
+    private final Gameboard gameboard;
+    private final CustomTimer customTimer;
  
-    private Button[][] cellButtons = new Button[10][10];
+    private final Button[][] cellButtons = new Button[10][10];
     private Label timerLabel;
     private Timeline timerTimeline;
     private boolean isFirstClick = true;

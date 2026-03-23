@@ -18,11 +18,11 @@ public class Storage {
     private static final String HINT_FILE_NAME = "hint.txt";
 
     // Instance Attributes
-    private Path folderPath;
-    private Path gameFilePath;
-    private Path solutionFilePath;
-    private Path timeFilePath;
-    private Path hintFilePath;
+    private final Path folderPath;
+    private final Path gameFilePath;
+    private final Path solutionFilePath;
+    private final Path timeFilePath;
+    private final Path hintFilePath;
 
     /**
      * Constructor class to define directories

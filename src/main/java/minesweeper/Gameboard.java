@@ -8,8 +8,8 @@ import java.util.*;
 public class Gameboard {
 
     private Box[][] gameboard;
-    private CustomTimer customTimer;
-    private Storage storage;
+    private final CustomTimer customTimer;
+    private final Storage storage;
 
     public enum MoveResult {
         SAFE, BOMB, WIN
@@ -264,11 +264,7 @@ public class Gameboard {
                 if (row < 9 && col < 9)  {
                     floodfill(row + 1, col + 1);
                 }
-            } else {
-                return;
             }
-        } else {
-            return;
         }
     }
 
