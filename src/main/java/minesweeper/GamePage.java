@@ -110,7 +110,7 @@ public class GamePage {
         primaryStage.setTitle("Minesweeper");
 
         timerTimeline = new Timeline(
-            new KeyFrame(Duration.seconds(1), e ->
+            new KeyFrame(Duration.millis(50), e ->
                 timerLabel.setText(customTimer.displayTimeMinSecs())
             )
         );
@@ -139,6 +139,10 @@ public class GamePage {
      */
     private void onCellLeftClick(int boxNumber) {
         try {
+            if (isFirstClick) {
+                handleFirstClick(boxNumber);
+                return;
+            }
             Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
             updateDisplay();
             switch (result) {
@@ -184,13 +188,15 @@ public class GamePage {
      * then resets the board for a new game.
      */
     private void handleWin() {
-        customTimer.stopTime();
+        String finalTime = customTimer.displayTimeMinSecs();
         timerTimeline.stop();
+        customTimer.stopTime();
+        timerLabel.setText(finalTime); // manually sync label to match dialog
 
         Alert win = new Alert(Alert.AlertType.INFORMATION);
         win.setTitle("You win!");
         win.setHeaderText(null);
-        win.setContentText("You cleared the board in " + customTimer.displayTimeMinSecs() + "!");
+        win.setContentText("You cleared the board in " + finalTime + "!");
         win.initOwner(primaryStage);
         win.showAndWait();
 
@@ -202,6 +208,7 @@ public class GamePage {
         }
         isFirstClick = true;
         updateDisplay();
+        timerTimeline.play();
     }
 
     /**
@@ -221,6 +228,7 @@ public class GamePage {
 
         isFirstClick = true;
         updateDisplay();
+        timerTimeline.play();
     }
 
     /**
