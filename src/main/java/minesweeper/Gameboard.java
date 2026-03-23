@@ -8,8 +8,12 @@ import java.util.*;
 public class Gameboard {
 
     private Box[][] gameboard;
-    private CustomTimer customTimer;
-    private Storage storage;
+    private final CustomTimer customTimer;
+    private final Storage storage;
+
+    public enum MoveResult {
+        SAFE, BOMB, WIN
+    }
 
     /**
      * Randomly generate up to 20 bomb placements
@@ -202,25 +206,21 @@ public class Gameboard {
         }
     }
 
-    public void revealBoxInGameboard(int boxNumber) throws MinesweeperException {
+    public MoveResult revealBoxInGameboard(int boxNumber) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
         if (this.gameboard[row][col].getFlag()) {
             throw new MinesweeperException("Box has been flagged. Select a different Box!");
-        } else {
-            String boxValue = this.gameboard[row][col].solutionDisplay();
-            if (Objects.equals(boxValue, "B")) {
-                this.gameover();
-            } else {
-                this.floodfill(row, col);
-                this.storeGame();
-                if (this.checkWin()) {
-                    System.out.println("WIN");
-                    this.restartGameboard();
-                    // WIN FUNCTION -- leaderboard + restart game
-                }
-            }
         }
+        if (this.gameboard[row][col].getBomb()) {
+            return MoveResult.BOMB;
+        }
+        this.floodfill(row, col);
+        this.storeGame();
+        if (this.checkWin()) {
+            return MoveResult.WIN;
+        }
+        return MoveResult.SAFE;
     }
 
     public boolean checkWin() throws StorageException {
@@ -252,22 +252,47 @@ public class Gameboard {
                 if (col < 9) {
                     floodfill(row, col + 1);
                 }
-            } else {
-                return;
+                if (row > 0 && col > 0)  {
+                    floodfill(row - 1, col - 1);
+                }
+                if (row > 0 && col < 9)  {
+                    floodfill(row - 1, col + 1);
+                }
+                if (row < 9 && col > 0)  {
+                    floodfill(row + 1, col - 1);
+                }
+                if (row < 9 && col < 9)  {
+                    floodfill(row + 1, col + 1);
+                }
             }
-        } else {
-            return;
+        }
+    }
+
+    /**
+     * Reveals all bombs on the board. Called when the player loses,
+     * so the player can see where all the bombs were.
+     */
+    public void revealAllBombs() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (this.gameboard[i][j].getBomb()) {
+                    this.gameboard[i][j].setReveal(true);
+                }
+            }
         }
     }
 
     public void gameover() throws MinesweeperException {
         this.restartGameboard();
-        throw new MinesweeperException("BOMB FOUND. GAME OVER");
     }
 
     public void closeProgram() throws MinesweeperException {
         this.storeGame();  // store gameplay to game.txt file
         this.customTimer.pauseAndStopTime(storage); // store time to time.txt file
+    }
+
+    public Box getBox(int row, int col) {
+        return this.gameboard[row][col];
     }
 
     public String toString() {

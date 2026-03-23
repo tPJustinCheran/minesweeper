@@ -1,17 +1,16 @@
 package minesweeper;
 
 import minesweeper.exception.MinesweeperException;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
  * Custom Timer Class for Timing the Gameplay.
  */
-public class CustomTimer{
+public class CustomTimer {
     private Timer timer;
-    private int seconds;
-    private int oldTiming;
+    private long startTimeMillis;
+    private long offsetMillis;
     private boolean timerRunning = false;
 
     /**
@@ -23,32 +22,42 @@ public class CustomTimer{
     public CustomTimer(Storage storage) throws MinesweeperException {
         timer = new Timer();
         try {
-            oldTiming = storage.loadTime();
+            offsetMillis = storage.loadTime();
         } catch (MinesweeperException noOldTiming) {
-            oldTiming = 0;
+            offsetMillis = 0;
         }
     }
 
     /**
      * Start timer. If there is a previous gameplay, add the time from that gameplay.
-     *
      */
     public void startTime() {
-        seconds = oldTiming;
+        startTimeMillis = System.currentTimeMillis();
         timerRunning = true;
         this.timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                seconds++;
+                // no-op: time is calculated on read, not incremented
             }
-        }, 0, 1000);
+        }, 0, 10);
     }
 
     public void restartTime() {
         this.stopTime();
         timer = new Timer();
-        oldTiming = 0;
-        seconds = 0;
+        offsetMillis = 0;
         this.startTime();
+    }
+
+    /**
+     * Get Time in Milliseconds.
+     *
+     * @return long (time in milliseconds).
+     */
+    public long getTimeMillis() {
+        if (!timerRunning) {
+            return offsetMillis;
+        }
+        return System.currentTimeMillis() - startTimeMillis + offsetMillis;
     }
 
     /**
@@ -57,7 +66,7 @@ public class CustomTimer{
      * @return Integer (time in seconds).
      */
     public int getTimeSecs() {
-        return seconds;
+        return (int) (getTimeMillis() / 1000);
     }
 
     /**
@@ -77,18 +86,22 @@ public class CustomTimer{
      * @throws MinesweeperException Exception raised when unable to write to time.txt file.
      */
     public void pauseAndStopTime(Storage storage) throws MinesweeperException {
-        String timeSecondsString = Integer.toString(this.getTimeSecs());
-        storage.storeTime(timeSecondsString);
+        String timeMillisString = Long.toString(this.getTimeMillis());
+        storage.storeTime(timeMillisString);
         timer.cancel();
     }
 
     /**
-     * Display Time in Mins and Seconds.
+     * Display Time in Mins, Seconds and Milliseconds.
      *
-     * @return String (Time in Mins and Seconds).
+     * @return String (Time in MM:SS.mmm format).
      */
     public String displayTimeMinSecs() {
-        return String.format("%02d:%02d", this.getTimeSecs()/60, this.getTimeSecs()%60);
+        long millis = getTimeMillis();
+        long mins = millis / 60000;
+        long secs = (millis % 60000) / 1000;
+        long ms   = millis % 1000;
+        return String.format("%02d:%02d.%03d", mins, secs, ms);
     }
 
     public boolean getTimerRunning() {
@@ -98,5 +111,4 @@ public class CustomTimer{
     public void setTimerRunning(boolean isTimerRunning) {
         this.timerRunning = isTimerRunning;
     }
-
 }

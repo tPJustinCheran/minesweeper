@@ -33,28 +33,28 @@ public class Minesweeper {
         }
         ui = new Ui(gameboard, storage, customTimer);
 
-
-        Scanner scanner = new Scanner(System.in);
         this.setCommandType(CommandType.Restart);
-        while (this.getCommandType() != CommandType.Bye) {
-            String input = scanner.nextLine();
-            System.out.println(input);
-            try {
-                Command command = parser.parse(input);
-                command.execute(gameboard, ui);
-                this.setCommandType(command.getCommandType());
-                System.out.println(command.getResponse());
-            } catch (MinesweeperException error) {
-                System.out.println(ui.printError(error));
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (this.getCommandType() != CommandType.Bye) {
+                String input = scanner.nextLine();
+                System.out.println(input);
+                try {
+                    Command command = parser.parse(input);
+                    command.execute(gameboard, ui);
+                    this.setCommandType(command.getCommandType());
+                    System.out.println(command.getResponse());
+                } catch (MinesweeperException error) {
+                    System.out.println(ui.printError(error));
+                }
             }
         }
     }
 
-    public void setCommandType(CommandType commandType) {
+    public final void setCommandType(CommandType commandType) {
         this.commandType = commandType;
     }
 
-    public CommandType getCommandType() {
+    public final CommandType getCommandType() {
         return this.commandType;
     }
 

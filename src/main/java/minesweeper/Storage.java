@@ -18,11 +18,11 @@ public class Storage {
     private static final String HINT_FILE_NAME = "hint.txt";
 
     // Instance Attributes
-    private Path folderPath;
-    private Path gameFilePath;
-    private Path solutionFilePath;
-    private Path timeFilePath;
-    private Path hintFilePath;
+    private final Path folderPath;
+    private final Path gameFilePath;
+    private final Path solutionFilePath;
+    private final Path timeFilePath;
+    private final Path hintFilePath;
 
     /**
      * Constructor class to define directories
@@ -144,16 +144,16 @@ public class Storage {
      * Load time from time.txt file.
      * Time is an integer value (represents seconds).
      *
-     * @return Time (integer value).
+     * @return Time (long value for milliseconds).
      * @throws StorageException
      */
-    public int loadTime() throws StorageException {
+    public long loadTime() throws StorageException {
         try {
             List<String> lines = Files.readAllLines(this.timeFilePath);
             if (lines.isEmpty()) {
                 throw new StorageException("No Existing Timing");
             }
-            return Integer.parseInt(lines.getFirst().trim());
+            return Long.parseLong(lines.getFirst().trim());
         } catch (IOException loadError) {
             throw new StorageException("No Existing Timing");
         }
