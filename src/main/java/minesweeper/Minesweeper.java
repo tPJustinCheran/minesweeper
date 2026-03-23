@@ -6,6 +6,8 @@ import minesweeper.exception.MinesweeperException;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+
 public class Minesweeper {
 
     private Storage storage;
@@ -56,7 +58,7 @@ public class Minesweeper {
         return this.commandType;
     }
 
-    public static void main(String[] args) throws MinesweeperException {
-        new Minesweeper();
+    public static void main(String[] args) {
+        Application.launch(HomePage.class, args);
     }
 }
