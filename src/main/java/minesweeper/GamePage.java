@@ -12,6 +12,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import minesweeper.exception.MinesweeperException;
@@ -59,7 +60,7 @@ public class GamePage {
      */
     public void show() {
 
-        timerLabel = new Label("00:00");
+        timerLabel = new Label(customTimer.displayTimeMinSecs());
 
         Button hintBtn = new Button("Hint");
         Button winBtn  = new Button("Win");
@@ -184,31 +185,29 @@ public class GamePage {
     }
 
     /**
-     * Handles the win condition. Stops the timer, shows the win dialog,
-     * then resets the board for a new game.
+     * Handles the win condition. Stops the timer, shows the win dialog with
+     * a name input field. On pressing Enter, saves the entry to the leaderboard
+     * and returns to the game page.
      */
     private void handleWin() {
-        String finalTime = customTimer.displayTimeMinSecs();
         timerTimeline.stop();
         customTimer.stopTime();
-        timerLabel.setText(finalTime); // manually sync label to match dialog
+        long finalMillis = customTimer.getTimeMillis();
+        String finalTime = customTimer.displayTimeMinSecs();
+        timerLabel.setText(finalTime);
 
-        Alert win = new Alert(Alert.AlertType.INFORMATION);
-        win.setTitle("You win!");
-        win.setHeaderText(null);
-        win.setContentText("You cleared the board in " + finalTime + "!");
-        win.initOwner(primaryStage);
-        win.showAndWait();
-
-        try {
-            gameboard.restartGameboard();
-            customTimer.stopTime();  // counteract restartTime() inside restartGameboard()
-        } catch (MinesweeperException ex) {
-            showAlert("Error", ex.getMessage());
-        }
-        isFirstClick = true;
-        updateDisplay();
-        timerTimeline.play();
+        new WinPage(primaryStage, storage, finalTime, finalMillis, () -> {
+            try {
+                gameboard.restartGameboard();
+                customTimer.stopTime();  // counteract restartTime() inside restartGameboard()
+            } catch (MinesweeperException ex) {
+                showAlert("Error", ex.getMessage());
+            }
+            isFirstClick = true;
+            customTimer.zeroTime();
+            timerLabel.setText(customTimer.displayTimeMinSecs());
+            updateDisplay();
+        }).show();
     }
 
     /**
@@ -216,13 +215,13 @@ public class GamePage {
      * gameover() in Gameboard already restarted the board.
      */
     private void handleLose() {
-        String finalTime = customTimer.displayTimeMinSecs();
         timerTimeline.stop();
-        customTimer.stopTime();
+        customTimer.stopTime();                              // freeze first
+        String finalTime = customTimer.displayTimeMinSecs();
         timerLabel.setText(finalTime);
 
-        gameboard.revealAllBombs();  // show all bomb locations
-        updateDisplay();              // draw them before dialog opens
+        gameboard.revealAllBombs();
+        updateDisplay();
 
         Alert lose = new Alert(Alert.AlertType.ERROR);
         lose.setTitle("Game Over");
@@ -232,11 +231,14 @@ public class GamePage {
         lose.showAndWait();
 
         try {
-            gameboard.gameover();  // restart board after player dismisses dialog
+            gameboard.gameover();
+            customTimer.stopTime();  // counteract restartTime() inside gameover()
         } catch (MinesweeperException ex) {
             showAlert("Error", ex.getMessage());
         }
         isFirstClick = true;
+        customTimer.zeroTime();
+        timerLabel.setText(customTimer.displayTimeMinSecs());
         updateDisplay();
     }
 

@@ -1,13 +1,16 @@
 package minesweeper;
 
+import java.util.Scanner;
+
+import javafx.application.Application;
 import minesweeper.command.Command;
 import minesweeper.command.CommandType;
 import minesweeper.exception.MinesweeperException;
 
-import java.util.Scanner;
-
-import javafx.application.Application;
-
+/**
+ * Entry point for the Minesweeper application.
+ * Handles CLI interaction and launches the GUI.
+ */
 public class Minesweeper {
 
     private Storage storage;
@@ -17,32 +20,48 @@ public class Minesweeper {
     private Ui ui;
     private CommandType commandType;
 
+    /**
+     * Constructs the Minesweeper application and initializes core components.
+     *
+     * @throws MinesweeperException if initialization fails
+     */
     public Minesweeper() throws MinesweeperException {
-        String HOME = System.getProperty("user.dir");
+        String home = System.getProperty("user.dir");
         try {
-            storage = new Storage(HOME);
+            storage = new Storage(home);
             parser = new Parser();
             customTimer = new CustomTimer(storage);
         } catch (MinesweeperException error) {
             System.out.println(error.getMessage());
         }
+
         try {
-            gameboard = new Gameboard(customTimer, storage, storage.loadSolution(), storage.loadGame());
+            gameboard = new Gameboard(
+                    customTimer,
+                    storage,
+                    storage.loadSolution(),
+                    storage.loadGame()
+            );
         } catch (MinesweeperException noPrevRecordError) {
             gameboard = new Gameboard(customTimer, storage);
         }
+
         ui = new Ui(gameboard, storage, customTimer);
 
         this.setCommandType(CommandType.Restart);
+
         try (Scanner scanner = new Scanner(System.in)) {
             while (this.getCommandType() != CommandType.Bye) {
                 String input = scanner.nextLine();
                 System.out.println(input);
+
                 try {
                     Command command = parser.parse(input);
                     command.execute(gameboard, ui);
+
                     this.setCommandType(command.getCommandType());
                     System.out.println(command.getResponse());
+
                 } catch (MinesweeperException error) {
                     System.out.println(ui.printError(error));
                 }
