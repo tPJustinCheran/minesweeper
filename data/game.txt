@@ -1,8 +1,8 @@
-N|R|R|R|R|R|R|R|R|R|
+F|R|R|R|R|R|R|R|R|R|
 R|R|R|R|R|R|R|R|R|R|
-R|R|R|R|R|N|N|N|N|N|
-R|R|R|N|N|N|N|N|N|N|
-N|N|N|N|N|N|N|N|N|N|
+R|R|R|R|R|F|N|N|N|N|
+R|R|R|F|R|R|N|N|N|N|
+N|N|N|N|R|N|N|N|N|N|
 N|N|N|N|N|N|N|N|N|N|
 N|N|N|N|N|N|N|N|N|N|
 N|N|N|N|N|N|N|N|N|N|

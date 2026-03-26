@@ -75,7 +75,8 @@ public class HomePage extends Application {
         });
 
         leaderboardBtn.setOnAction(e -> {
-            showInfo(primaryStage, "Leaderboard button works!");
+            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage);
+            leaderboardPage.show();
         });
 
         helpBtn.setOnAction(e -> {
