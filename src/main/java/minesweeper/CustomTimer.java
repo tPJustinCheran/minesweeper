@@ -34,6 +34,7 @@ public class CustomTimer {
     public void startTime() {
         startTimeMillis = System.currentTimeMillis();
         timerRunning = true;
+        timer = new Timer();
         this.timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 // no-op: time is calculated on read, not incremented
@@ -41,10 +42,20 @@ public class CustomTimer {
         }, 0, 10);
     }
 
+    /**
+     * Zero the timer. Resets offset and frozen time to 0.
+     */
+    public void zeroTime() {
+        offsetMillis = 0;
+    }
+
+
+    /**
+     * Restart Timer. Stops, zeroes, then starts fresh from 0.
+     */
     public void restartTime() {
         this.stopTime();
-        timer = new Timer();
-        offsetMillis = 0;
+        this.zeroTime();
         this.startTime();
     }
 
@@ -74,6 +85,7 @@ public class CustomTimer {
      */
     public void stopTime() {
         if (this.getTimerRunning()) {
+            offsetMillis = getTimeMillis();  // freeze current time before cancelling
             timer.cancel();
             this.setTimerRunning(false);
         }
