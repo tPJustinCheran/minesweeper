@@ -1,5 +1,7 @@
 package minesweeper;
 
+import java.util.List;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,8 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import minesweeper.exception.StorageException;
 
-import java.util.List;
-
+/**
+ * Displays the leaderboard window containing ranked completion times.
+ */
 public class LeaderboardPage {
 
     private final Stage leaderboardStage;
@@ -38,7 +41,7 @@ public class LeaderboardPage {
      * Shows the leaderboard window. If already open, brings it to the front.
      */
     public void show() {
-        leaderboardStage.setScene(buildScene());  // rebuild each time to get latest entries
+        leaderboardStage.setScene(buildScene());
         if (leaderboardStage.isShowing()) {
             leaderboardStage.toFront();
         } else {
@@ -48,6 +51,7 @@ public class LeaderboardPage {
 
     /**
      * Builds the leaderboard scene by loading entries from storage.
+     * Displays rank, player name and completion time. Handles empty state and loading errors.
      *
      * @return Scene containing the leaderboard layout.
      */
@@ -57,32 +61,48 @@ public class LeaderboardPage {
 
         Label title = new Label("Leaderboard");
         title.setStyle(
-            "-fx-font-size: 16px;" +
-            "-fx-font-weight: bold;"
+                "-fx-font-size: 16px;"
+                        + "-fx-font-weight: bold;"
         );
 
         content.getChildren().add(title);
 
         try {
             List<String> entries = storage.loadLeaderboard();
+
             if (entries.isEmpty()) {
-                Label emptyLabel = new Label("No entries yet. Win a game to get on the board!");
+                Label emptyLabel = new Label(
+                        "No entries yet. Win a game to get on the board!"
+                );
                 emptyLabel.setStyle("-fx-font-style: italic;");
                 content.getChildren().add(emptyLabel);
+
             } else {
                 for (int i = 0; i < entries.size(); i++) {
+
                     String[] parts = entries.get(i).split("\\|");
+
                     if (parts.length < 2) {
-                        continue;  // skip malformed lines
+                        continue;
                     }
+
                     String name = parts[0];
                     long millis = Long.parseLong(parts[1]);
                     String time = formatMillis(millis);
-                    content.getChildren().add(buildEntryRow(i + 1, name, time));
+
+                    content.getChildren().add(
+                            buildEntryRow(i + 1, name, time)
+                    );
                 }
             }
+
         } catch (StorageException ex) {
-            Label errorLabel = new Label("Could not load leaderboard: " + ex.getMessage());
+
+            Label errorLabel = new Label(
+                    "Could not load leaderboard: "
+                            + ex.getMessage()
+            );
+
             errorLabel.setStyle("-fx-text-fill: red;");
             content.getChildren().add(errorLabel);
         }
@@ -96,24 +116,29 @@ public class LeaderboardPage {
     /**
      * Builds a single leaderboard entry row with rank, name and time.
      *
-     * @param rank  Position on the leaderboard.
-     * @param name  Player name.
-     * @param time  Formatted completion time string.
+     * @param rank Position on the leaderboard.
+     * @param name Player name.
+     * @param time Formatted completion time string.
      * @return Styled HBox row.
      */
     private HBox buildEntryRow(int rank, String name, String time) {
+
         HBox row = new HBox(12);
+
         row.setAlignment(Pos.CENTER_LEFT);
+
         row.setPadding(new Insets(6, 10, 6, 10));
+
         row.setStyle(
-            "-fx-background-color: white;" +
-            "-fx-background-radius: 8;" +
-            "-fx-border-color: #cccccc;" +
-            "-fx-border-radius: 8;" +
-            "-fx-border-width: 1;"
+                "-fx-background-color: white;"
+                        + "-fx-background-radius: 8;"
+                        + "-fx-border-color: #cccccc;"
+                        + "-fx-border-radius: 8;"
+                        + "-fx-border-width: 1;"
         );
 
         Label rankLabel = new Label("#" + rank);
+
         rankLabel.setMinWidth(40);
         rankLabel.setStyle("-fx-font-weight: bold;");
 
@@ -124,6 +149,7 @@ public class LeaderboardPage {
         timeLabel.setStyle("-fx-font-family: monospace;");
 
         row.getChildren().addAll(rankLabel, nameLabel, timeLabel);
+
         return row;
     }
 
@@ -134,9 +160,16 @@ public class LeaderboardPage {
      * @return formatted time string
      */
     private String formatMillis(long millis) {
+
         long mins = millis / 60000;
         long secs = (millis % 60000) / 1000;
-        long ms   = millis % 1000;
-        return String.format("%02d:%02d.%03d", mins, secs, ms);
+        long ms = millis % 1000;
+
+        return String.format(
+                "%02d:%02d.%03d",
+                mins,
+                secs,
+                ms
+        );
     }
 }

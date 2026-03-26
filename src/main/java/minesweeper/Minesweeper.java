@@ -3,7 +3,6 @@ package minesweeper;
 import java.util.Scanner;
 
 import javafx.application.Application;
-
 import minesweeper.command.Command;
 import minesweeper.command.CommandType;
 import minesweeper.exception.MinesweeperException;

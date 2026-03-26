@@ -15,7 +15,7 @@ import minesweeper.exception.StorageException;
  * The WinPage class represents the dialog shown when the player wins the game.
  * It prompts the player to enter their name for the leaderboard, validates the input,
  * saves the entry to storage, and then opens the leaderboard page. It also displays
- * the player's completion time. 
+ * the player's completion time.
  */
 public class WinPage {
 
