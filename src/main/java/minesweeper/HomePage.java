@@ -12,50 +12,72 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import minesweeper.exception.MinesweeperException;
 
+/**
+ * Home page UI for the Minesweeper game.
+ * Displays navigation options such as starting a new game,
+ * continuing an existing game, viewing leaderboard and help.
+ */
 public class HomePage extends Application {
 
     private Storage storage;
     private boolean hasExistingSave;
 
+    /**
+     * Starts the JavaFX application by setting up the home page UI.
+     * It checks for existing saved game data to enable or disable the "Continue Game" button accordingly.
+     * Sets up title and stylised buttons for "New Game", "Continue Game", "Leaderboard", and "Help".
+     */
     @Override
     public void start(Stage primaryStage) {
 
-        // Check for existing save
         try {
             String home = System.getProperty("user.dir");
             storage = new Storage(home);
-            storage.loadGame();         // throws StorageException if game.txt is empty
-            storage.loadSolution();     // also verify solution exists
+            storage.loadGame();
+            storage.loadSolution();
             hasExistingSave = true;
         } catch (MinesweeperException e) {
             hasExistingSave = false;
         }
 
-        // Title
         Label title = new Label("Minesweeper");
         title.setStyle(
-            "-fx-font-size: 35px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-text-fill: #1a1a2e;"
+                "-fx-font-size: 35px;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-text-fill: #1a1a2e;"
         );
 
-        // Buttons
-        Button newGameBtn      = createButton("New Game",       "#4CAF50", "#388E3C");
-        Button continueBtn     = createButton("Continue Game",  "#2196F3", "#1565C0");
-        Button leaderboardBtn  = createButton("Leaderboard",    "#9C27B0", "#6A1B9A");
-        Button helpBtn         = createButton("Help",           "#607D8B", "#37474F");
+        Button newGameBtn = createButton(
+            "New Game",
+            "#4CAF50",
+            "#388E3C"
+        );
 
-        // Disable continue if no save file exists
+        Button continueBtn = createButton(
+            "Continue Game",
+            "#2196F3",
+            "#1565C0"
+        );
+
+        Button leaderboardBtn = createButton("Leaderboard",
+            "#9C27B0",
+            "#6A1B9A"
+        );
+
+        Button helpBtn = createButton("Help",
+            "#607D8B",
+            "#37474F"
+        );
+
         if (!hasExistingSave) {
             continueBtn.setDisable(true);
             continueBtn.setOpacity(0.45);
             continueBtn.setStyle(
-                continueBtn.getStyle() +
-                "-fx-cursor: default;"
+                    continueBtn.getStyle()
+                            + "-fx-cursor: default;"
             );
         }
 
-        // Button actions
         newGameBtn.setOnAction(e -> {
             try {
                 GamePage gamePage = new GamePage(primaryStage, storage, false);
@@ -83,7 +105,6 @@ public class HomePage extends Application {
             showInfo(primaryStage, "Help button works!");
         });
 
-        // Layout
         VBox layout = new VBox(16);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(60, 60, 60, 60));
@@ -98,7 +119,6 @@ public class HomePage extends Application {
             helpBtn
         );
 
-        // Scene
         Scene scene = new Scene(layout, 420, 520);
         primaryStage.setTitle("Minesweeper");
         primaryStage.setScene(scene);
@@ -117,21 +137,23 @@ public class HomePage extends Application {
     private Button createButton(String text, String bgColor, String hoverColor) {
         Button btn = new Button(text);
         String base =
-            "-fx-min-width: 240px;" +
-            "-fx-min-height: 46px;" +
-            "-fx-font-size: 15px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-text-fill: white;" +
-            "-fx-background-radius: 8;" +
-            "-fx-cursor: hand;" +
-            "-fx-background-color: " + bgColor + ";";
+                "-fx-min-width: 240px;"
+                        + "-fx-min-height: 46px;"
+                        + "-fx-font-size: 15px;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-text-fill: white;"
+                        + "-fx-background-radius: 8;"
+                        + "-fx-cursor: hand;"
+                        + "-fx-background-color: "
+                        + bgColor
+                        + ";";
         btn.setStyle(base);
 
         DropShadow shadow = new DropShadow(6, Color.rgb(0, 0, 0, 0.2));
         btn.setEffect(shadow);
 
         btn.setOnMouseEntered(e -> btn.setStyle(base.replace(bgColor, hoverColor)));
-        btn.setOnMouseExited(e  -> btn.setStyle(base));
+        btn.setOnMouseExited(e -> btn.setStyle(base));
 
         return btn;
     }
