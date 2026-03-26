@@ -196,47 +196,18 @@ public class GamePage {
         String finalTime = customTimer.displayTimeMinSecs();
         timerLabel.setText(finalTime);
 
-        Stage winStage = new Stage();
-        winStage.setTitle("You win!");
-        winStage.initOwner(primaryStage);
-
-        Label msgLabel  = new Label("You cleared the board in " + finalTime + "!");
-        Label nameLabel = new Label("Enter your name:");
-        javafx.scene.control.TextField nameField = new javafx.scene.control.TextField();
-        nameField.setPromptText("Your name");
-        Button enterBtn = new Button("Enter");
-
-        enterBtn.setOnAction(e -> {
-            String name = nameField.getText().trim();
-            if (name.isEmpty()) {
-                name = "Anonymous";
-            }
-            try {
-                storage.addEntry(name, finalMillis);
-            } catch (minesweeper.exception.StorageException ex) {
-                showAlert("Error", "Could not save to leaderboard: " + ex.getMessage());
-            }
-            winStage.close();
+        new WinPage(primaryStage, storage, finalTime, finalMillis, () -> {
             try {
                 gameboard.restartGameboard();
-                customTimer.stopTime();
+                customTimer.stopTime();  // counteract restartTime() inside restartGameboard()
             } catch (MinesweeperException ex) {
                 showAlert("Error", ex.getMessage());
             }
             isFirstClick = true;
-            customTimer.zeroTime();            // reset timer to 0
-            timerLabel.setText(customTimer.displayTimeMinSecs());   // update label to match
+            customTimer.zeroTime();
+            timerLabel.setText(customTimer.displayTimeMinSecs());
             updateDisplay();
-        });
-
-        VBox layout = new VBox(12);
-        layout.setPadding(new Insets(24));
-        layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(msgLabel, nameLabel, nameField, enterBtn);
-
-        winStage.setScene(new Scene(layout, 300, 180));
-        winStage.setResizable(false);
-        winStage.show();
+        }).show();
     }
 
     /**
