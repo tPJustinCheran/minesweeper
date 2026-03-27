@@ -61,11 +61,17 @@ public class GamePage {
 
         timerLabel = new Label(customTimer.displayTimeMinSecs());
 
-        Button hintBtn = new Button("Hint");
+        Button hintBtn = new Button("Hint (" + gameboard.getHintsRemaining() + " left)");
         Button winBtn  = new Button("Win");
 
         hintBtn.setOnAction(e -> {
-            // TODO: does nothing for now
+            try {
+                gameboard.giveHint();
+                updateDisplay();
+                hintBtn.setText("Hint (" + gameboard.getHintsRemaining() + " left)");
+            } catch (MinesweeperException ex) {
+                showAlert("Error", ex.getMessage());
+            }
         });
 
         winBtn.setOnAction(e -> {

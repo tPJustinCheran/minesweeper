@@ -10,6 +10,7 @@ public class Gameboard {
     private Box[][] gameboard;
     private final CustomTimer customTimer;
     private final Storage storage;
+    private int hintsRemaining;
 
     public enum MoveResult {
         SAFE, BOMB, WIN
@@ -78,7 +79,8 @@ public class Gameboard {
         this.storeSolution();  // store solution to solution.txt file
         this.storeGame();   // store existing gameplay to game.txt file
         this.customTimer.restartTime(); // start timer
-        this.storage.storeHint("0");
+        this.hintsRemaining = 3; // reset hints
+        this.storage.storeHint("3");
     }
 
     /**
@@ -92,6 +94,7 @@ public class Gameboard {
     public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
         this.customTimer = customTimer;
         this.storage = storage;
+        this.hintsRemaining = 3;
         restartGameboard();
     }
 
@@ -136,6 +139,7 @@ public class Gameboard {
     public Gameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
         this.customTimer = customTimer;
         this.storage = storage;
+        this.hintsRemaining = storage.loadHint();
         reloadGameboard(solutionGrid, gameGrid);
     }
 
@@ -189,21 +193,58 @@ public class Gameboard {
         this.storeGame();
     }
 
-    public String giveHint(int boxNumber) throws MinesweeperException {
-        int hintCount = this.storage.loadHint();
-        if (hintCount < 3) {
-            this.storage.storeHint(String.valueOf(hintCount + 1));
-            int row = boxNumber / 10;
-            int col = boxNumber % 10;
-            String boxValue = this.gameboard[row][col].solutionDisplay();
-            if (Objects.equals(boxValue, " ")) {
-                return "0";
-            } else {
-                return this.gameboard[row][col].solutionDisplay();
-            }
-        } else {
-            throw new MinesweeperException("Max 3 Hints!");
+    public int giveHint() throws MinesweeperException {
+        if (hintsRemaining <= 0) {
+            throw new MinesweeperException("No more hints remaining!");
         }
+
+        List<Integer> unrevealedNonBombs = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            int row = i / 10;
+            int col = i % 10;
+            Box currBox = this.gameboard[row][col];
+            if (!currBox.getBomb() && !currBox.getReveal()) {
+                unrevealedNonBombs.add(i);
+            }
+        }
+
+        if(unrevealedNonBombs.isEmpty()) {
+            throw new MinesweeperException("No more safe boxes to reveal!");
+        }
+
+        int randomHintBoxReveal = unrevealedNonBombs.get(new Random().nextInt(unrevealedNonBombs.size()));
+        int hintRow = randomHintBoxReveal / 10;
+        int hintCol = randomHintBoxReveal % 10;
+        this.floodfill(hintRow, hintCol);
+
+        hintsRemaining--;
+        storage.storeHint(String.valueOf(hintsRemaining));
+        this.storeGame();
+
+        return randomHintBoxReveal;
+    }
+
+    /**
+     * Peeks at a cell's solution value without revealing it on the board.
+     * Maximum of 3 shields per game.
+     * TODO: currently untested and unimplemented in UI, uses same hint count as givehint.
+     *
+     * @param boxNumber the cell to peek at (0-99)
+     * @return the solution value of the cell — "B" for bomb, "0" for no adjacent bombs, or the number of adjacent bombs
+     * @throws MinesweeperException if max shields reached
+     */
+    public String giveShield(int boxNumber) throws MinesweeperException {
+        if (hintsRemaining <= 0) {
+            throw new MinesweeperException("No shields remaining!");
+        }
+        hintsRemaining--;
+        storage.storeHint(String.valueOf(hintsRemaining));
+
+        int row = boxNumber / 10;
+        int col = boxNumber % 10;
+        String boxValue = this.gameboard[row][col].solutionDisplay();
+
+        return Objects.equals(boxValue, " ") ? "0" : boxValue;
     }
 
     public MoveResult revealBoxInGameboard(int boxNumber) throws MinesweeperException {
@@ -293,6 +334,10 @@ public class Gameboard {
 
     public Box getBox(int row, int col) {
         return this.gameboard[row][col];
+    }
+
+    public int getHintsRemaining() {
+        return hintsRemaining;
     }
 
     public String toString() {
