@@ -79,6 +79,8 @@ public class Gameboard {
         this.storeSolution();  // store solution to solution.txt file
         this.storeGame();   // store existing gameplay to game.txt file
         this.customTimer.restartTime(); // start timer
+        this.customTimer.stopTime(); // pause timer to store time to time.txt file
+        this.customTimer.zeroTime(); // zero timer
         this.hintsRemaining = 3; // reset hints
         this.storage.storeHint("3");
     }
