@@ -12,7 +12,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import minesweeper.exception.MinesweeperException;
@@ -211,35 +210,30 @@ public class GamePage {
     }
 
     /**
-     * Handles the lose condition. Stops the timer, shows the lose dialog.
+     * Handles the lose condition. Opens the LosePage, stops the timer, and shows the lose dialog.
      * gameover() in Gameboard already restarted the board.
      */
     private void handleLose() {
         timerTimeline.stop();
-        customTimer.stopTime();                              // freeze first
+        customTimer.stopTime();
         String finalTime = customTimer.displayTimeMinSecs();
         timerLabel.setText(finalTime);
 
         gameboard.revealAllBombs();
         updateDisplay();
 
-        Alert lose = new Alert(Alert.AlertType.ERROR);
-        lose.setTitle("Game Over");
-        lose.setHeaderText(null);
-        lose.setContentText("You hit a bomb! Time: " + finalTime);
-        lose.initOwner(primaryStage);
-        lose.showAndWait();
-
-        try {
-            gameboard.gameover();
-            customTimer.stopTime();  // counteract restartTime() inside gameover()
-        } catch (MinesweeperException ex) {
-            showAlert("Error", ex.getMessage());
-        }
-        isFirstClick = true;
-        customTimer.zeroTime();
-        timerLabel.setText(customTimer.displayTimeMinSecs());
-        updateDisplay();
+        new LosePage(primaryStage, finalTime, () -> {
+            try {
+                gameboard.gameover();
+                customTimer.stopTime();  // counteract restartTime() inside gameover()
+            } catch (MinesweeperException ex) {
+                showAlert("Error", ex.getMessage());
+            }
+            isFirstClick = true;
+            customTimer.zeroTime();
+            timerLabel.setText(customTimer.displayTimeMinSecs());
+            updateDisplay();
+        }).show();
     }
 
     /**
