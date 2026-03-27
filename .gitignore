@@ -11,6 +11,9 @@
 # Minesweeper Data files
 data/
 
+#allow help.txt to be tracked
+!data/help.txt
+
 # BlueJ files
 *.ctxt
 
