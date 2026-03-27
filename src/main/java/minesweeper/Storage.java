@@ -266,4 +266,23 @@ public List<String> loadLeaderboard() throws StorageException {
             throw new StorageException("Unable to save leaderboard: " + writeError.getMessage());
         }
     }
+
+    private void clearFile(Path filePath) throws StorageException{
+        try {
+            Files.write(filePath, new byte[0]);
+        } catch (IOException writeError) {
+            throw new StorageException("Unable to clear file: " + writeError.getMessage()
+                    + "[" + filePath + "]" );
+        }
+    }
+
+    public void clearGame() throws StorageException{
+        this.clearFile(this.gameFilePath);
+        this.clearFile(this.hintFilePath);
+        this.clearFile(this.solutionFilePath);
+        this.clearFile(this.timeFilePath);
+        System.out.println("CLEAR BOARD");
+    }
+
+
 }

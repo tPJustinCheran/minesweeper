@@ -81,6 +81,10 @@ public class Gameboard {
         this.storage.storeHint("0");
     }
 
+    public void clearGameboard() throws MinesweeperException {
+        this.storage.clearGame();
+    }
+
     /**
      * Constructor Class if no pre-existing data from hard disk
      * Creates empty 10 x 10 grid with each cell containing a minesweeper.Box Object.
@@ -283,7 +287,7 @@ public class Gameboard {
     }
 
     public void gameover() throws MinesweeperException {
-        this.restartGameboard();
+        this.clearGameboard(); // this.restartGameboard();
     }
 
     public void closeProgram() throws MinesweeperException {

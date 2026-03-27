@@ -69,7 +69,10 @@ public class WinPage {
         Button enterBtn = new Button("Enter");
         enterBtn.setDefaultButton(true);
 
+        boolean[] buttonClicked = {false};
+
         enterBtn.setOnAction(e -> {
+            buttonClicked[0] = true;
             String name = nameField.getText().trim();
 
             if (name.isEmpty()) {
@@ -109,7 +112,16 @@ public class WinPage {
                 errorLabel
         );
 
-        winStage.setOnCloseRequest(e -> onClose.run());
+        winStage.setOnCloseRequest(e -> {
+            if (!buttonClicked[0]) {
+                onClose.run();
+                try {
+                    new HomePage().start(primaryStage);
+                } catch (Exception ex) {
+                    System.out.println("Error returning to home: " + ex.getMessage());
+                }
+            }
+        });
 
         winStage.setScene(new Scene(layout, 340, 210));
         winStage.show();
