@@ -16,7 +16,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import minesweeper.exception.MinesweeperException;
 
- 
+import java.util.function.Consumer;
+
+
 public class GamePage {
  
     private final Stage primaryStage;
@@ -229,7 +231,7 @@ public class GamePage {
 
         new WinPage(primaryStage, storage, finalTime, finalMillis, () -> {
             try {
-                gameboard.restartGameboard();
+                gameboard.gameover();
                 customTimer.stopTime();  // counteract restartTime() inside restartGameboard()
             } catch (MinesweeperException ex) {
                 showAlert("Error", ex.getMessage());
@@ -237,7 +239,7 @@ public class GamePage {
             isFirstClick = true;
             customTimer.zeroTime();
             timerLabel.setText(customTimer.displayTimeMinSecs());
-            updateDisplay();
+//            updateDisplay();
         }).show();
     }
 
@@ -256,16 +258,29 @@ public class GamePage {
 
         new LosePage(primaryStage, finalTime, () -> {
             try {
-                gameboard.gameover();
-                customTimer.stopTime();  // counteract restartTime() inside gameover()
-            } catch (MinesweeperException ex) {
-                showAlert("Error", ex.getMessage());
+                onPlayAgain();
+            } catch (MinesweeperException error) {
+                showAlert("Error", error.getMessage());
             }
-            isFirstClick = true;
-            customTimer.zeroTime();
-            timerLabel.setText(customTimer.displayTimeMinSecs());
-            updateDisplay();
+        }, () -> {
+            try {
+                onHomeButton();
+            } catch (MinesweeperException homeBtnError) {
+                showAlert("Error: ", homeBtnError.getMessage());
+            }
         }).show();
+    }
+
+    private void onPlayAgain() throws MinesweeperException {
+        gameboard.gameover();
+        isFirstClick = true;
+        timerLabel.setText(customTimer.displayTimeMinSecs());
+        gameboard.restartGameboard();
+        updateDisplay();
+    }
+
+    private void onHomeButton() throws MinesweeperException {
+        gameboard.gameover();
     }
 
     /**

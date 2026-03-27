@@ -8,7 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
- 
+import minesweeper.exception.MinesweeperException;
+
 public class LosePage {
 
     /**
@@ -20,6 +21,8 @@ public class LosePage {
     private final Stage primaryStage;
     private final String finalTime;
     private final Runnable onPlayAgain;
+    private final Runnable onHomeButton;
+
 
     /**
      * Constructor for the LosePage class.
@@ -28,10 +31,11 @@ public class LosePage {
      * @param finalTime    the formatted completion time string to display
      * @param onPlayAgain  callback to run when the player chooses to play again
      */
-    public LosePage(Stage primaryStage, String finalTime, Runnable onPlayAgain) {
+    public LosePage(Stage primaryStage, String finalTime, Runnable onPlayAgain, Runnable onHomeButton) {
         this.primaryStage = primaryStage;
         this.finalTime = finalTime;
         this.onPlayAgain = onPlayAgain;
+        this.onHomeButton = onHomeButton;
     }
 
     /**
@@ -56,13 +60,18 @@ public class LosePage {
 
         Button homeBtn = new Button("Back to Home");
 
+        boolean[] buttonClicked = {false};
+
         playAgainBtn.setOnAction(e -> {
+            buttonClicked[0] = true;
             loseStage.close();
             onPlayAgain.run();
         });
 
         homeBtn.setOnAction(e -> {
+            buttonClicked[0] = true;
             loseStage.close();
+            onHomeButton.run();
             try {
                 new HomePage().start(primaryStage);
             } catch (Exception ex) {
@@ -70,7 +79,11 @@ public class LosePage {
             }
         });
 
-        loseStage.setOnCloseRequest(e -> onPlayAgain.run());
+        loseStage.setOnCloseRequest(e -> {
+            if (!buttonClicked[0]) {
+                onPlayAgain.run();
+            }
+        });
 
         VBox layout = new VBox(12);
         layout.setPadding(new Insets(24));
