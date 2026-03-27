@@ -15,8 +15,8 @@ public class HintCommand extends Command {
 
     @Override
     public void execute(Gameboard gameboard, Ui ui) throws MinesweeperException {
-        String hint = gameboard.giveHint(this.boxNumber);
+        int boxNumber = gameboard.giveHint();
         this.setCommandType(CommandType.Hint);
-        this.setResponse(ui.printHint(hint));
+        this.setResponse(ui.printHint("Revealed cell " + boxNumber));
     }
 }

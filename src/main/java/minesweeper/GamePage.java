@@ -26,6 +26,7 @@ public class GamePage {
     private final CustomTimer customTimer;
  
     private final Button[][] cellButtons = new Button[10][10];
+    private Button hintBtn;
     private Label timerLabel;
     private Timeline timerTimeline;
     private boolean isFirstClick = true;
@@ -61,21 +62,52 @@ public class GamePage {
 
         timerLabel = new Label(customTimer.displayTimeMinSecs());
 
-        Button hintBtn = new Button("Hint");
-        Button winBtn  = new Button("Win");
+        Button homeBtn = new Button("← Home");
+        hintBtn = new Button("Hint (" + gameboard.getHintsRemaining() + " left)");
+
+        homeBtn.setOnAction(e -> {
+            try {
+                gameboard.closeProgram();
+            } catch (MinesweeperException ex) {
+                System.out.println("Error saving: " + ex.getMessage());
+            }
+            timerTimeline.stop();
+            try {
+                new HomePage().start(primaryStage);
+            } catch (Exception ex) {
+                System.out.println("Error returning to home: " + ex.getMessage());
+            }
+        });
 
         hintBtn.setOnAction(e -> {
-            // TODO: does nothing for now
+            try {
+                gameboard.giveHint();
+                updateDisplay();
+            } catch (MinesweeperException ex) {
+                showAlert("Hint", ex.getMessage());
+            }
         });
 
-        winBtn.setOnAction(e -> {
-            handleWin();
-        });
+        Button winBtn = new Button("Win");
+        winBtn.setOnAction(e -> handleWin());
 
-        HBox header = new HBox(10);
+        HBox leftHeader = new HBox(10);
+        leftHeader.setAlignment(Pos.CENTER_LEFT);
+        leftHeader.getChildren().add(homeBtn);
+
+        HBox rightHeader = new HBox(10);
+        rightHeader.setAlignment(Pos.CENTER_RIGHT);
+        rightHeader.getChildren().addAll(winBtn, hintBtn);
+
+        HBox header = new HBox();
         header.setPadding(new Insets(10));
         header.setAlignment(Pos.CENTER);
-        header.getChildren().addAll(timerLabel, new Label("DEBUG:"), hintBtn, winBtn);
+
+        HBox spacerLeft  = new HBox();
+        HBox spacerRight = new HBox();
+        javafx.scene.layout.HBox.setHgrow(spacerLeft,  javafx.scene.layout.Priority.ALWAYS);
+        javafx.scene.layout.HBox.setHgrow(spacerRight, javafx.scene.layout.Priority.ALWAYS);
+        header.getChildren().addAll(leftHeader, spacerLeft, timerLabel, spacerRight, rightHeader);
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -272,6 +304,8 @@ public class GamePage {
                 }
             }
         }
+
+        hintBtn.setText("Hint (" + gameboard.getHintsRemaining() + " left)");
     }
 
     /**
