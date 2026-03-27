@@ -8,6 +8,9 @@
 /.gradle/
 /build/
 
+# Minesweeper Data files
+data/
+
 # BlueJ files
 *.ctxt
 

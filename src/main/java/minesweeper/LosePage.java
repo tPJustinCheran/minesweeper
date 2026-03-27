@@ -10,13 +10,82 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
  
 public class LosePage {
-    //stub for later implementation of lose page
+
     /**
-    * A "Play Again" button
-    * A "Back to Home" button
-    * Showing the final time
-    * Showing how many bombs were on the board
-    */
+     * TODO:
+     * - "Back to Home" button
+     * - Showing how many bombs were on the board
+     */
+
+    private final Stage primaryStage;
+    private final String finalTime;
+    private final Runnable onPlayAgain;
+
+    /**
+     * Constructor for the LosePage class.
+     *
+     * @param primaryStage the owner stage
+     * @param finalTime    the formatted completion time string to display
+     * @param onPlayAgain  callback to run when the player chooses to play again
+     */
+    public LosePage(Stage primaryStage, String finalTime, Runnable onPlayAgain) {
+        this.primaryStage = primaryStage;
+        this.finalTime = finalTime;
+        this.onPlayAgain = onPlayAgain;
+    }
+
+    /**
+     * Displays the lose dialog. Shows the final time and provides
+     * a Play Again button to reset the board.
+     */
+    public void show() {
+        Stage loseStage = new Stage();
+        loseStage.setTitle("Game Over");
+        loseStage.initOwner(primaryStage);
+        loseStage.initModality(Modality.APPLICATION_MODAL);
+        loseStage.setResizable(false);
+
+        Label msgLabel  = new Label("You hit a bomb!");
+        Label timeLabel = new Label("Time: " + finalTime);
+
+        // TODO: add bomb count label here
+        // Label bombLabel = new Label("Bombs on board: " + bombCount);
+
+        Button playAgainBtn = new Button("Play Again");
+        playAgainBtn.setDefaultButton(true);
+
+        Button homeBtn = new Button("Back to Home");
+
+        playAgainBtn.setOnAction(e -> {
+            loseStage.close();
+            onPlayAgain.run();
+        });
+
+        homeBtn.setOnAction(e -> {
+            loseStage.close();
+            try {
+                new HomePage().start(primaryStage);
+            } catch (Exception ex) {
+                System.out.println("Error returning to home: " + ex.getMessage());
+            }
+        });
+
+        loseStage.setOnCloseRequest(e -> onPlayAgain.run());
+
+        VBox layout = new VBox(12);
+        layout.setPadding(new Insets(24));
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(
+                msgLabel,
+                timeLabel,
+                // TODO: add bombLabel here
+                playAgainBtn,
+                homeBtn
+        );
+
+        loseStage.setScene(new Scene(layout, 280, 180));
+        loseStage.show();
+    }
 }
 
 

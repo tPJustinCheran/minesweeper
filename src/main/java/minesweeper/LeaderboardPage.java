@@ -5,10 +5,12 @@ import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import minesweeper.exception.StorageException;
 
@@ -17,6 +19,7 @@ import minesweeper.exception.StorageException;
  */
 public class LeaderboardPage {
 
+    private final Stage primaryStage;
     private final Stage leaderboardStage;
     private final Storage storage;
 
@@ -28,12 +31,14 @@ public class LeaderboardPage {
      * @param storage      the storage object to load leaderboard entries
      */
     public LeaderboardPage(Stage primaryStage, Storage storage) {
+        this.primaryStage = primaryStage;
         this.storage = storage;
 
         leaderboardStage = new Stage();
         leaderboardStage.setTitle("Leaderboard");
         leaderboardStage.initOwner(primaryStage);
-        leaderboardStage.setResizable(true);
+        leaderboardStage.initModality(Modality.APPLICATION_MODAL);
+        leaderboardStage.setResizable(false);
         leaderboardStage.setMinWidth(400);
     }
 
@@ -59,13 +64,33 @@ public class LeaderboardPage {
         VBox content = new VBox(12);
         content.setPadding(new Insets(20));
 
+        HBox header = new HBox(10);
+        header.setAlignment(Pos.CENTER_LEFT);
+
+        Button backButton = new Button("← Home");
+        backButton.setStyle(
+                "-fx-font-size: 14px;"
+                        + "-fx-background-radius: 8;"
+        );
+
+        backButton.setOnAction(e -> {
+            leaderboardStage.close();
+            try {
+                new HomePage().start(primaryStage);
+            } catch (Exception ex) {
+                System.out.println("Error returning to home: " + ex.getMessage());
+            }
+        });
+
         Label title = new Label("Leaderboard");
         title.setStyle(
                 "-fx-font-size: 16px;"
                         + "-fx-font-weight: bold;"
         );
 
-        content.getChildren().add(title);
+        header.getChildren().addAll(backButton, title);
+
+        content.getChildren().add(header);
 
         try {
             List<String> entries = storage.loadLeaderboard();

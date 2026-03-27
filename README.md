@@ -5,18 +5,15 @@ Team Project for CS2103DE
 
 ### WinPage
 
-- "Back to Home" button in LeaderboardPage after winning
+- Test for bugs
 
 ### LeaderboardPage
 
-- "Back to Home" button
+- Test for bugs
 
 ### LosePage
 
-- "Play Again" button (stub exists, already wired)
-- "Back to Home" button
 - Bomb count display
-- Proper styling to match WinPage
 
 ### GamePage
 
@@ -26,6 +23,7 @@ Team Project for CS2103DE
 ### HomePage
 
 - Help button functionality (HelpPage not yet implemented)
+- Continue button on HomePage is incorrectly enabled after a win, because `restartGameboard()` saves a fresh board to game.txt
 
 ### HelpPage
 
