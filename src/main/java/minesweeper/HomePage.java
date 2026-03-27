@@ -102,8 +102,8 @@ public class HomePage extends Application {
         });
 
         helpBtn.setOnAction(e -> {
-            HelpPage helpPage = new HelpPage(primaryStage, storage);
-            helpPage.show();
+            ResourceManager resourceManager = new ResourceManager();
+            new HelpPage(primaryStage, resourceManager).show();
         });
 
         VBox layout = new VBox(16);

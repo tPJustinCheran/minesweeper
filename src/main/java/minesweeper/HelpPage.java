@@ -1,7 +1,5 @@
 package minesweeper;
 
-import java.util.List;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,35 +9,25 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import minesweeper.exception.StorageException;
 
 /**
- * Displays instructions loaded from help.txt.
+ * Displays instructions loaded from resources/help.txt.
  */
 public class HelpPage {
 
     private final Stage primaryStage;
-    private final Storage storage;
+    private final ResourceManager resourceManager;
 
-    public HelpPage(Stage primaryStage, Storage storage) {
+    public HelpPage(Stage primaryStage, ResourceManager resourceManager) {
         this.primaryStage = primaryStage;
-        this.storage = storage;
+        this.resourceManager = resourceManager;
     }
 
     public void show() {
         Label title = new Label("Help");
         title.setStyle("-fx-font-size: 28px;-fx-font-weight: bold;");
 
-        Label helpLabel = new Label();
-
-        try {
-            List<String> helpLines = storage.loadHelp();
-            String helpText = String.join("\n", helpLines);
-            helpLabel.setText(helpText);
-        } catch (StorageException e) {
-            helpLabel.setText("Unable to load help file.");
-        }
-
+        Label helpLabel = new Label(resourceManager.loadHelpText());
         helpLabel.setWrapText(true);
         helpLabel.setStyle("-fx-font-size: 14px;-fx-line-spacing: 4px;");
 
@@ -47,13 +35,7 @@ public class HelpPage {
         scrollPane.setFitToWidth(true);
 
         Button backBtn = new Button("← Back");
-        backBtn.setOnAction(e -> {
-            try {
-                new HomePage().start(primaryStage);
-            } catch (Exception ex) {
-                System.out.println("Error returning home");
-            }
-        });
+        backBtn.setOnAction(e -> new HomePage().start(primaryStage));
 
         VBox content = new VBox(20);
         content.setPadding(new Insets(25));

@@ -17,7 +17,6 @@ public class Storage {
     private static final String TIME_FILE_NAME = "time.txt";
     private static final String HINT_FILE_NAME = "hint.txt";
     private static final String LEADERBOARD_FILE_NAME = "leaderboard.txt";
-    private static final String HELP_FILE_NAME = "help.txt";
 
     // Instance Attributes
     private final Path folderPath;
@@ -26,7 +25,6 @@ public class Storage {
     private final Path timeFilePath;
     private final Path hintFilePath;
     private final Path leaderboardFilePath;
-    private final Path helpFilePath;
 
     /**
      * Constructor class to define directories
@@ -42,7 +40,6 @@ public class Storage {
         this.timeFilePath = this.folderPath.resolve(TIME_FILE_NAME);
         this.hintFilePath = this.folderPath.resolve(HINT_FILE_NAME);
         this.leaderboardFilePath = this.folderPath.resolve(LEADERBOARD_FILE_NAME);
-        this.helpFilePath = this.folderPath.resolve(HELP_FILE_NAME);
         onStartup();
     }
 
@@ -79,7 +76,6 @@ public class Storage {
         checkAndCreateFileFolder(this.timeFilePath, false);
         checkAndCreateFileFolder(this.hintFilePath, false);
         checkAndCreateFileFolder(this.leaderboardFilePath, false);
-        checkAndCreateFileFolder(this.helpFilePath, false);
     }
 
     /**
@@ -268,25 +264,6 @@ public List<String> loadLeaderboard() throws StorageException {
             Files.write(this.leaderboardFilePath, entries);
         } catch (IOException writeError) {
             throw new StorageException("Unable to save leaderboard: " + writeError.getMessage());
-        }
-    }
-
-    /**
-     * Load help instructions from help.txt file.
-     *
-     * @return List of Strings representing help text lines.
-     * @throws StorageException if file cannot be read
-     */
-    public List<String> loadHelp() throws StorageException {
-        try {
-            List<String> lines = Files.readAllLines(this.helpFilePath);
-            if (lines.isEmpty()) {
-                throw new StorageException("Help file is empty");
-            }
-            return lines;
-        } catch (IOException loadError) {
-            throw new StorageException("Unable to load help file: "
-                    + loadError.getMessage());
         }
     }
 }
