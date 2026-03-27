@@ -55,7 +55,6 @@ public class LosePage {
         playAgainBtn.setDefaultButton(true);
 
         Button homeBtn = new Button("Back to Home");
-        // TODO: implement homeBtn action — navigate to HomePage
 
         playAgainBtn.setOnAction(e -> {
             loseStage.close();
@@ -63,7 +62,12 @@ public class LosePage {
         });
 
         homeBtn.setOnAction(e -> {
-            // TODO: implement back to home navigation
+            loseStage.close();
+            try {
+                new HomePage().start(primaryStage);
+            } catch (Exception ex) {
+                System.out.println("Error returning to home: " + ex.getMessage());
+            }
         });
 
         loseStage.setOnCloseRequest(e -> onPlayAgain.run());
