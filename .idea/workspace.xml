@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/GamePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Gameboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/LosePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/LosePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/WinPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/WinPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +64,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "branch-Hint",
+    "git-widget-placeholder": "clearBranch",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
     "nodejs_package_manager_path": "npm",
@@ -103,6 +106,7 @@
       <workItem from="1773912163671" duration="11692000" />
       <workItem from="1774063816345" duration="8465000" />
       <workItem from="1774100423196" duration="3217000" />
+      <workItem from="1774620836278" duration="2569000" />
     </task>
     <servers />
   </component>
