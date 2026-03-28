@@ -97,7 +97,7 @@ public class HomePage extends Application {
         });
 
         leaderboardBtn.setOnAction(e -> {
-            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage);
+            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage,null);
             leaderboardPage.show();
         });
 

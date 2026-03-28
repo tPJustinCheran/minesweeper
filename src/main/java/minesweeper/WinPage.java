@@ -92,13 +92,9 @@ public class WinPage {
                 return;
             }
 
-            winStage.close();
-
-            LeaderboardPage leaderboardPage =
-                    new LeaderboardPage(primaryStage, storage);
-            leaderboardPage.show();
-
-            onClose.run();
+        winStage.close();
+        new LeaderboardPage(primaryStage, storage, onClose).showAndWait();
+        onClose.run();
         });
 
         VBox layout = new VBox(12);

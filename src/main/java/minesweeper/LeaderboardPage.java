@@ -22,6 +22,7 @@ public class LeaderboardPage {
     private final Stage primaryStage;
     private final Stage leaderboardStage;
     private final Storage storage;
+    private final Runnable onClose;
 
     /**
      * Constructor for the LeaderboardPage class.
@@ -30,9 +31,10 @@ public class LeaderboardPage {
      * @param primaryStage the owner stage
      * @param storage      the storage object to load leaderboard entries
      */
-    public LeaderboardPage(Stage primaryStage, Storage storage) {
+    public LeaderboardPage(Stage primaryStage, Storage storage, Runnable onClose) {
         this.primaryStage = primaryStage;
         this.storage = storage;
+        this.onClose = onClose;
 
         leaderboardStage = new Stage();
         leaderboardStage.setTitle("Leaderboard");
@@ -52,6 +54,10 @@ public class LeaderboardPage {
         } else {
             leaderboardStage.show();
         }
+
+        leaderboardStage.setOnCloseRequest(e -> {
+            if (onClose != null) onClose.run();
+        });
     }
 
     /**
@@ -74,6 +80,7 @@ public class LeaderboardPage {
         );
 
         backButton.setOnAction(e -> {
+            if (onClose != null) onClose.run();
             leaderboardStage.close();
             try {
                 new HomePage().start(primaryStage);
@@ -176,6 +183,14 @@ public class LeaderboardPage {
         row.getChildren().addAll(rankLabel, nameLabel, timeLabel);
 
         return row;
+    }
+
+    /**
+     * Shows the leaderboard window and waits until it is closed.
+     */
+    public void showAndWait() {
+        leaderboardStage.setScene(buildScene());
+        leaderboardStage.showAndWait();
     }
 
     /**

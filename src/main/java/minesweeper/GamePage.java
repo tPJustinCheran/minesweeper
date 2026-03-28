@@ -66,7 +66,11 @@ public class GamePage {
 
         homeBtn.setOnAction(e -> {
             try {
-                gameboard.closeProgram();
+                if (isFirstClick) {
+                    gameboard.clearGameboard();
+                } else {
+                    gameboard.closeProgram();
+                }
             } catch (MinesweeperException ex) {
                 System.out.println("Error saving: " + ex.getMessage());
             }
@@ -77,7 +81,7 @@ public class GamePage {
                 System.out.println("Error returning to home: " + ex.getMessage());
             }
         });
-
+        
         hintBtn.setOnAction(e -> {
             try {
                 gameboard.giveHint();
@@ -233,8 +237,9 @@ public class GamePage {
 
         new WinPage(primaryStage, storage, finalTime, finalMillis, () -> {
             try {
-                gameboard.clearGameboard();
-                customTimer.stopTime();
+                gameboard.restartGameboard();  // restarts board, internally zeros timer
+                customTimer.stopTime();          // counteract restartTime() inside restartGameboard()  
+                gameboard.clearGameboard();  // X button: clears, isFirstClick=true, fresh game
             } catch (MinesweeperException ex) {
                 showAlert("Error", ex.getMessage());
             }
