@@ -86,6 +86,9 @@ public class GamePage {
             try {
                 gameboard.giveHint();
                 updateDisplay();
+                if (gameboard.checkWin()) {
+                    handleWin();
+                }
             } catch (MinesweeperException ex) {
                 showAlert("Hint", ex.getMessage());
             }

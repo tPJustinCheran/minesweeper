@@ -66,15 +66,6 @@ public class CustomTimer {
     }
 
     /**
-     * Get Time in Seconds.
-     *
-     * @return Integer (time in seconds).
-     */
-    public int getTimeSecs() {
-        return (int) (getTimeMillis() / 1000);
-    }
-
-    /**
      * Stop Timer. Used when game ends.
      */
     public void stopTime() {

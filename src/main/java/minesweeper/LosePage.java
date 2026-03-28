@@ -29,7 +29,8 @@ public class LosePage {
      *
      * @param primaryStage the owner stage
      * @param finalTime    the formatted completion time string to display
-     * @param onPlayAgain  callback to run when the player chooses to play again
+     * @param onPlayAgain callback to run when the player clicks "Play Again"
+     * @param onHomeButton callback to run when the player clicks "Back to Home"
      */
     public LosePage(Stage primaryStage, String finalTime, Runnable onPlayAgain, Runnable onHomeButton) {
         this.primaryStage = primaryStage;

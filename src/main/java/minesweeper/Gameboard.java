@@ -192,8 +192,6 @@ public class Gameboard {
     public void setFlagInGameboard(int boxNumber, boolean isFlag) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
-        System.out.println(this.gameboard[row][col].getFlag());
-        System.out.println(isFlag);
         this.gameboard[row][col].setFlag(isFlag);
         this.storeGame();
     }
