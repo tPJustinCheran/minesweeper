@@ -84,6 +84,11 @@ public class GamePage {
         
         hintBtn.setOnAction(e -> {
             try {
+                if (isFirstClick) {
+                    isFirstClick = false;
+                    customTimer.restartTime();
+                    timerTimeline.play();
+                }
                 gameboard.giveHint();
                 updateDisplay();
                 if (gameboard.checkWin()) {
