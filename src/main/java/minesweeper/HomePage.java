@@ -97,12 +97,13 @@ public class HomePage extends Application {
         });
 
         leaderboardBtn.setOnAction(e -> {
-            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage);
+            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage,null);
             leaderboardPage.show();
         });
 
         helpBtn.setOnAction(e -> {
-            showInfo(primaryStage, "Help button works!");
+            ResourceManager resourceManager = new ResourceManager();
+            new HelpPage(primaryStage, resourceManager).show();
         });
 
         VBox layout = new VBox(16);

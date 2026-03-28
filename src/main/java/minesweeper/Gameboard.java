@@ -81,7 +81,6 @@ public class Gameboard {
         this.customTimer.restartTime(); // start timer
         this.customTimer.stopTime(); // pause timer to store time to time.txt file
         this.customTimer.zeroTime(); // zero timer
-        this.hintsRemaining = 3; // reset hints
         this.storage.storeHint("3");
     }
 
@@ -193,8 +192,6 @@ public class Gameboard {
     public void setFlagInGameboard(int boxNumber, boolean isFlag) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
-        System.out.println(this.gameboard[row][col].getFlag());
-        System.out.println(isFlag);
         this.gameboard[row][col].setFlag(isFlag);
         this.storeGame();
     }
@@ -329,10 +326,6 @@ public class Gameboard {
         }
     }
 
-    public void gameover() throws MinesweeperException {
-        this.clearGameboard(); // this.restartGameboard();
-    }
-
     public void closeProgram() throws MinesweeperException {
         this.storeGame();  // store gameplay to game.txt file
         this.customTimer.pauseAndStopTime(storage); // store time to time.txt file
@@ -356,5 +349,4 @@ public class Gameboard {
         }
         return totalStr;
     }
-
 }

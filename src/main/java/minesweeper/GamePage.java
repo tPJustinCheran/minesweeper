@@ -16,9 +16,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import minesweeper.exception.MinesweeperException;
 
-import java.util.function.Consumer;
-
-
 public class GamePage {
  
     private final Stage primaryStage;
@@ -69,7 +66,11 @@ public class GamePage {
 
         homeBtn.setOnAction(e -> {
             try {
-                gameboard.closeProgram();
+                if (isFirstClick) {
+                    gameboard.clearGameboard();
+                } else {
+                    gameboard.closeProgram();
+                }
             } catch (MinesweeperException ex) {
                 System.out.println("Error saving: " + ex.getMessage());
             }
@@ -80,11 +81,19 @@ public class GamePage {
                 System.out.println("Error returning to home: " + ex.getMessage());
             }
         });
-
+        
         hintBtn.setOnAction(e -> {
             try {
+                if (isFirstClick) {
+                    isFirstClick = false;
+                    customTimer.restartTime();
+                    timerTimeline.play();
+                }
                 gameboard.giveHint();
                 updateDisplay();
+                if (gameboard.checkWin()) {
+                    handleWin();
+                }
             } catch (MinesweeperException ex) {
                 showAlert("Hint", ex.getMessage());
             }
@@ -156,7 +165,11 @@ public class GamePage {
 
         primaryStage.setOnCloseRequest(e -> {
             try {
-                gameboard.closeProgram();
+                if (isFirstClick) {
+                    gameboard.clearGameboard();
+                } else {
+                    gameboard.closeProgram();
+                }
             } catch (MinesweeperException ex) {
                 System.out.println("Error saving: " + ex.getMessage());
             }
@@ -185,7 +198,7 @@ public class GamePage {
                 case SAFE -> {}
             }
         } catch (MinesweeperException ex) {
-            showAlert("Error", ex.getMessage());  // only flagged cell or storage errors
+            showAlert("Error", ex.getMessage());
         }
     }
 
@@ -209,11 +222,12 @@ public class GamePage {
         customTimer.restartTime();   // ← creates a fresh Timer, then starts it
         timerTimeline.play();
 
-        gameboard.revealBoxInGameboard(boxNumber);
+        Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
         updateDisplay();
-
-        if (gameboard.checkWin()) {
-            handleWin();
+        switch (result) {
+            case WIN  -> handleWin();
+            case BOMB -> handleLose();
+            case SAFE -> {}
         }
     }
 
@@ -231,15 +245,16 @@ public class GamePage {
 
         new WinPage(primaryStage, storage, finalTime, finalMillis, () -> {
             try {
-                gameboard.gameover();
-                customTimer.stopTime();  // counteract restartTime() inside restartGameboard()
+                gameboard.restartGameboard();  // restarts board, internally zeros timer
+                customTimer.stopTime();          // counteract restartTime() inside restartGameboard()  
+                gameboard.clearGameboard();  // X button: clears, isFirstClick=true, fresh game
             } catch (MinesweeperException ex) {
                 showAlert("Error", ex.getMessage());
             }
             isFirstClick = true;
             customTimer.zeroTime();
             timerLabel.setText(customTimer.displayTimeMinSecs());
-//            updateDisplay();
+            updateDisplay();
         }).show();
     }
 
@@ -272,15 +287,18 @@ public class GamePage {
     }
 
     private void onPlayAgain() throws MinesweeperException {
-        gameboard.gameover();
+        gameboard.restartGameboard();        // restarts board, internally zeros timer
+        customTimer.stopTime();              // counteract restartTime() inside restartGameboard()
         isFirstClick = true;
-        timerLabel.setText(customTimer.displayTimeMinSecs());
-        gameboard.restartGameboard();
+        timerLabel.setText(customTimer.displayTimeMinSecs());  // now reads 00:00.000
         updateDisplay();
     }
 
     private void onHomeButton() throws MinesweeperException {
-        gameboard.gameover();
+        gameboard.clearGameboard();  // clear save so Continue is disabled on home
+        customTimer.stopTime();
+        customTimer.zeroTime();
+        timerTimeline.stop();
     }
 
     /**

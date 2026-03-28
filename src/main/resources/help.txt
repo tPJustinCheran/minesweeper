@@ -1,0 +1,34 @@
+MINESWEEPER HELP
+
+GOAL
+Reveal all safe cells without clicking any bombs.
+
+CONTROLS
+Left click:
+Reveals a cell.
+The first click is always safe.
+
+Right click:
+Places or removes a flag.
+Flags help you mark suspected bombs.
+
+NUMBERS
+Each number shows how many bombs exist in the 8 surrounding cells.
+
+Example:
+1 = 1 bomb nearby
+2 = 2 bombs nearby
+n = n bombs nearby
+0 = no bombs nearby (area expands automatically)
+
+HINTS
+You have 3 hints.
+Each hint reveals a safe area.
+
+WIN
+You win when all non-bomb cells are revealed.
+
+LOSE
+Clicking a bomb ends the game.
+
+Good luck and have fun!
