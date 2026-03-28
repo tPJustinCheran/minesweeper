@@ -34,12 +34,6 @@ public class CustomTimer {
     public void startTime() {
         startTimeMillis = System.currentTimeMillis();
         timerRunning = true;
-        timer = new Timer();
-        this.timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                // no-op: time is calculated on read, not incremented
-            }
-        }, 0, 10);
     }
 
     /**
@@ -98,9 +92,12 @@ public class CustomTimer {
      * @throws MinesweeperException Exception raised when unable to write to time.txt file.
      */
     public void pauseAndStopTime(Storage storage) throws MinesweeperException {
-        String timeMillisString = Long.toString(this.getTimeMillis());
-        storage.storeTime(timeMillisString);
-        timer.cancel();
+        offsetMillis = getTimeMillis();
+        if (timerRunning) {
+            timer.cancel();
+            timerRunning = false;
+        }
+        storage.storeTime(Long.toString(offsetMillis));
     }
 
     /**

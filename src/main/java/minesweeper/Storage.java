@@ -283,6 +283,4 @@ public List<String> loadLeaderboard() throws StorageException {
         this.clearFile(this.timeFilePath);
         System.out.println("CLEAR BOARD");
     }
-
-
 }
