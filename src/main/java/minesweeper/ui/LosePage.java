@@ -16,16 +16,11 @@ import javafx.stage.Stage;
  */
 public class LosePage {
 
-    /**
-     * TODO:
-     * - Showing how many bombs were on the board
-     */
-
+    private final int bombsNotFlagged;
     private final Stage primaryStage;
     private final String finalTime;
     private final Runnable onPlayAgain;
     private final Runnable onHomeButton;
-
 
     /**
      * Constructor for the LosePage class.
@@ -35,9 +30,10 @@ public class LosePage {
      * @param onPlayAgain callback to run when the player clicks "Play Again"
      * @param onHomeButton callback to run when the player clicks "Back to Home"
      */
-    public LosePage(Stage primaryStage, String finalTime, Runnable onPlayAgain, Runnable onHomeButton) {
+    public LosePage(Stage primaryStage, String finalTime, int bombsNotFlagged, Runnable onPlayAgain, Runnable onHomeButton) {
         this.primaryStage = primaryStage;
         this.finalTime = finalTime;
+        this.bombsNotFlagged = bombsNotFlagged;
         this.onPlayAgain = onPlayAgain;
         this.onHomeButton = onHomeButton;
     }
@@ -55,9 +51,7 @@ public class LosePage {
 
         Label msgLabel = new Label("You hit a bomb!");
         Label timeLabel = new Label("Time: " + finalTime);
-
-        // TODO: add bomb count label here
-        // Label bombLabel = new Label("Bombs on board: " + bombCount);
+        Label bombLabel = new Label("Bombs not flagged: " + bombsNotFlagged);
 
         Button playAgainBtn = new Button("Play Again");
         playAgainBtn.setDefaultButton(true);
@@ -95,7 +89,7 @@ public class LosePage {
         layout.getChildren().addAll(
                 msgLabel,
                 timeLabel,
-                // TODO: add bombLabel here
+                bombLabel,
                 playAgainBtn,
                 homeBtn
         );
@@ -104,7 +98,3 @@ public class LosePage {
         loseStage.show();
     }
 }
-
-
-
-

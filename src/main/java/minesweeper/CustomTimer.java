@@ -2,7 +2,6 @@ package minesweeper;
 
 import minesweeper.exception.MinesweeperException;
 import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Custom Timer Class for Timing the Gameplay.

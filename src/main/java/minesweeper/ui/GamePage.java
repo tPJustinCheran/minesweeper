@@ -291,7 +291,7 @@ public class GamePage {
         gameboard.revealAllBombs();
         updateDisplay();
 
-        new LosePage(primaryStage, finalTime, () -> {
+        new LosePage(primaryStage, finalTime, gameboard.getUnflaggedBombCount(), () -> {
             try {
                 onPlayAgain();
             } catch (MinesweeperException error) {

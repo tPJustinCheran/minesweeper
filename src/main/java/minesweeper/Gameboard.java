@@ -326,6 +326,23 @@ public class Gameboard {
         }
     }
 
+    /**
+     * Returns the number of bombs that have not been flagged.
+     *
+     * @return count of unflagged bombs
+     */
+    public int getUnflaggedBombCount() {
+        int count = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (gameboard[i][j].getBomb() && !gameboard[i][j].getFlag()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public void closeProgram() throws MinesweeperException {
         this.storeGame();  // store gameplay to game.txt file
         this.customTimer.pauseAndStopTime(storage); // store time to time.txt file
