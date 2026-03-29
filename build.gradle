@@ -43,7 +43,7 @@ shadowJar {
     archiveClassifier = null
     archiveFileName = "minesweeper.jar"
     manifest {
-        attributes 'Main-Class': 'minesweeper.Launcher'
+        attributes 'Main-Class': 'minesweeper.Minesweeper'
     }
     mergeServiceFiles()
 }
