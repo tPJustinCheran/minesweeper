@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.ui;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.Storage;
+import minesweeper.ResourceManager;
 
 /**
  * Home page UI for the Minesweeper game.
@@ -188,25 +190,6 @@ public class HomePage extends Application {
         alert.initOwner(stage);
         alert.showAndWait();
     }
-
-    /**
-     * Shows a simple information dialog on the primary stage.
-     * Temporary helper — replace with a proper DialogPage when built.
-     *
-     * @param stage   Owner stage.
-     * @param message Information message to display.
-     */
-    private void showInfo(Stage stage, String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
-            javafx.scene.control.Alert.AlertType.INFORMATION
-        );
-        alert.setTitle("Debug");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.initOwner(stage);
-        alert.showAndWait();
-    }
-
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import minesweeper.exception.StorageException;
+import minesweeper.Storage;
 
 /**
  * The WinPage class represents the dialog shown when the player wins the game.

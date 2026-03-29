@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.ui;
  
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,6 +15,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.Storage;
+import minesweeper.Box;
+import minesweeper.Gameboard;
+import minesweeper.CustomTimer;
 
 public class GamePage {
  

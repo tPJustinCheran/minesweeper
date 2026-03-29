@@ -5,8 +5,6 @@ Team Project for CS2103DE
 
 ### Features
 - [ ] LosePage: show bomb count on the board
-- [ ] WinPage: add Back to Home button
-- [ ] HelpPage: implement help page content
 
 ### Code Quality
 - [ ] Move all UI classes into a `ui/` package

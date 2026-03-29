@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.ui;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import minesweeper.exception.StorageException;
+import minesweeper.Storage;
 
 /**
  * Displays the leaderboard window containing ranked completion times.
