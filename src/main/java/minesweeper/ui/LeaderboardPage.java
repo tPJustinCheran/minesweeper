@@ -12,8 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import minesweeper.exception.StorageException;
 import minesweeper.Storage;
+import minesweeper.exception.StorageException;
 
 /**
  * Displays the leaderboard window containing ranked completion times.
@@ -57,7 +57,9 @@ public class LeaderboardPage {
         }
 
         leaderboardStage.setOnCloseRequest(e -> {
-            if (onClose != null) onClose.run();
+            if (onClose != null) {
+                onClose.run();
+            }
         });
     }
 
@@ -81,7 +83,9 @@ public class LeaderboardPage {
         );
 
         backButton.setOnAction(e -> {
-            if (onClose != null) onClose.run();
+            if (onClose != null) {
+                onClose.run();
+            }
             leaderboardStage.close();
             try {
                 new HomePage().start(primaryStage);

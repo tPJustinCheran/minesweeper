@@ -9,8 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import minesweeper.exception.StorageException;
 import minesweeper.Storage;
+import minesweeper.exception.StorageException;
 
 /**
  * The WinPage class represents the dialog shown when the player wins the game.
@@ -93,9 +93,9 @@ public class WinPage {
                 return;
             }
 
-        winStage.close();
-        new LeaderboardPage(primaryStage, storage, onClose).showAndWait();
-        onClose.run();
+            winStage.close();
+            new LeaderboardPage(primaryStage, storage, onClose).showAndWait();
+            onClose.run();
         });
 
         VBox layout = new VBox(12);

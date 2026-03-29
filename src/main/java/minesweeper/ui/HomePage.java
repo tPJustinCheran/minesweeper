@@ -10,9 +10,9 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import minesweeper.exception.MinesweeperException;
-import minesweeper.Storage;
 import minesweeper.ResourceManager;
+import minesweeper.Storage;
+import minesweeper.exception.MinesweeperException;
 
 /**
  * Home page UI for the Minesweeper game.
@@ -99,7 +99,7 @@ public class HomePage extends Application {
         });
 
         leaderboardBtn.setOnAction(e -> {
-            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage,null);
+            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage, null);
             leaderboardPage.show();
         });
 

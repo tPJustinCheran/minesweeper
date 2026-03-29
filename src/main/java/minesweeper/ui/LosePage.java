@@ -1,5 +1,5 @@
 package minesweeper.ui;
- 
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,11 +9,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * The LosePage class represents the dialog shown when the player loses the game.
+ * It prompts the player to play again or return to the home page, and displays
+ * the player's completion time.
+ */
 public class LosePage {
 
     /**
      * TODO:
-     * - "Back to Home" button
      * - Showing how many bombs were on the board
      */
 
@@ -49,7 +53,7 @@ public class LosePage {
         loseStage.initModality(Modality.APPLICATION_MODAL);
         loseStage.setResizable(false);
 
-        Label msgLabel  = new Label("You hit a bomb!");
+        Label msgLabel = new Label("You hit a bomb!");
         Label timeLabel = new Label("Time: " + finalTime);
 
         // TODO: add bomb count label here

@@ -1,5 +1,5 @@
 package minesweeper.ui;
- 
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
@@ -14,20 +14,25 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import minesweeper.exception.MinesweeperException;
-import minesweeper.Storage;
 import minesweeper.Box;
-import minesweeper.Gameboard;
 import minesweeper.CustomTimer;
+import minesweeper.Gameboard;
+import minesweeper.Storage;
+import minesweeper.exception.MinesweeperException;
 
+/**
+ * GamePage represents the main game screen.
+ * Displays the 10x10 Minesweeper grid, header controls, and handles
+ * all player interactions including cell clicks, flagging, hints, win and lose conditions.
+ */
 public class GamePage {
- 
+
     private final Stage primaryStage;
     private final Storage storage;
- 
+
     private final Gameboard gameboard;
     private final CustomTimer customTimer;
- 
+
     private final Button[][] cellButtons = new Button[10][10];
     private Button hintBtn;
     private Label timerLabel;
@@ -35,19 +40,20 @@ public class GamePage {
     private boolean isFirstClick = true;
 
     /**
-    * Constructor for the GamePage class, taking account if it is a new or continued game.
-    * 
-    * @param primaryStage the stage to display the game page on
-    * @param storage the storage object to load/save game data
-    * @param isContinue whether to continue an existing game
-    */
+     * Constructor for the GamePage class, taking account if it is a new or continued game.
+     *
+     * @param primaryStage the stage to display the game page on
+     * @param storage the storage object to load/save game data
+     * @param isContinue whether to continue an existing game
+     * @throws MinesweeperException if loading or creating the gameboard fails
+     */
     public GamePage(Stage primaryStage, Storage storage, boolean isContinue)
             throws MinesweeperException {
         this.primaryStage = primaryStage;
         this.storage = storage;
- 
+
         customTimer = new CustomTimer(storage);
- 
+
         if (isContinue) {
             gameboard = new Gameboard(customTimer, storage,
                     storage.loadSolution(), storage.loadGame());
@@ -56,7 +62,7 @@ public class GamePage {
             gameboard = new Gameboard(customTimer, storage);
         }
     }
-    
+
     /**
      * Displays the game page, setting up the UI and event handlers for the game interactions.
      * Handles left and right clicks on the game cells, updates the display accordingly.
@@ -65,7 +71,7 @@ public class GamePage {
 
         timerLabel = new Label(customTimer.displayTimeMinSecs());
 
-        Button homeBtn = new Button("← Home");
+        Button homeBtn = new Button("\u2190 Home");
         hintBtn = new Button("Hint (" + gameboard.getHintsRemaining() + " left)");
 
         homeBtn.setOnAction(e -> {
@@ -85,7 +91,7 @@ public class GamePage {
                 System.out.println("Error returning to home: " + ex.getMessage());
             }
         });
-        
+
         hintBtn.setOnAction(e -> {
             try {
                 if (isFirstClick) {
@@ -118,9 +124,9 @@ public class GamePage {
         header.setPadding(new Insets(10));
         header.setAlignment(Pos.CENTER);
 
-        HBox spacerLeft  = new HBox();
+        HBox spacerLeft = new HBox();
         HBox spacerRight = new HBox();
-        javafx.scene.layout.HBox.setHgrow(spacerLeft,  javafx.scene.layout.Priority.ALWAYS);
+        javafx.scene.layout.HBox.setHgrow(spacerLeft, javafx.scene.layout.Priority.ALWAYS);
         javafx.scene.layout.HBox.setHgrow(spacerRight, javafx.scene.layout.Priority.ALWAYS);
         header.getChildren().addAll(leftHeader, spacerLeft, timerLabel, spacerRight, rightHeader);
 
@@ -134,7 +140,7 @@ public class GamePage {
             for (int col = 0; col < 10; col++) {
                 final int boxNumber = row * 10 + col;
                 Button btn = new Button(" ");
-                btn.setMinSize(46, 46); // Set button size to fit the grid nicely
+                btn.setMinSize(46, 46);
 
                 btn.setOnMouseClicked(e -> {
                     if (e.getButton() == MouseButton.PRIMARY) {
@@ -182,11 +188,11 @@ public class GamePage {
 
         updateDisplay();
     }
- 
+
     /**
      * Handles left click on a cell, revealing the box and checking for win/loss conditions.
-     * 
-     * @param boxNumber
+     *
+     * @param boxNumber the index of the cell clicked (0-99)
      */
     private void onCellLeftClick(int boxNumber) {
         try {
@@ -197,9 +203,14 @@ public class GamePage {
             Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
             updateDisplay();
             switch (result) {
-                case WIN  -> handleWin();
-                case BOMB -> handleLose();
-                case SAFE -> {}
+            case WIN:
+                handleWin();
+                break;
+            case BOMB:
+                handleLose();
+                break;
+            default:
+                break;
             }
         } catch (MinesweeperException ex) {
             showAlert("Error", ex.getMessage());
@@ -210,8 +221,8 @@ public class GamePage {
      * Handles the first click on the board. Regenerates the board until the
      * clicked cell is not a bomb, then starts the timer and reveals the cell.
      *
-     * @param boxNumber
-     * @throws MinesweeperException
+     * @param boxNumber the index of the first cell clicked (0-99)
+     * @throws MinesweeperException if revealing the cell or restarting the board fails
      */
     private void handleFirstClick(int boxNumber) throws MinesweeperException {
         int row = boxNumber / 10;
@@ -223,15 +234,20 @@ public class GamePage {
         }
 
         isFirstClick = false;
-        customTimer.restartTime();   // ← creates a fresh Timer, then starts it
+        customTimer.restartTime();
         timerTimeline.play();
 
         Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
         updateDisplay();
         switch (result) {
-            case WIN  -> handleWin();
-            case BOMB -> handleLose();
-            case SAFE -> {}
+        case WIN:
+            handleWin();
+            break;
+        case BOMB:
+            handleLose();
+            break;
+        default:
+            break;
         }
     }
 
@@ -249,9 +265,9 @@ public class GamePage {
 
         new WinPage(primaryStage, storage, finalTime, finalMillis, () -> {
             try {
-                gameboard.restartGameboard();  // restarts board, internally zeros timer
-                customTimer.stopTime();          // counteract restartTime() inside restartGameboard()  
-                gameboard.clearGameboard();  // X button: clears, isFirstClick=true, fresh game
+                gameboard.restartGameboard();
+                customTimer.stopTime();
+                gameboard.clearGameboard();
             } catch (MinesweeperException ex) {
                 showAlert("Error", ex.getMessage());
             }
@@ -264,7 +280,7 @@ public class GamePage {
 
     /**
      * Handles the lose condition. Opens the LosePage, stops the timer, and shows the lose dialog.
-     * gameover() in Gameboard already restarted the board.
+     * Reveals all bomb locations before showing the dialog.
      */
     private void handleLose() {
         timerTimeline.stop();
@@ -285,21 +301,31 @@ public class GamePage {
             try {
                 onHomeButton();
             } catch (MinesweeperException homeBtnError) {
-                showAlert("Error: ", homeBtnError.getMessage());
+                showAlert("Error", homeBtnError.getMessage());
             }
         }).show();
     }
 
+    /**
+     * Resets the board and timer for a new game after losing.
+     *
+     * @throws MinesweeperException if restarting the gameboard fails
+     */
     private void onPlayAgain() throws MinesweeperException {
-        gameboard.restartGameboard();        // restarts board, internally zeros timer
-        customTimer.stopTime();              // counteract restartTime() inside restartGameboard()
+        gameboard.restartGameboard();
+        customTimer.stopTime();
         isFirstClick = true;
-        timerLabel.setText(customTimer.displayTimeMinSecs());  // now reads 00:00.000
+        timerLabel.setText(customTimer.displayTimeMinSecs());
         updateDisplay();
     }
 
+    /**
+     * Clears the save and stops the timer when navigating home after losing.
+     *
+     * @throws MinesweeperException if clearing the gameboard fails
+     */
     private void onHomeButton() throws MinesweeperException {
-        gameboard.clearGameboard();  // clear save so Continue is disabled on home
+        gameboard.clearGameboard();
         customTimer.stopTime();
         customTimer.zeroTime();
         timerTimeline.stop();
@@ -307,8 +333,8 @@ public class GamePage {
 
     /**
      * Handles right click on a cell, toggling the flag state of the box.
-     * 
-     * @param boxNumber
+     *
+     * @param boxNumber the index of the cell right-clicked (0-99)
      */
     private void onCellRightClick(int boxNumber) {
         try {
@@ -321,13 +347,17 @@ public class GamePage {
             showAlert("Error", ex.getMessage());
         }
     }
- 
+
+    /**
+     * Updates all cell buttons to reflect the current gameboard state.
+     * Also updates the hint button label with remaining hints.
+     */
     private void updateDisplay() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
                 Box box = gameboard.getBox(row, col);
                 Button btn = cellButtons[row][col];
- 
+
                 if (box.getFlag()) {
                     btn.setText("F");
                     btn.setDisable(false);
@@ -347,9 +377,9 @@ public class GamePage {
 
     /**
      * Utility method to show an alert dialog with a given title and message.
-     * 
-     * @param title
-     * @param message
+     *
+     * @param title the title of the alert dialog
+     * @param message the message to display in the alert dialog
      */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
