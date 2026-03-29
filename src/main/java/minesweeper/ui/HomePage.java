@@ -10,7 +10,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import minesweeper.ResourceManager;
 import minesweeper.Storage;
 import minesweeper.exception.MinesweeperException;
 
