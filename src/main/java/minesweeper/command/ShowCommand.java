@@ -1,12 +1,8 @@
 package minesweeper.command;
 
-import minesweeper.CustomTimer;
-import minesweeper.Gameboard;
-import minesweeper.Storage;
 import minesweeper.Ui;
 import minesweeper.exception.MinesweeperException;
-import minesweeper.exception.ParserException;
-import minesweeper.exception.StorageException;
+import minesweeper.logic.Gameboard;
 
 public class ShowCommand extends Command {
 

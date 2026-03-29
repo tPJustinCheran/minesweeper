@@ -6,6 +6,9 @@ import javafx.application.Application;
 import minesweeper.command.Command;
 import minesweeper.command.CommandType;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.logic.CustomTimer;
+import minesweeper.logic.Gameboard;
+import minesweeper.logic.Parser;
 import minesweeper.ui.HomePage;
 
 /**

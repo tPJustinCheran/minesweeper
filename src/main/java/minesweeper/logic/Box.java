@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.logic;
 
 public class Box {
     private boolean flag;

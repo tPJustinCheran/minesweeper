@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.logic;
 
 import minesweeper.command.*;
 import minesweeper.exception.ParserException;

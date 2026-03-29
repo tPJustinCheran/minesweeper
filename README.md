@@ -4,7 +4,7 @@ Team Project for CS2103DE
 ## To-Do (v0.4)
 
 ### Features
-- [ ] LosePage: show bomb count on the board
+- [X] LosePage: show bomb count on the board
 
 ### Code Quality
 - [X] Move all UI classes into a `ui/` package

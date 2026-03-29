@@ -1,5 +1,6 @@
-package minesweeper;
+package minesweeper.logic;
 
+import minesweeper.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
 

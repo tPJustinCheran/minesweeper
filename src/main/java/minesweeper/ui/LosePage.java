@@ -30,7 +30,9 @@ public class LosePage {
      * @param onPlayAgain callback to run when the player clicks "Play Again"
      * @param onHomeButton callback to run when the player clicks "Back to Home"
      */
-    public LosePage(Stage primaryStage, String finalTime, int bombsNotFlagged, Runnable onPlayAgain, Runnable onHomeButton) {
+    public LosePage(Stage primaryStage, String finalTime,
+        int bombsNotFlagged, Runnable onPlayAgain, Runnable onHomeButton) {
+
         this.primaryStage = primaryStage;
         this.finalTime = finalTime;
         this.bombsNotFlagged = bombsNotFlagged;
