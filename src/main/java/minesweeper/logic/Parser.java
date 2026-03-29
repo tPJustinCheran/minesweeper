@@ -32,7 +32,7 @@ public class Parser {
         } else if (userInput.contains("hint")) {
             boxNumber = extractBoxNumber(userInput);
             return new HintCommand(boxNumber);
-        } else if (userInput.contains("input")) {  // check a single box
+        } else if (userInput.contains("input")) {
             boxNumber = extractBoxNumber(userInput);
             return new InputCommand(boxNumber);
         } else if (userInput.contains("show")) {

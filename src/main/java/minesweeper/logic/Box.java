@@ -14,14 +14,14 @@ public class Box {
      * @param bomb boolean.
      * @param reveal boolean.
      */
-    public Box (boolean flag, int adjacentBombs, boolean bomb, boolean reveal) {
+    public Box(boolean flag, int adjacentBombs, boolean bomb, boolean reveal) {
         this.flag = flag;
         this.adjacentBombs = adjacentBombs;
         this.bomb = bomb;
         this.reveal = reveal;
     }
 
-    public boolean getFlag(){
+    public boolean getFlag() {
         return this.flag;
     }
 
@@ -29,15 +29,15 @@ public class Box {
         this.flag = flag;
     }
 
-    public int getAdjacentBombs(){
+    public int getAdjacentBombs() {
         return this.adjacentBombs;
     }
 
-    public boolean getBomb(){
+    public boolean getBomb() {
         return this.bomb;
     }
 
-    public boolean getReveal(){
+    public boolean getReveal() {
         return this.reveal;
     }
 
@@ -45,7 +45,7 @@ public class Box {
         this.reveal = reveal;
     }
 
-    private String printAdjacentBombs(){
+    private String printAdjacentBombs() {
         if (this.getAdjacentBombs() == 0) {
             return " ";
         } else {
