@@ -1,10 +1,18 @@
-package minesweeper;
+package minesweeper.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
+import minesweeper.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
 
-import java.util.*;
-
+/**
+ * Represents the Minesweeper gameboard.
+ * Manages the 10x10 grid of Box objects, bomb placements, flood fill,
+ * hints, flags, win/lose detection, and game state persistence.
+ */
 public class Gameboard {
 
     private Box[][] gameboard;
@@ -12,20 +20,60 @@ public class Gameboard {
     private final Storage storage;
     private int hintsRemaining;
 
+    /**
+     * Enum representing the result of a move on the gameboard.
+     * SAFE: the cell was revealed and is not a bomb.
+     * BOMB: the cell was a bomb.
+     * WIN: all non-bomb cells have been revealed.
+     */
     public enum MoveResult {
         SAFE, BOMB, WIN
     }
 
     /**
-     * Randomly generate up to 20 bomb placements
+     * Constructor Class if no pre-existing data from hard disk.
+     * Creates empty 10x10 grid with each cell containing a Box Object.
+     * Randomly generates bombs and stores the grid in solution.txt.
+     *
+     * @param customTimer Timer Class.
+     * @param storage     Storage Class. To store data to game.txt and solution.txt files.
+     * @throws MinesweeperException if initialisation fails.
+     */
+    public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
+        this.customTimer = customTimer;
+        this.storage = storage;
+        this.hintsRemaining = 3;
+        restartGameboard();
+    }
+
+    /**
+     * Constructor Class if there is pre-existing data from hard disk.
+     * Loads Previous Gameplay and Solutions (from game.txt and solution.txt files).
+     *
+     * @param customTimer  Timer class.
+     * @param storage      Storage Class.
+     * @param solutionGrid data from solution.txt.
+     * @param gameGrid     data from game.txt.
+     * @throws MinesweeperException Error Handling.
+     */
+    public Gameboard(CustomTimer customTimer, Storage storage,
+            List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
+        this.customTimer = customTimer;
+        this.storage = storage;
+        this.hintsRemaining = storage.loadHint();
+        reloadGameboard(solutionGrid, gameGrid);
+    }
+
+    /**
+     * Randomly generates up to 20 bomb placements.
      *
      * @return list of bomb positions
      */
     public List<Integer> generateBombPlacements() {
         List<Integer> bombPlacements = new ArrayList<>();
         Random randomNum = new Random();
-        int numOfBombs = randomNum.nextInt(5,20);
-        for (int i=0; i < numOfBombs; i++) {
+        int numOfBombs = randomNum.nextInt(5, 20);
+        for (int i = 0; i < numOfBombs; i++) {
             bombPlacements.add(randomNum.nextInt(100));
         }
         return bombPlacements;
@@ -34,17 +82,17 @@ public class Gameboard {
     /**
      * Given a position on the board, find out the number of adjacent bombs to that position.
      *
-     * @param position integer from 0 to 99
-     * @param bombPlacements list of bombplacements
-     * @return
+     * @param position       integer from 0 to 99
+     * @param bombPlacements list of bomb placements
+     * @return number of adjacent bombs
      */
     public int numberOfAdjacentBombs(int position, List<Integer> bombPlacements) {
         int count = 0;
         int row = position / 10;
         int col = position % 10;
 
-        for (int iterateRow = -1; iterateRow <= 1; iterateRow++){
-            for (int iterateCol = -1; iterateCol <= 1; iterateCol++){
+        for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
+            for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
                 if (currRow >= 0 && currRow < 10 && currCol >= 0 && currCol < 10) {
@@ -59,9 +107,10 @@ public class Gameboard {
     }
 
     /**
-     * Restart a Gameboard.
+     * Restarts the Gameboard with a new random bomb layout.
+     * Stores solution and game state to file, resets timer and hints.
      *
-     * @throws MinesweeperException Handle Errors.
+     * @throws MinesweeperException if storing game state fails.
      */
     public void restartGameboard() throws MinesweeperException {
         this.gameboard = new Box[10][10];
@@ -72,46 +121,42 @@ public class Gameboard {
                 if (bombPlacements.contains(currPtr)) {
                     gameboard[i][j] = new Box(false, 0, true, false);
                 } else {
-                    gameboard[i][j] = new Box(false, this.numberOfAdjacentBombs(currPtr, bombPlacements), false, false);
+                    gameboard[i][j] = new Box(
+                            false,
+                            this.numberOfAdjacentBombs(currPtr, bombPlacements),
+                            false,
+                            false
+                    );
                 }
             }
         }
-        this.storeSolution();  // store solution to solution.txt file
-        this.storeGame();   // store existing gameplay to game.txt file
-        this.customTimer.restartTime(); // start timer
-        this.customTimer.stopTime(); // pause timer to store time to time.txt file
-        this.customTimer.zeroTime(); // zero timer
+        this.storeSolution();
+        this.storeGame();
+        this.customTimer.restartTime();
+        this.customTimer.stopTime();
+        this.customTimer.zeroTime();
         this.storage.storeHint("3");
     }
 
+    /**
+     * Clears all saved game data so Continue is disabled on HomePage.
+     *
+     * @throws MinesweeperException if clearing the save files fails.
+     */
     public void clearGameboard() throws MinesweeperException {
         this.storage.clearGame();
     }
 
     /**
-     * Constructor Class if no pre-existing data from hard disk
-     * Creates empty 10 x 10 grid with each cell containing a minesweeper.Box Object.
-     * Randomly generates bombs and stores the grid in solution.txt
+     * Reloads the gameboard from saved solution and game grid data.
+     * Resumes the timer from the stored time.
      *
-     * @param customTimer Timer Class.
-     * @param storage Storage Class. To store data to game.txt and solution.txt files.
+     * @param solutionGrid list of strings representing the solution grid.
+     * @param gameGrid     list of strings representing the game progress grid.
+     * @throws MinesweeperException if loading fails.
      */
-    public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
-        this.customTimer = customTimer;
-        this.storage = storage;
-        this.hintsRemaining = 3;
-        restartGameboard();
-    }
-
-    private boolean checkRevealInGameboard(String marker) {
-        return Objects.equals(marker, "R");
-    }
-
-    private boolean checkFlagInGameboard(String marker) {
-        return Objects.equals(marker, "F");
-    }
-
-    public void reloadGameboard(List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
+    public void reloadGameboard(List<String> solutionGrid,
+            List<String> gameGrid) throws MinesweeperException {
         this.gameboard = new Box[10][10];
         for (int i = 0; i < 10; i++) {
             String currRowSoln = solutionGrid.get(i);
@@ -120,11 +165,24 @@ public class Gameboard {
             String[] partsGame = currRowGame.split("\\|");
             for (int j = 0; j < 10; j++) {
                 if (Objects.equals(partsSoln[j], "B")) {
-                    this.gameboard[i][j] = new Box(checkFlagInGameboard(partsGame[j]), 0, true, checkRevealInGameboard(partsGame[j]));
+                    this.gameboard[i][j] = new Box(
+                            checkFlagInGameboard(partsGame[j]),
+                            0, true,
+                            checkRevealInGameboard(partsGame[j])
+                    );
                 } else if (Objects.equals(partsSoln[j], " ")) {
-                    this.gameboard[i][j] = new Box(checkFlagInGameboard(partsGame[j]), 0, false, checkRevealInGameboard(partsGame[j]));
+                    this.gameboard[i][j] = new Box(
+                            checkFlagInGameboard(partsGame[j]),
+                            0, false,
+                            checkRevealInGameboard(partsGame[j])
+                    );
                 } else {
-                    this.gameboard[i][j] = new Box(checkFlagInGameboard(partsGame[j]), Integer.parseInt(partsSoln[j]), false, checkRevealInGameboard(partsGame[j]));
+                    this.gameboard[i][j] = new Box(
+                            checkFlagInGameboard(partsGame[j]),
+                            Integer.parseInt(partsSoln[j]),
+                            false,
+                            checkRevealInGameboard(partsGame[j])
+                    );
                 }
             }
         }
@@ -132,28 +190,10 @@ public class Gameboard {
     }
 
     /**
-     * Constructor Class if there is pre-existing data from hard disk.
-     * Loads Previous Gameplay and Solutions (from game.txt and solution.txt files).
-     *
-     * @param customTimer Timer class.
-     * @param storage Storage Class.
-     * @param solutionGrid data from solution.txt.
-     * @param gameGrid data from game.txt.
-     * @throws MinesweeperException Error Handling.
-     */
-    public Gameboard(CustomTimer customTimer, Storage storage, List<String> solutionGrid, List<String> gameGrid) throws MinesweeperException {
-        this.customTimer = customTimer;
-        this.storage = storage;
-        this.hintsRemaining = storage.loadHint();
-        reloadGameboard(solutionGrid, gameGrid);
-    }
-
-
-    /**
-     * Store Solution (Bombs + adjacent bombs) to solution.txt file
+     * Store Solution (Bombs + adjacent bombs) to solution.txt file.
      * Called upon initialisation of new game board.
      *
-     * @throws MinesweeperException
+     * @throws MinesweeperException if storing fails.
      */
     public void storeSolution() throws MinesweeperException {
         String totalStr = "";
@@ -170,7 +210,7 @@ public class Gameboard {
      * Store Game Progress. Shows what has been revealed and what has not.
      * Called after every player move.
      *
-     * @throws MinesweeperException
+     * @throws MinesweeperException if storing fails.
      */
     public void storeGame() throws MinesweeperException {
         String totalStr = "";
@@ -189,6 +229,13 @@ public class Gameboard {
         this.storage.storeGame(totalStr);
     }
 
+    /**
+     * Sets the flag state of a cell in the gameboard.
+     *
+     * @param boxNumber the cell index (0-99)
+     * @param isFlag    true to flag, false to unflag
+     * @throws MinesweeperException if storing game state fails.
+     */
     public void setFlagInGameboard(int boxNumber, boolean isFlag) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
@@ -196,6 +243,13 @@ public class Gameboard {
         this.storeGame();
     }
 
+    /**
+     * Reveals a random safe unrevealed unflagged cell on the board.
+     * Maximum of 3 hints per game. Hint count is stored in hint.txt.
+     *
+     * @return the box number (0-99) of the revealed cell
+     * @throws MinesweeperException if max hints reached or no safe cell found.
+     */
     public int giveHint() throws MinesweeperException {
         if (hintsRemaining <= 0) {
             throw new MinesweeperException("No more hints remaining!");
@@ -211,11 +265,12 @@ public class Gameboard {
             }
         }
 
-        if(unrevealedNonBombs.isEmpty()) {
+        if (unrevealedNonBombs.isEmpty()) {
             throw new MinesweeperException("No more safe boxes to reveal!");
         }
 
-        int randomHintBoxReveal = unrevealedNonBombs.get(new Random().nextInt(unrevealedNonBombs.size()));
+        int randomHintBoxReveal = unrevealedNonBombs.get(
+                new Random().nextInt(unrevealedNonBombs.size()));
         int hintRow = randomHintBoxReveal / 10;
         int hintCol = randomHintBoxReveal % 10;
         this.floodfill(hintRow, hintCol);
@@ -230,11 +285,12 @@ public class Gameboard {
     /**
      * Peeks at a cell's solution value without revealing it on the board.
      * Maximum of 3 shields per game.
-     * TODO: currently untested and unimplemented in UI, uses same hint count as givehint.
+     * TODO: currently untested and unimplemented in UI, uses same hint count as giveHint.
      *
      * @param boxNumber the cell to peek at (0-99)
-     * @return the solution value of the cell — "B" for bomb, "0" for no adjacent bombs, or the number of adjacent bombs
-     * @throws MinesweeperException if max shields reached
+     * @return the solution value of the cell — "B" for bomb, "0" for no adjacent bombs,
+     *         or the number of adjacent bombs
+     * @throws MinesweeperException if max shields reached.
      */
     public String giveShield(int boxNumber) throws MinesweeperException {
         if (hintsRemaining <= 0) {
@@ -250,6 +306,14 @@ public class Gameboard {
         return Objects.equals(boxValue, " ") ? "0" : boxValue;
     }
 
+    /**
+     * Reveals a box in the gameboard given a box number.
+     * Returns a MoveResult indicating what happened.
+     *
+     * @param boxNumber integer from 0 to 99
+     * @return MoveResult — BOMB if bomb, WIN if all safe cells revealed, SAFE otherwise
+     * @throws MinesweeperException if the box is flagged or a storage error occurs.
+     */
     public MoveResult revealBoxInGameboard(int boxNumber) throws MinesweeperException {
         int row = boxNumber / 10;
         int col = boxNumber % 10;
@@ -267,8 +331,14 @@ public class Gameboard {
         return MoveResult.SAFE;
     }
 
+    /**
+     * Checks if the player has won by verifying all non-bomb cells are revealed.
+     *
+     * @return true if all non-bomb cells are revealed, false otherwise.
+     * @throws StorageException if a storage error occurs.
+     */
     public boolean checkWin() throws StorageException {
-        for (int i = 0; i < 100; i ++) {
+        for (int i = 0; i < 100; i++) {
             int row = i / 10;
             int col = i % 10;
             Box currBox = this.gameboard[row][col];
@@ -279,6 +349,13 @@ public class Gameboard {
         return true;
     }
 
+    /**
+     * Recursively reveals all adjacent cells with no adjacent bombs (flood fill).
+     * Also checks all 8 directions including diagonals.
+     *
+     * @param row the row of the cell to flood fill from.
+     * @param col the column of the cell to flood fill from.
+     */
     public void floodfill(int row, int col) {
         Box currBox = this.gameboard[row][col];
         if (!currBox.getReveal()) {
@@ -296,16 +373,16 @@ public class Gameboard {
                 if (col < 9) {
                     floodfill(row, col + 1);
                 }
-                if (row > 0 && col > 0)  {
+                if (row > 0 && col > 0) {
                     floodfill(row - 1, col - 1);
                 }
-                if (row > 0 && col < 9)  {
+                if (row > 0 && col < 9) {
                     floodfill(row - 1, col + 1);
                 }
-                if (row < 9 && col > 0)  {
+                if (row < 9 && col > 0) {
                     floodfill(row + 1, col - 1);
                 }
-                if (row < 9 && col < 9)  {
+                if (row < 9 && col < 9) {
                     floodfill(row + 1, col + 1);
                 }
             }
@@ -326,19 +403,58 @@ public class Gameboard {
         }
     }
 
-    public void closeProgram() throws MinesweeperException {
-        this.storeGame();  // store gameplay to game.txt file
-        this.customTimer.pauseAndStopTime(storage); // store time to time.txt file
+    /**
+     * Returns the number of bombs that have not been flagged.
+     *
+     * @return count of unflagged bombs
+     */
+    public int getUnflaggedBombCount() {
+        int count = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (gameboard[i][j].getBomb() && !gameboard[i][j].getFlag()) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
+    /**
+     * Stores the current game state and pauses the timer when the player exits.
+     *
+     * @throws MinesweeperException if storing fails.
+     */
+    public void closeProgram() throws MinesweeperException {
+        this.storeGame();
+        this.customTimer.pauseAndStopTime(storage);
+    }
+
+    /**
+     * Returns the Box object at the given row and column.
+     *
+     * @param row the row index (0-9)
+     * @param col the column index (0-9)
+     * @return the Box at the given position
+     */
     public Box getBox(int row, int col) {
         return this.gameboard[row][col];
     }
 
+    /**
+     * Returns the number of hints remaining for the current game.
+     *
+     * @return number of hints remaining
+     */
     public int getHintsRemaining() {
         return hintsRemaining;
     }
 
+    /**
+     * Returns a string representation of the current gameboard state.
+     *
+     * @return string representation of the gameboard
+     */
     public String toString() {
         String totalStr = "";
         for (int i = 0; i < 10; i++) {
@@ -348,5 +464,13 @@ public class Gameboard {
             }
         }
         return totalStr;
+    }
+
+    private boolean checkRevealInGameboard(String marker) {
+        return Objects.equals(marker, "R");
+    }
+
+    private boolean checkFlagInGameboard(String marker) {
+        return Objects.equals(marker, "F");
     }
 }

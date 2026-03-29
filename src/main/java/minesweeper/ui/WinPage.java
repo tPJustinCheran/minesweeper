@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import minesweeper.Storage;
 import minesweeper.exception.StorageException;
 
 /**
@@ -92,9 +93,9 @@ public class WinPage {
                 return;
             }
 
-        winStage.close();
-        new LeaderboardPage(primaryStage, storage, onClose).showAndWait();
-        onClose.run();
+            winStage.close();
+            new LeaderboardPage(primaryStage, storage, onClose).showAndWait();
+            onClose.run();
         });
 
         VBox layout = new VBox(12);

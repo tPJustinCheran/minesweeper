@@ -1,36 +1,27 @@
-# minesweeper
+# tP-Minesweeper
 Team Project for CS2103DE
 
-## ToDos:
+## To-Do (v0.4)
 
-### WinPage
+### Features
+- [X] LosePage: show bomb count on the board
 
-- Test for bugs
+### Code Quality
+- [X] Move all UI classes into a `ui/` package
+- [ ] Fix checkstyle violations across all files
+- [ ] Remove Win debug button from GamePage header
+- [ ] Add missing javadocs to methods that lack them
 
-### LeaderboardPage
+### UI Polish
+- [ ] Add icons to the UI Header / Title
+- [ ] Style GamePage grid cells (colours, fonts, icons)
+- [ ] Style HomePage buttons and layout
+- [ ] Style LeaderboardPage entries
+- [ ] Style WinPage and LosePage dialogs
+- [ ] Stlyle HelpPage
+- [ ] Add flag and bomb icons to replace text labels (F, B)
 
-- Test for bugs
-
-### LosePage
-
-- Bomb count display
-
-### GamePage
-
-- Hint button functionality
-- Home button in the header (remove DEBUG label when done)
-
-### HomePage
-
-- Help button functionality (HelpPage not yet implemented)
-- Continue button on HomePage is incorrectly enabled after a win, because `restartGameboard()` saves a fresh board to game.txt
-
-### HelpPage
-
-- Not yet implemented
-
-### General
-
-- Styling/UI polish across all pages
-- User Guide documentation
-- Developer Guide documentation
+### Testing
+- [ ] Write unit tests for `Gameboard` logic
+- [ ] Write unit tests for `Storage` read/write methods
+- [ ] Write unit tests for `CustomTimer`

@@ -1,8 +1,9 @@
-package minesweeper;
+package minesweeper.logic;
 
-import minesweeper.exception.MinesweeperException;
 import java.util.Timer;
-import java.util.TimerTask;
+
+import minesweeper.Storage;
+import minesweeper.exception.MinesweeperException;
 
 /**
  * Custom Timer Class for Timing the Gameplay.
@@ -70,7 +71,7 @@ public class CustomTimer {
      */
     public void stopTime() {
         if (this.getTimerRunning()) {
-            offsetMillis = getTimeMillis();  // freeze current time before cancelling
+            offsetMillis = getTimeMillis();
             timer.cancel();
             this.setTimerRunning(false);
         }
@@ -100,7 +101,7 @@ public class CustomTimer {
         long millis = getTimeMillis();
         long mins = millis / 60000;
         long secs = (millis % 60000) / 1000;
-        long ms   = millis % 1000;
+        long ms = millis % 1000;
         return String.format("%02d:%02d.%03d", mins, secs, ms);
     }
 

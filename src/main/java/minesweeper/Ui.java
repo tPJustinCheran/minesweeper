@@ -1,6 +1,7 @@
 package minesweeper;
 
-import minesweeper.exception.MinesweeperException;
+import minesweeper.logic.CustomTimer;
+import minesweeper.logic.Gameboard;
 
 public class Ui {
 

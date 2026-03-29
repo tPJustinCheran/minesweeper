@@ -212,21 +212,21 @@ public class Storage {
         }
     }
 
-/**
- * Load leaderboard entries from leaderboard.txt file.
- * Each line is in the format: name|timeInMillis
- *
- * @return List of Strings representing leaderboard entries, empty list if no entries.
- * @throws StorageException
- */
-public List<String> loadLeaderboard() throws StorageException {
-    try {
-        List<String> lines = Files.readAllLines(this.leaderboardFilePath);
-        return lines;  // empty list is valid — no entries yet
-    } catch (IOException loadError) {
-        throw new StorageException("Unable to load leaderboard: " + loadError.getMessage());
+    /**
+     * Load leaderboard entries from leaderboard.txt file.
+     * Each line is in the format: name|timeInMillis
+     *
+     * @return List of Strings representing leaderboard entries, empty list if no entries.
+     * @throws StorageException
+     */
+    public List<String> loadLeaderboard() throws StorageException {
+        try {
+            List<String> lines = Files.readAllLines(this.leaderboardFilePath);
+            return lines;  // empty list is valid — no entries yet
+        } catch (IOException loadError) {
+            throw new StorageException("Unable to load leaderboard: " + loadError.getMessage());
+        }
     }
-}
 
     /**
      * Adds a new entry to the leaderboard, sorts by time, then saves to leaderboard.txt.
@@ -244,7 +244,7 @@ public List<String> loadLeaderboard() throws StorageException {
     }
 
     private void sortLeaderboardByTime(List<String> entries) {
-        entries.removeIf(line -> !line.contains("|"));  // remove blank or malformed lines
+        entries.removeIf(line -> !line.contains("|")); // remove blank or malformed lines
         entries.sort((a, b) -> {
             long timeA = Long.parseLong(a.split("\\|")[1]);
             long timeB = Long.parseLong(b.split("\\|")[1]);
@@ -267,16 +267,16 @@ public List<String> loadLeaderboard() throws StorageException {
         }
     }
 
-    private void clearFile(Path filePath) throws StorageException{
+    private void clearFile(Path filePath) throws StorageException {
         try {
             Files.write(filePath, new byte[0]);
         } catch (IOException writeError) {
             throw new StorageException("Unable to clear file: " + writeError.getMessage()
-                    + "[" + filePath + "]" );
+                    + "[" + filePath + "]");
         }
     }
 
-    public void clearGame() throws StorageException{
+    public void clearGame() throws StorageException {
         this.clearFile(this.gameFilePath);
         this.clearFile(this.hintFilePath);
         this.clearFile(this.solutionFilePath);

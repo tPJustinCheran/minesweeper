@@ -1,10 +1,8 @@
 package minesweeper.command;
 
-import minesweeper.CustomTimer;
-import minesweeper.Gameboard;
-import minesweeper.Storage;
 import minesweeper.Ui;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.logic.Gameboard;
 
 public class HintCommand extends Command {
     private int boxNumber;

@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,11 +18,21 @@ public class HelpPage {
     private final Stage primaryStage;
     private final ResourceManager resourceManager;
 
+    /**
+     * Constructor for the HelpPage class.
+     *
+     * @param primaryStage the owner stage
+     * @param resourceManager the resource manager to load help text
+     */
     public HelpPage(Stage primaryStage, ResourceManager resourceManager) {
         this.primaryStage = primaryStage;
         this.resourceManager = resourceManager;
     }
 
+    /**
+     * Shows the help page with instructions loaded from resources.
+     * Provides a back button to return to the home page.
+     */
     public void show() {
         Label title = new Label("Help");
         title.setStyle("-fx-font-size: 28px;-fx-font-weight: bold;");

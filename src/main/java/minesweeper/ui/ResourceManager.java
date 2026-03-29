@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.ui;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
