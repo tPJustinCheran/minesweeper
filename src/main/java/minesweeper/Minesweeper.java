@@ -6,6 +6,7 @@ import javafx.application.Application;
 import minesweeper.command.Command;
 import minesweeper.command.CommandType;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.ui.HomePage;
 
 /**
  * Entry point for the Minesweeper application.

@@ -5,11 +5,9 @@ Team Project for CS2103DE
 
 ### Features
 - [ ] LosePage: show bomb count on the board
-- [ ] WinPage: add Back to Home button
-- [ ] HelpPage: implement help page content
 
 ### Code Quality
-- [ ] Move all UI classes into a `ui/` package
+- [X] Move all UI classes into a `ui/` package
 - [ ] Fix checkstyle violations across all files
 - [ ] Remove Win debug button from GamePage header
 - [ ] Add missing javadocs to methods that lack them
