@@ -55,7 +55,7 @@ public class WinPage {
         Stage winStage = new Stage();
         winStage.setTitle("You win!");
         winStage.initOwner(primaryStage);
-        winStage.initModality(Modality.APPLICATION_MODAL);
+        winStage.initModality(Modality.WINDOW_MODAL);
         winStage.setResizable(false);
 
         Image winicon = new ResourceManager().loadWinPageIcon();

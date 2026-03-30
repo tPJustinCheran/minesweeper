@@ -41,7 +41,7 @@ public class LeaderboardPage {
         leaderboardStage = new Stage();
         leaderboardStage.setTitle("Leaderboard");
         leaderboardStage.initOwner(primaryStage);
-        leaderboardStage.initModality(Modality.APPLICATION_MODAL);
+        leaderboardStage.initModality(Modality.WINDOW_MODAL);
         leaderboardStage.setResizable(false);
         leaderboardStage.setMinWidth(400);
 

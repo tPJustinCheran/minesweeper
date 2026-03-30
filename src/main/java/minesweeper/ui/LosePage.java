@@ -49,7 +49,7 @@ public class LosePage {
         Stage loseStage = new Stage();
         loseStage.setTitle("Game Over");
         loseStage.initOwner(primaryStage);
-        loseStage.initModality(Modality.APPLICATION_MODAL);
+        loseStage.initModality(Modality.WINDOW_MODAL);
         loseStage.setResizable(false);
 
         Image loseIcon = new ResourceManager().loadLosePageIcon();
