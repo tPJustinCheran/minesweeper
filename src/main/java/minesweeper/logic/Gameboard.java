@@ -108,6 +108,31 @@ public class Gameboard {
     }
 
     /**
+     * Given a position on the board, find out the number of adjacent flags to that position.
+     *
+     * @param position integer from 0 to 99
+     * @return number of adjacent flags
+     */
+    public int numberOfAdjacentFlags(int position) {
+        int count = 0;
+        int row = position / Config.BOARD_SIZE_COL;
+        int col = position % Config.BOARD_SIZE_COL;
+
+        for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
+            for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
+                int currRow = row + iterateRow;
+                int currCol = col + iterateCol;
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                    if (this.gameboard[currRow][currCol].getFlag()) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
      * Restarts the Gameboard with a new random bomb layout.
      * Stores solution and game state to file, resets timer and hints.
      *
@@ -327,6 +352,45 @@ public class Gameboard {
         }
         this.floodfill(row, col);
         this.storeGame();
+        if (this.checkWin()) {
+            return MoveResult.WIN;
+        }
+        return MoveResult.SAFE;
+    }
+
+    /**
+     * Performs a chord action on a revealed cell. Reveals all adjacent cells if the number of adjacent flags
+     * matches the number on the cell. If any adjacent cell is a bomb and not flagged, the player loses.
+     *
+     * @param boxNumber integer from 0 to 99
+     * @return MoveResult — BOMB if a bomb was revealed, WIN if all safe cells revealed, SAFE otherwise
+     * @throws MinesweeperException if the cell is not revealed, adjacent flag count does not match, or a storage error occurs.
+     */
+    public MoveResult chord(int boxNumber) throws MinesweeperException {
+        int row = boxNumber / Config.BOARD_SIZE_COL;
+        int col = boxNumber % Config.BOARD_SIZE_COL;
+        Box currBox = this.gameboard[row][col];
+        if (!currBox.getReveal()) {
+            return MoveResult.SAFE;
+        }
+        int adjacentFlags = this.numberOfAdjacentFlags(boxNumber);
+        if (adjacentFlags != currBox.getAdjacentBombs()) {
+           return MoveResult.SAFE;
+        }
+        for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
+            for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
+                int currRow = row + iterateRow;
+                int currCol = col + iterateCol;
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                    if (!this.gameboard[currRow][currCol].getFlag() && !this.gameboard[currRow][currCol].getReveal()) {
+                        MoveResult result = this.revealBoxInGameboard(currRow * Config.BOARD_SIZE_COL + currCol);
+                        if (result == MoveResult.BOMB) {
+                            return MoveResult.BOMB;
+                        }
+                    }
+                }
+            }
+        }
         if (this.checkWin()) {
             return MoveResult.WIN;
         }

@@ -251,6 +251,21 @@ public class GamePage {
                 handleFirstClick(boxNumber);
                 return;
             }
+            int row = boxNumber / Config.BOARD_SIZE_COL;
+            int col = boxNumber % Config.BOARD_SIZE_COL;
+
+            if (gameboard.getBox(row, col).getReveal()) {
+                Gameboard.MoveResult result = gameboard.chord(boxNumber);
+                updateDisplay();
+                switch (result) {
+                case WIN -> handleWin();
+                case BOMB -> handleLose();
+                default -> {
+                }
+                }
+                return;
+            }
+
             Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
             updateDisplay();
             switch (result) {
@@ -383,6 +398,10 @@ public class GamePage {
         try {
             int row = boxNumber / Config.BOARD_SIZE_COL;
             int col = boxNumber % Config.BOARD_SIZE_COL;
+            Box box = gameboard.getBox(row, col);
+            if (box.getReveal()) {
+                return;
+            }
             boolean currentlyFlagged = gameboard.getBox(row, col).getFlag();
             gameboard.setFlagInGameboard(boxNumber, !currentlyFlagged);
             updateDisplay();
@@ -405,7 +424,7 @@ public class GamePage {
                     setButtonIcon(btn, flagIcon, "F");
                     btn.setDisable(false);
                 } else if (box.getReveal()) {
-                    btn.setDisable(true);
+                    btn.setDisable(false);
                     if (box.getBomb()) {
                         setButtonIcon(btn, bombIcon, "B");
                     } else {
