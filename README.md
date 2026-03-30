@@ -9,12 +9,12 @@ Team Project for CS2103DE
 ### Code Quality
 - [X] Move all UI classes into a `ui/` package
 - [ ] Fix checkstyle violations across all files
-- [ ] Remove Win debug button from GamePage header
+- [X] Remove Win debug button from GamePage header - add DEBUG under Config
 - [ ] Add missing javadocs to methods that lack them
 
 ### UI Polish
 - [X] Add icons to the UI Header / Title
-- [ ] Style GamePage grid cells (colours, fonts, icons)
+- [X] Style GamePage grid cells (colours, fonts, icons)
 - [ ] Style HomePage buttons and layout (introduce settings button)
 - [X] Style LeaderboardPage entries
 - [X] Style WinPage and LosePage dialogs

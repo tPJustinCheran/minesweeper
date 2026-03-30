@@ -84,6 +84,11 @@ public class GamePage {
         bombIcon = resourceManager.loadBombIcon();
         flagIcon = resourceManager.loadFlagIcon();
         timerLabel = new Label(customTimer.displayTimeMinSecs());
+        timerLabel.setStyle(
+            "-fx-font-size: 16px;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-text-fill: #1a1a2e;"
+        );
 
         Button homeBtn = new Button("\u2190 Home");
         homeBtn.setStyle(
@@ -413,7 +418,14 @@ public class GamePage {
                     btn.setGraphic(null);
                     btn.setText(" ");
                     btn.setDisable(false);
-                    btn.setStyle("");
+                    btn.setStyle(
+                            "-fx-background-color: #bdbdbd;"
+                                    + "-fx-border-color: #9e9e9e;"
+                                    + "-fx-border-width: 1;"
+                                    + "-fx-background-radius: 3;"
+                                    + "-fx-border-radius: 3;"
+                                    + "-fx-cursor: hand;"
+                    );
                 }
             }
         }
@@ -427,7 +439,14 @@ public class GamePage {
      * @return JavaFX CSS style string
      */
     private String getNumberStyle(int adj) {
-        String base = "-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: ";
+        String base = "-fx-background-color: #e0e0e0;"
+                + "-fx-border-color: #bdbdbd;"
+                + "-fx-border-width: 1;"
+                + "-fx-background-radius: 3;"
+                + "-fx-border-radius: 3;"
+                + "-fx-font-size: 16px;"
+                + "-fx-font-weight: bold;"
+                + "-fx-text-fill: ";
         return switch (adj) {
         case 1 -> base + "blue;";
         case 2 -> base + "green;";

@@ -6,7 +6,7 @@ package minesweeper;
  */
 public class Config {
 
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     public static final int BOARD_SIZE_ROW = 10;
     public static final int BOARD_SIZE_COL = 10;

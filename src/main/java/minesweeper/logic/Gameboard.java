@@ -136,6 +136,7 @@ public class Gameboard {
         this.customTimer.restartTime();
         this.customTimer.stopTime();
         this.customTimer.zeroTime();
+        this.hintsRemaining = Config.MAX_HINTS;
         this.storage.storeHint(String.valueOf(Config.MAX_HINTS));
     }
 
