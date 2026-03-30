@@ -167,21 +167,40 @@ public class LeaderboardPage {
     private HBox buildEntryRow(int rank, String name, String time) {
 
         HBox row = new HBox(12);
-
         row.setAlignment(Pos.CENTER_LEFT);
-
         row.setPadding(new Insets(6, 10, 6, 10));
 
+        String bgColor;
+        String medal;
+
+        switch (rank) {
+            case 1 -> {
+                bgColor = "#f6e7b6";
+                medal = "🥇";
+            }
+            case 2 -> {
+                bgColor = "#bababa";
+                medal = "🥈";
+            }
+            case 3 -> {
+                bgColor = "#b08d8d";
+                medal = "🥉";
+            }
+            default -> {
+                bgColor = "#f0f0f5";
+                medal = "";
+            }
+        }
+
         row.setStyle(
-                "-fx-background-color: white;"
+                "-fx-background-color: " + bgColor + ";"
                         + "-fx-background-radius: 8;"
                         + "-fx-border-color: #cccccc;"
                         + "-fx-border-radius: 8;"
                         + "-fx-border-width: 1;"
         );
 
-        Label rankLabel = new Label("#" + rank);
-
+        Label rankLabel = new Label("#" + medal + rank);
         rankLabel.setMinWidth(40);
         rankLabel.setStyle("-fx-font-weight: bold;");
 
@@ -192,7 +211,6 @@ public class LeaderboardPage {
         timeLabel.setStyle("-fx-font-family: monospace;");
 
         row.getChildren().addAll(rankLabel, nameLabel, timeLabel);
-
         return row;
     }
 

@@ -16,12 +16,13 @@ Team Project for CS2103DE
 - [X] Add icons to the UI Header / Title
 - [ ] Style GamePage grid cells (colours, fonts, icons)
 - [ ] Style HomePage buttons and layout
-- [ ] Style LeaderboardPage entries
+- [X] Style LeaderboardPage entries
 - [ ] Style WinPage and LosePage dialogs
-- [ ] Stlyle HelpPage
+- [ ] Style HelpPage
 - [X] Add flag and bomb icons to replace text labels (F, B)
 
 ### Testing
 - [ ] Write unit tests for `Gameboard` logic
 - [ ] Write unit tests for `Storage` read/write methods
 - [ ] Write unit tests for `CustomTimer`
+- [ ] Test UI and document the results
