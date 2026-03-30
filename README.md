@@ -1,25 +1,17 @@
 # tP-Minesweeper
 Team Project for CS2103DE
 
-## To-Do (v0.4)
+## To-Do (v0.5)
 
 ### Features
-- [X] LosePage: show bomb count on the board
+- [X] All Planned Features are met
 
 ### Code Quality
-- [X] Move all UI classes into a `ui/` package
 - [ ] Fix checkstyle violations across all files
-- [X] Remove Win debug button from GamePage header - add DEBUG under Config
 - [ ] Add missing javadocs to methods that lack them
 
 ### UI Polish
-- [X] Add icons to the UI Header / Title
-- [X] Style GamePage grid cells (colours, fonts, icons)
-- [ ] Style HomePage buttons and layout (introduce settings button)
-- [X] Style LeaderboardPage entries
-- [X] Style WinPage and LosePage dialogs
-- [X] Style HelpPage
-- [X] Add flag and bomb icons to replace text labels (F, B)
+- [X] All Planned UI goals are met
 
 ### Testing
 - [ ] Write unit tests for `Gameboard` logic
