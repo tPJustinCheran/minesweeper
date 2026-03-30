@@ -18,7 +18,7 @@ Team Project for CS2103DE
 - [ ] Style HomePage buttons and layout
 - [X] Style LeaderboardPage entries
 - [ ] Style WinPage and LosePage dialogs
-- [ ] Style HelpPage
+- [X] Style HelpPage
 - [X] Add flag and bomb icons to replace text labels (F, B)
 
 ### Testing

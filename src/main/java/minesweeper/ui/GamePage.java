@@ -216,14 +216,10 @@ public class GamePage {
             Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
             updateDisplay();
             switch (result) {
-            case WIN:
-                handleWin();
-                break;
-            case BOMB:
-                handleLose();
-                break;
-            default:
-                break;
+            case WIN -> handleWin();
+            case BOMB -> handleLose();
+            default -> {
+                }
             }
         } catch (MinesweeperException ex) {
             showAlert("Error", ex.getMessage());
@@ -253,14 +249,10 @@ public class GamePage {
         Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
         updateDisplay();
         switch (result) {
-        case WIN:
-            handleWin();
-            break;
-        case BOMB:
-            handleLose();
-            break;
-        default:
-            break;
+        case WIN -> handleWin();
+        case BOMB -> handleLose();
+        default -> {
+            }
         }
     }
 
