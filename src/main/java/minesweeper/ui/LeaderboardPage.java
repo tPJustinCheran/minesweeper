@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -40,9 +41,14 @@ public class LeaderboardPage {
         leaderboardStage = new Stage();
         leaderboardStage.setTitle("Leaderboard");
         leaderboardStage.initOwner(primaryStage);
-        leaderboardStage.initModality(Modality.APPLICATION_MODAL);
+        leaderboardStage.initModality(Modality.WINDOW_MODAL);
         leaderboardStage.setResizable(false);
         leaderboardStage.setMinWidth(400);
+
+        Image leaderboardIcon = new ResourceManager().loadLeaderboardPageIcon();
+        if (leaderboardIcon != null) {
+            leaderboardStage.getIcons().add(leaderboardIcon);
+        }
     }
 
     /**
@@ -76,13 +82,18 @@ public class LeaderboardPage {
         HBox header = new HBox(10);
         header.setAlignment(Pos.CENTER_LEFT);
 
-        Button backButton = new Button("← Home");
-        backButton.setStyle(
-                "-fx-font-size: 14px;"
-                        + "-fx-background-radius: 8;"
+        Button homeButton = new Button("← Home");
+        homeButton.setStyle(
+            "-fx-font-size: 13px;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-text-fill: white;"
+                    + "-fx-background-color: #607D8B;"
+                    + "-fx-background-radius: 6;"
+                    + "-fx-padding: 6 14;"
+                    + "-fx-cursor: hand;"
         );
 
-        backButton.setOnAction(e -> {
+        homeButton.setOnAction(e -> {
             if (onClose != null) {
                 onClose.run();
             }
@@ -100,8 +111,7 @@ public class LeaderboardPage {
                         + "-fx-font-weight: bold;"
         );
 
-        header.getChildren().addAll(backButton, title);
-
+        header.getChildren().addAll(homeButton, title);
         content.getChildren().add(header);
 
         try {
@@ -161,21 +171,40 @@ public class LeaderboardPage {
     private HBox buildEntryRow(int rank, String name, String time) {
 
         HBox row = new HBox(12);
-
         row.setAlignment(Pos.CENTER_LEFT);
-
         row.setPadding(new Insets(6, 10, 6, 10));
 
+        String bgColor;
+        String medal;
+
+        switch (rank) {
+        case 1 -> {
+            bgColor = "#f6e7b6";
+            medal = "🥇";
+        }
+        case 2 -> {
+            bgColor = "#bababa";
+            medal = "🥈";
+        }
+        case 3 -> {
+            bgColor = "#b08d8d";
+            medal = "🥉";
+        }
+        default -> {
+            bgColor = "#f0f0f5";
+            medal = "";
+        }
+        }
+
         row.setStyle(
-                "-fx-background-color: white;"
+                "-fx-background-color: " + bgColor + ";"
                         + "-fx-background-radius: 8;"
                         + "-fx-border-color: #cccccc;"
                         + "-fx-border-radius: 8;"
                         + "-fx-border-width: 1;"
         );
 
-        Label rankLabel = new Label("#" + rank);
-
+        Label rankLabel = new Label("#" + medal + rank);
         rankLabel.setMinWidth(40);
         rankLabel.setStyle("-fx-font-weight: bold;");
 
@@ -186,7 +215,6 @@ public class LeaderboardPage {
         timeLabel.setStyle("-fx-font-family: monospace;");
 
         row.getChildren().addAll(rankLabel, nameLabel, timeLabel);
-
         return row;
     }
 

@@ -9,19 +9,20 @@ Team Project for CS2103DE
 ### Code Quality
 - [X] Move all UI classes into a `ui/` package
 - [ ] Fix checkstyle violations across all files
-- [ ] Remove Win debug button from GamePage header
+- [X] Remove Win debug button from GamePage header - add DEBUG under Config
 - [ ] Add missing javadocs to methods that lack them
 
 ### UI Polish
-- [ ] Add icons to the UI Header / Title
-- [ ] Style GamePage grid cells (colours, fonts, icons)
-- [ ] Style HomePage buttons and layout
-- [ ] Style LeaderboardPage entries
-- [ ] Style WinPage and LosePage dialogs
-- [ ] Stlyle HelpPage
-- [ ] Add flag and bomb icons to replace text labels (F, B)
+- [X] Add icons to the UI Header / Title
+- [X] Style GamePage grid cells (colours, fonts, icons)
+- [ ] Style HomePage buttons and layout (introduce settings button)
+- [X] Style LeaderboardPage entries
+- [X] Style WinPage and LosePage dialogs
+- [X] Style HelpPage
+- [X] Add flag and bomb icons to replace text labels (F, B)
 
 ### Testing
 - [ ] Write unit tests for `Gameboard` logic
 - [ ] Write unit tests for `Storage` read/write methods
 - [ ] Write unit tests for `CustomTimer`
+- [ ] Test UI and document the results

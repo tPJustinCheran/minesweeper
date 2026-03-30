@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -39,6 +40,11 @@ public class HomePage extends Application {
             hasExistingSave = true;
         } catch (MinesweeperException e) {
             hasExistingSave = false;
+        }
+
+        Image appIcon = new ResourceManager().loadAppIcon();
+        if (appIcon != null) {
+            primaryStage.getIcons().add(appIcon);
         }
 
         Label title = new Label("Minesweeper");

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,21 +55,67 @@ public class WinPage {
         Stage winStage = new Stage();
         winStage.setTitle("You win!");
         winStage.initOwner(primaryStage);
-        winStage.initModality(Modality.APPLICATION_MODAL);
+        winStage.initModality(Modality.WINDOW_MODAL);
         winStage.setResizable(false);
 
-        Label msgLabel = new Label(
-                "You cleared the board in " + finalTime + "!");
-        Label nameLabel = new Label(
-                "Enter your name for the leaderboard:");
+        Image winicon = new ResourceManager().loadWinPageIcon();
+        if (winicon != null) {
+            winStage.getIcons().add(winicon);
+        }
+
+        Label titleLabel = new Label("You Win!");
+        titleLabel.setStyle(
+                "-fx-font-size: 20px;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-text-fill: #1a1a2e;"
+        );
+
+        Label msgLabel = new Label("Completed in " + finalTime);
+        msgLabel.setStyle(
+                "-fx-font-size: 13px;"
+                        + "-fx-text-fill: #555577;"
+                        + "-fx-font-family: monospace;"
+        );
+
+        Label nameLabel = new Label("Enter your name for the leaderboard:");
+        nameLabel.setStyle(
+                "-fx-font-size: 13px;"
+                        + "-fx-text-fill: #333333;"
+        );
+
         TextField nameField = new TextField();
         nameField.setPromptText("Your name");
+        nameField.setStyle(
+                "-fx-font-size: 13px;"
+                        + "-fx-background-radius: 6;"
+                        + "-fx-border-color: #cccccc;"
+                        + "-fx-border-radius: 6;"
+                        + "-fx-border-width: 1;"
+                        + "-fx-padding: 6 10;"
+        );
+        nameField.setMaxWidth(240);
 
         Label errorLabel = new Label();
-        errorLabel.setStyle("-fx-text-fill: red;");
+        errorLabel.setStyle(
+                "-fx-text-fill: #be1300;"
+                        + "-fx-font-size: 12px;"
+        );
 
-        Button enterBtn = new Button("Enter");
+        Button enterBtn = new Button("Submit");
         enterBtn.setDefaultButton(true);
+        enterBtn.setStyle(
+                "-fx-font-size: 13px;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-text-fill: white;"
+                        + "-fx-background-color: #4CAF50;"
+                        + "-fx-background-radius: 6;"
+                        + "-fx-padding: 8 24;"
+                        + "-fx-cursor: hand;"
+        );
+        enterBtn.setOnMouseEntered(e -> enterBtn.setStyle(
+                enterBtn.getStyle().replace("#4CAF50", "#388E3C")));
+        enterBtn.setOnMouseExited(e -> enterBtn.setStyle(
+                enterBtn.getStyle().replace("#388E3C", "#4CAF50")));
 
         boolean[] buttonClicked = {false};
 
@@ -88,8 +135,7 @@ public class WinPage {
             try {
                 storage.addEntry(name, timeMillis);
             } catch (StorageException ex) {
-                errorLabel.setText(
-                        "Could not save: " + ex.getMessage());
+                errorLabel.setText("Could not save: " + ex.getMessage());
                 return;
             }
 
@@ -98,16 +144,29 @@ public class WinPage {
             onClose.run();
         });
 
-        VBox layout = new VBox(12);
-        layout.setPadding(new Insets(24));
-        layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(
+        VBox winCard = new VBox(12);
+        winCard.setPadding(new Insets(28, 32, 28, 32));
+        winCard.setAlignment(Pos.CENTER);
+        winCard.setStyle(
+                "-fx-background-color: white;"
+                        + "-fx-background-radius: 12;"
+                        + "-fx-border-color: #e0e0e8;"
+                        + "-fx-border-radius: 12;"
+                        + "-fx-border-width: 1;"
+        );
+        winCard.getChildren().addAll(
+                titleLabel,
                 msgLabel,
                 nameLabel,
                 nameField,
                 enterBtn,
                 errorLabel
         );
+
+        VBox root = new VBox(winCard);
+        root.setPadding(new Insets(20));
+        root.setAlignment(Pos.CENTER);
+        root.setStyle("-fx-background-color: #f0f0f5;");
 
         winStage.setOnCloseRequest(e -> {
             if (!buttonClicked[0]) {
@@ -120,7 +179,7 @@ public class WinPage {
             }
         });
 
-        winStage.setScene(new Scene(layout, 340, 210));
+        winStage.setScene(new Scene(root, 360, 290));
         winStage.show();
     }
 }

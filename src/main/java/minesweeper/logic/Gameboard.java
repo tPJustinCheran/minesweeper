@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import minesweeper.Config;
 import minesweeper.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
@@ -42,7 +43,7 @@ public class Gameboard {
     public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
         this.customTimer = customTimer;
         this.storage = storage;
-        this.hintsRemaining = 3;
+        this.hintsRemaining = Config.MAX_HINTS;
         restartGameboard();
     }
 
@@ -72,9 +73,9 @@ public class Gameboard {
     public List<Integer> generateBombPlacements() {
         List<Integer> bombPlacements = new ArrayList<>();
         Random randomNum = new Random();
-        int numOfBombs = randomNum.nextInt(5, 20);
+        int numOfBombs = randomNum.nextInt(Config.MIN_BOMBS, Config.MAX_BOMBS);
         for (int i = 0; i < numOfBombs; i++) {
-            bombPlacements.add(randomNum.nextInt(100));
+            bombPlacements.add(randomNum.nextInt(Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL));
         }
         return bombPlacements;
     }
@@ -88,15 +89,15 @@ public class Gameboard {
      */
     public int numberOfAdjacentBombs(int position, List<Integer> bombPlacements) {
         int count = 0;
-        int row = position / 10;
-        int col = position % 10;
+        int row = position / Config.BOARD_SIZE_COL;
+        int col = position % Config.BOARD_SIZE_COL;
 
         for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
             for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
-                if (currRow >= 0 && currRow < 10 && currCol >= 0 && currCol < 10) {
-                    int currPos = currRow * 10 + currCol;
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                    int currPos = currRow * Config.BOARD_SIZE_COL + currCol;
                     if (bombPlacements.contains(currPos)) {
                         count++;
                     }
@@ -113,11 +114,11 @@ public class Gameboard {
      * @throws MinesweeperException if storing game state fails.
      */
     public void restartGameboard() throws MinesweeperException {
-        this.gameboard = new Box[10][10];
+        this.gameboard = new Box[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
         List<Integer> bombPlacements = this.generateBombPlacements();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                int currPtr = i * 10 + j;
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
+                int currPtr = i * Config.BOARD_SIZE_COL + j;
                 if (bombPlacements.contains(currPtr)) {
                     gameboard[i][j] = new Box(false, 0, true, false);
                 } else {
@@ -135,7 +136,8 @@ public class Gameboard {
         this.customTimer.restartTime();
         this.customTimer.stopTime();
         this.customTimer.zeroTime();
-        this.storage.storeHint("3");
+        this.hintsRemaining = Config.MAX_HINTS;
+        this.storage.storeHint(String.valueOf(Config.MAX_HINTS));
     }
 
     /**
@@ -157,13 +159,13 @@ public class Gameboard {
      */
     public void reloadGameboard(List<String> solutionGrid,
             List<String> gameGrid) throws MinesweeperException {
-        this.gameboard = new Box[10][10];
-        for (int i = 0; i < 10; i++) {
+        this.gameboard = new Box[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
             String currRowSoln = solutionGrid.get(i);
             String currRowGame = gameGrid.get(i);
             String[] partsSoln = currRowSoln.split("\\|");
             String[] partsGame = currRowGame.split("\\|");
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
                 if (Objects.equals(partsSoln[j], "B")) {
                     this.gameboard[i][j] = new Box(
                             checkFlagInGameboard(partsGame[j]),
@@ -197,8 +199,8 @@ public class Gameboard {
      */
     public void storeSolution() throws MinesweeperException {
         String totalStr = "";
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
                 totalStr = totalStr + this.gameboard[i][j].solutionDisplay() + "|";
             }
             totalStr += "\n";
@@ -214,8 +216,8 @@ public class Gameboard {
      */
     public void storeGame() throws MinesweeperException {
         String totalStr = "";
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
                 if (this.gameboard[i][j].getReveal()) {
                     totalStr = totalStr + "R|";
                 } else if (this.gameboard[i][j].getFlag()) {
@@ -237,8 +239,8 @@ public class Gameboard {
      * @throws MinesweeperException if storing game state fails.
      */
     public void setFlagInGameboard(int boxNumber, boolean isFlag) throws MinesweeperException {
-        int row = boxNumber / 10;
-        int col = boxNumber % 10;
+        int row = boxNumber / Config.BOARD_SIZE_COL;
+        int col = boxNumber % Config.BOARD_SIZE_COL;
         this.gameboard[row][col].setFlag(isFlag);
         this.storeGame();
     }
@@ -256,9 +258,9 @@ public class Gameboard {
         }
 
         List<Integer> unrevealedNonBombs = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            int row = i / 10;
-            int col = i % 10;
+        for (int i = 0; i < Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL; i++) {
+            int row = i / Config.BOARD_SIZE_COL;
+            int col = i % Config.BOARD_SIZE_COL;
             Box currBox = this.gameboard[row][col];
             if (!currBox.getBomb() && !currBox.getReveal()) {
                 unrevealedNonBombs.add(i);
@@ -299,8 +301,8 @@ public class Gameboard {
         hintsRemaining--;
         storage.storeHint(String.valueOf(hintsRemaining));
 
-        int row = boxNumber / 10;
-        int col = boxNumber % 10;
+        int row = boxNumber / Config.BOARD_SIZE_COL;
+        int col = boxNumber % Config.BOARD_SIZE_COL;
         String boxValue = this.gameboard[row][col].solutionDisplay();
 
         return Objects.equals(boxValue, " ") ? "0" : boxValue;
@@ -315,8 +317,8 @@ public class Gameboard {
      * @throws MinesweeperException if the box is flagged or a storage error occurs.
      */
     public MoveResult revealBoxInGameboard(int boxNumber) throws MinesweeperException {
-        int row = boxNumber / 10;
-        int col = boxNumber % 10;
+        int row = boxNumber / Config.BOARD_SIZE_COL;
+        int col = boxNumber % Config.BOARD_SIZE_COL;
         if (this.gameboard[row][col].getFlag()) {
             throw new MinesweeperException("Box has been flagged. Select a different Box!");
         }
@@ -338,9 +340,9 @@ public class Gameboard {
      * @throws StorageException if a storage error occurs.
      */
     public boolean checkWin() throws StorageException {
-        for (int i = 0; i < 100; i++) {
-            int row = i / 10;
-            int col = i % 10;
+        for (int i = 0; i < Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL; i++) {
+            int row = i / Config.BOARD_SIZE_COL;
+            int col = i % Config.BOARD_SIZE_COL;
             Box currBox = this.gameboard[row][col];
             if (!currBox.getBomb() && !currBox.getReveal()) {
                 return false;
@@ -364,25 +366,25 @@ public class Gameboard {
                 if (row > 0) {
                     floodfill(row - 1, col);
                 }
-                if (row < 9) {
+                if (row < Config.BOARD_SIZE_ROW - 1) {
                     floodfill(row + 1, col);
                 }
                 if (col > 0) {
                     floodfill(row, col - 1);
                 }
-                if (col < 9) {
+                if (col < Config.BOARD_SIZE_COL - 1) {
                     floodfill(row, col + 1);
                 }
                 if (row > 0 && col > 0) {
                     floodfill(row - 1, col - 1);
                 }
-                if (row > 0 && col < 9) {
+                if (row > 0 && col < Config.BOARD_SIZE_COL - 1) {
                     floodfill(row - 1, col + 1);
                 }
-                if (row < 9 && col > 0) {
+                if (row < Config.BOARD_SIZE_ROW - 1 && col > 0) {
                     floodfill(row + 1, col - 1);
                 }
-                if (row < 9 && col < 9) {
+                if (row < Config.BOARD_SIZE_ROW - 1 && col < Config.BOARD_SIZE_COL - 1) {
                     floodfill(row + 1, col + 1);
                 }
             }
@@ -394,8 +396,8 @@ public class Gameboard {
      * so the player can see where all the bombs were.
      */
     public void revealAllBombs() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
                 if (this.gameboard[i][j].getBomb()) {
                     this.gameboard[i][j].setReveal(true);
                 }
@@ -410,8 +412,8 @@ public class Gameboard {
      */
     public int getUnflaggedBombCount() {
         int count = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
                 if (gameboard[i][j].getBomb() && !gameboard[i][j].getFlag()) {
                     count++;
                 }
@@ -457,9 +459,9 @@ public class Gameboard {
      */
     public String toString() {
         String totalStr = "";
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
             totalStr = totalStr + "\n";
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
                 totalStr = totalStr + this.gameboard[i][j].toString() + "|";
             }
         }
