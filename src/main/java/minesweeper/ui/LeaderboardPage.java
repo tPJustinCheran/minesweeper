@@ -174,22 +174,22 @@ public class LeaderboardPage {
         String medal;
 
         switch (rank) {
-            case 1 -> {
-                bgColor = "#f6e7b6";
-                medal = "🥇";
-            }
-            case 2 -> {
-                bgColor = "#bababa";
-                medal = "🥈";
-            }
-            case 3 -> {
-                bgColor = "#b08d8d";
-                medal = "🥉";
-            }
-            default -> {
-                bgColor = "#f0f0f5";
-                medal = "";
-            }
+        case 1 -> {
+            bgColor = "#f6e7b6";
+            medal = "🥇";
+        }
+        case 2 -> {
+            bgColor = "#bababa";
+            medal = "🥈";
+        }
+        case 3 -> {
+            bgColor = "#b08d8d";
+            medal = "🥉";
+        }
+        default -> {
+            bgColor = "#f0f0f5";
+            medal = "";
+        }
         }
 
         row.setStyle(

@@ -15,7 +15,7 @@ Team Project for CS2103DE
 ### UI Polish
 - [X] Add icons to the UI Header / Title
 - [ ] Style GamePage grid cells (colours, fonts, icons)
-- [ ] Style HomePage buttons and layout
+- [ ] Style HomePage buttons and layout (introduce settings button)
 - [X] Style LeaderboardPage entries
 - [ ] Style WinPage and LosePage dialogs
 - [X] Style HelpPage

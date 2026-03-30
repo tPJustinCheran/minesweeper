@@ -173,13 +173,13 @@ public class HelpPage {
      */
     private String getSectionEmoji(String header) {
         return switch (header) {
-            case "GOAL" -> "\uD83C\uDFAF";
-            case "CONTROLS" -> "\uD83D\uDDA5";
-            case "NUMBERS" -> "\uD83D\uDD22";
-            case "HINTS" -> "\uD83D\uDCA1";
-            case "WIN" -> "\uD83C\uDFC6";
-            case "LOSE" -> "\uD83D\uDCA3";
-            default -> "\u2139";
+        case "GOAL" -> "\uD83C\uDFAF";
+        case "CONTROLS" -> "\uD83D\uDDA5";
+        case "NUMBERS" -> "\uD83D\uDD22";
+        case "HINTS" -> "\uD83D\uDCA1";
+        case "WIN" -> "\uD83C\uDFC6";
+        case "LOSE" -> "\uD83D\uDCA3";
+        default -> "\u2139";
         };
     }
 }
