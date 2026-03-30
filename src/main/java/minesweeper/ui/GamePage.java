@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import minesweeper.Config;
 import minesweeper.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.logic.Box;
@@ -36,7 +37,7 @@ public class GamePage {
 
     private final ResourceManager resourceManager = new ResourceManager();
 
-    private final Button[][] cellButtons = new Button[10][10];
+    private final Button[][] cellButtons = new Button[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
     private Button hintBtn;
     private Label timerLabel;
     private Timeline timerTimeline;
@@ -85,7 +86,36 @@ public class GamePage {
         timerLabel = new Label(customTimer.displayTimeMinSecs());
 
         Button homeBtn = new Button("\u2190 Home");
+        homeBtn.setStyle(
+            "-fx-font-size: 13px;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-text-fill: white;"
+                    + "-fx-background-color: #607D8B;"
+                    + "-fx-background-radius: 6;"
+                    + "-fx-padding: 6 14;"
+                    + "-fx-cursor: hand;"
+        );
+
+        homeBtn.setOnMouseEntered(e -> homeBtn.setStyle(
+                homeBtn.getStyle().replace("#607D8B", "#37474F")));
+        homeBtn.setOnMouseExited(e -> homeBtn.setStyle(
+                homeBtn.getStyle().replace("#37474F", "#607D8B")));
+
         hintBtn = new Button("Hint (" + gameboard.getHintsRemaining() + " left)");
+        hintBtn.setStyle(
+                "-fx-font-size: 13px;"
+                        + "-fx-font-weight: bold;"
+                        + "-fx-text-fill: white;"
+                        + "-fx-background-color: #F57F17;"
+                        + "-fx-background-radius: 6;"
+                        + "-fx-padding: 6 14;"
+                        + "-fx-cursor: hand;"
+        );
+
+        hintBtn.setOnMouseEntered(e -> hintBtn.setStyle(
+                hintBtn.getStyle().replace("#F57F17", "#E65100")));
+        hintBtn.setOnMouseExited(e -> hintBtn.setStyle(
+                hintBtn.getStyle().replace("#E65100", "#F57F17")));
 
         homeBtn.setOnAction(e -> {
             try {
@@ -122,16 +152,19 @@ public class GamePage {
             }
         });
 
-        Button winBtn = new Button("Win");
-        winBtn.setOnAction(e -> handleWin());
-
         HBox leftHeader = new HBox(10);
         leftHeader.setAlignment(Pos.CENTER_LEFT);
         leftHeader.getChildren().add(homeBtn);
 
         HBox rightHeader = new HBox(10);
         rightHeader.setAlignment(Pos.CENTER_RIGHT);
-        rightHeader.getChildren().addAll(winBtn, hintBtn);
+        rightHeader.getChildren().add(hintBtn);
+
+        if (Config.DEBUG_MODE) {
+            Button winBtn = new Button("Win");
+            winBtn.setOnAction(e -> handleWin());
+            rightHeader.getChildren().add(winBtn);
+        }
 
         HBox header = new HBox();
         header.setPadding(new Insets(10));
@@ -149,9 +182,9 @@ public class GamePage {
         grid.setVgap(3);
         grid.setPadding(new Insets(10));
 
-        for (int row = 0; row < 10; row++) {
-            for (int col = 0; col < 10; col++) {
-                final int boxNumber = row * 10 + col;
+        for (int row = 0; row < Config.BOARD_SIZE_ROW; row++) {
+            for (int col = 0; col < Config.BOARD_SIZE_COL; col++) {
+                final int boxNumber = row * Config.BOARD_SIZE_COL + col;
                 Button btn = new Button(" ");
                 btn.setMinSize(46, 46);
 
@@ -234,8 +267,8 @@ public class GamePage {
      * @throws MinesweeperException if revealing the cell or restarting the board fails
      */
     private void handleFirstClick(int boxNumber) throws MinesweeperException {
-        int row = boxNumber / 10;
-        int col = boxNumber % 10;
+        int row = boxNumber / Config.BOARD_SIZE_COL;
+        int col = boxNumber % Config.BOARD_SIZE_COL;
 
         while (gameboard.getBox(row, col).getBomb()) {
             gameboard.restartGameboard();
@@ -343,8 +376,8 @@ public class GamePage {
      */
     private void onCellRightClick(int boxNumber) {
         try {
-            int row = boxNumber / 10;
-            int col = boxNumber % 10;
+            int row = boxNumber / Config.BOARD_SIZE_COL;
+            int col = boxNumber % Config.BOARD_SIZE_COL;
             boolean currentlyFlagged = gameboard.getBox(row, col).getFlag();
             gameboard.setFlagInGameboard(boxNumber, !currentlyFlagged);
             updateDisplay();
@@ -358,8 +391,8 @@ public class GamePage {
      * Also updates the hint button label with remaining hints.
      */
     private void updateDisplay() {
-        for (int row = 0; row < 10; row++) {
-            for (int col = 0; col < 10; col++) {
+        for (int row = 0; row < Config.BOARD_SIZE_ROW; row++) {
+            for (int col = 0; col < Config.BOARD_SIZE_COL; col++) {
                 Box box = gameboard.getBox(row, col);
                 Button btn = cellButtons[row][col];
 
@@ -367,22 +400,45 @@ public class GamePage {
                     setButtonIcon(btn, flagIcon, "F");
                     btn.setDisable(false);
                 } else if (box.getReveal()) {
+                    btn.setDisable(true);
                     if (box.getBomb()) {
                         setButtonIcon(btn, bombIcon, "B");
                     } else {
                         int adj = box.getAdjacentBombs();
                         btn.setGraphic(null);
                         btn.setText(adj == 0 ? "" : String.valueOf(adj));
+                        btn.setStyle(getNumberStyle(adj));
                     }
-                    btn.setDisable(true);
                 } else {
                     btn.setGraphic(null);
                     btn.setText(" ");
                     btn.setDisable(false);
+                    btn.setStyle("");
                 }
             }
         }
         hintBtn.setText("Hint (" + gameboard.getHintsRemaining() + " left)");
+    }
+
+    /**
+     * Returns the style string for a revealed cell based on adjacent bomb count.
+     *
+     * @param adj number of adjacent bombs (0-8)
+     * @return JavaFX CSS style string
+     */
+    private String getNumberStyle(int adj) {
+        String base = "-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: ";
+        return switch (adj) {
+        case 1 -> base + "blue;";
+        case 2 -> base + "green;";
+        case 3 -> base + "red;";
+        case 4 -> base + "darkblue;";
+        case 5 -> base + "darkred;";
+        case 6 -> base + "teal;";
+        case 7 -> base + "brown;";
+        case 8 -> base + "gray;";
+        default -> base + "black;";
+        };
     }
 
     /**

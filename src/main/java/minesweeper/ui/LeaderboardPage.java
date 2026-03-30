@@ -82,13 +82,18 @@ public class LeaderboardPage {
         HBox header = new HBox(10);
         header.setAlignment(Pos.CENTER_LEFT);
 
-        Button backButton = new Button("← Home");
-        backButton.setStyle(
-                "-fx-font-size: 14px;"
-                        + "-fx-background-radius: 8;"
+        Button homeButton = new Button("← Home");
+        homeButton.setStyle(
+            "-fx-font-size: 13px;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-text-fill: white;"
+                    + "-fx-background-color: #607D8B;"
+                    + "-fx-background-radius: 6;"
+                    + "-fx-padding: 6 14;"
+                    + "-fx-cursor: hand;"
         );
 
-        backButton.setOnAction(e -> {
+        homeButton.setOnAction(e -> {
             if (onClose != null) {
                 onClose.run();
             }
@@ -106,8 +111,7 @@ public class LeaderboardPage {
                         + "-fx-font-weight: bold;"
         );
 
-        header.getChildren().addAll(backButton, title);
-
+        header.getChildren().addAll(homeButton, title);
         content.getChildren().add(header);
 
         try {

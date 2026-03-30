@@ -32,7 +32,7 @@ public class HelpPage {
 
     /**
      * Shows the help page with instructions loaded from resources.
-     * Provides a back button to close the help page.
+     * Provides a home button to close the help page.
      */
     public void show() {
         Stage helpStage = new Stage();
@@ -60,8 +60,8 @@ public class HelpPage {
                         + "-fx-background-color: #f0f0f5;"
         );
 
-        Button backBtn = new Button("\u2190 Back");
-        backBtn.setStyle(
+        Button homeBtn = new Button("\u2190 Home");
+        homeBtn.setStyle(
                 "-fx-font-size: 13px;"
                         + "-fx-font-weight: bold;"
                         + "-fx-text-fill: white;"
@@ -70,13 +70,13 @@ public class HelpPage {
                         + "-fx-padding: 8 20;"
                         + "-fx-cursor: hand;"
         );
-        backBtn.setOnAction(e -> helpStage.close());
+        homeBtn.setOnAction(e -> helpStage.close());
 
         VBox outerContent = new VBox(16);
         outerContent.setPadding(new Insets(25));
         outerContent.setAlignment(Pos.TOP_CENTER);
         outerContent.setStyle("-fx-background-color: #f0f0f5;");
-        outerContent.getChildren().addAll(title, scrollPane, backBtn);
+        outerContent.getChildren().addAll(title, scrollPane, homeBtn);
 
         BorderPane layout = new BorderPane();
         layout.setCenter(outerContent);
