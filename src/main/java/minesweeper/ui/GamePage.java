@@ -219,7 +219,7 @@ public class GamePage {
             case WIN -> handleWin();
             case BOMB -> handleLose();
             default -> {
-                }
+            }
             }
         } catch (MinesweeperException ex) {
             showAlert("Error", ex.getMessage());
@@ -252,7 +252,7 @@ public class GamePage {
         case WIN -> handleWin();
         case BOMB -> handleLose();
         default -> {
-            }
+        }
         }
     }
 

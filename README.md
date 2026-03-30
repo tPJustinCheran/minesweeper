@@ -17,7 +17,7 @@ Team Project for CS2103DE
 - [ ] Style GamePage grid cells (colours, fonts, icons)
 - [ ] Style HomePage buttons and layout (introduce settings button)
 - [X] Style LeaderboardPage entries
-- [ ] Style WinPage and LosePage dialogs
+- [X] Style WinPage and LosePage dialogs
 - [X] Style HelpPage
 - [X] Add flag and bomb icons to replace text labels (F, B)
 

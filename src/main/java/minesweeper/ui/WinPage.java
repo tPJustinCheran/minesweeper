@@ -144,17 +144,17 @@ public class WinPage {
             onClose.run();
         });
 
-        VBox card = new VBox(12);
-        card.setPadding(new Insets(28, 32, 28, 32));
-        card.setAlignment(Pos.CENTER);
-        card.setStyle(
+        VBox winCard = new VBox(12);
+        winCard.setPadding(new Insets(28, 32, 28, 32));
+        winCard.setAlignment(Pos.CENTER);
+        winCard.setStyle(
                 "-fx-background-color: white;"
                         + "-fx-background-radius: 12;"
                         + "-fx-border-color: #e0e0e8;"
                         + "-fx-border-radius: 12;"
                         + "-fx-border-width: 1;"
         );
-        card.getChildren().addAll(
+        winCard.getChildren().addAll(
                 titleLabel,
                 msgLabel,
                 nameLabel,
@@ -163,7 +163,7 @@ public class WinPage {
                 errorLabel
         );
 
-        VBox root = new VBox(card);
+        VBox root = new VBox(winCard);
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #f0f0f5;");
