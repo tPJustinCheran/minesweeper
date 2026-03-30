@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -43,6 +44,11 @@ public class LeaderboardPage {
         leaderboardStage.initModality(Modality.APPLICATION_MODAL);
         leaderboardStage.setResizable(false);
         leaderboardStage.setMinWidth(400);
+
+        Image leaderboardIcon = new ResourceManager().loadLeaderboardPageIcon();
+        if (leaderboardIcon != null) {
+            leaderboardStage.getIcons().add(leaderboardIcon);
+        }
     }
 
     /**

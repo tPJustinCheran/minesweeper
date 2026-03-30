@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -56,6 +57,11 @@ public class WinPage {
         winStage.initOwner(primaryStage);
         winStage.initModality(Modality.APPLICATION_MODAL);
         winStage.setResizable(false);
+
+        Image winicon = new ResourceManager().loadWinPageIcon();
+        if (winicon != null) {
+            winStage.getIcons().add(winicon);
+        }
 
         Label msgLabel = new Label(
                 "You cleared the board in " + finalTime + "!");

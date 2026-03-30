@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -34,6 +35,14 @@ public class HelpPage {
      * Provides a back button to return to the home page.
      */
     public void show() {
+        Stage helpStage = new Stage();
+        helpStage.initOwner(primaryStage);
+
+        Image helpIcon = resourceManager.loadHelpPageIcon();
+        if (helpIcon != null) {
+            helpStage.getIcons().add(helpIcon);
+        }
+
         Label title = new Label("Help");
         title.setStyle("-fx-font-size: 28px;-fx-font-weight: bold;");
 
@@ -45,7 +54,7 @@ public class HelpPage {
         scrollPane.setFitToWidth(true);
 
         Button backBtn = new Button("← Back");
-        backBtn.setOnAction(e -> new HomePage().start(primaryStage));
+        backBtn.setOnAction(e -> helpStage.close());
 
         VBox content = new VBox(20);
         content.setPadding(new Insets(25));
@@ -56,8 +65,8 @@ public class HelpPage {
         layout.setCenter(content);
         layout.setStyle("-fx-background-color: #f0f0f5;");
 
-        Scene scene = new Scene(layout, 460, 520);
-        primaryStage.setTitle("Help");
-        primaryStage.setScene(scene);
+        helpStage.setScene(new Scene(layout, 460, 520));
+        helpStage.setTitle("Help");
+        helpStage.show();
     }
 }

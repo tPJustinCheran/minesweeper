@@ -13,13 +13,13 @@ Team Project for CS2103DE
 - [ ] Add missing javadocs to methods that lack them
 
 ### UI Polish
-- [ ] Add icons to the UI Header / Title
+- [X] Add icons to the UI Header / Title
 - [ ] Style GamePage grid cells (colours, fonts, icons)
 - [ ] Style HomePage buttons and layout
 - [ ] Style LeaderboardPage entries
 - [ ] Style WinPage and LosePage dialogs
 - [ ] Stlyle HelpPage
-- [ ] Add flag and bomb icons to replace text labels (F, B)
+- [X] Add flag and bomb icons to replace text labels (F, B)
 
 ### Testing
 - [ ] Write unit tests for `Gameboard` logic

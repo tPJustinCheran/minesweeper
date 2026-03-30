@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -33,11 +34,16 @@ public class GamePage {
     private final Gameboard gameboard;
     private final CustomTimer customTimer;
 
+    private final ResourceManager resourceManager = new ResourceManager();
+
     private final Button[][] cellButtons = new Button[10][10];
     private Button hintBtn;
     private Label timerLabel;
     private Timeline timerTimeline;
     private boolean isFirstClick = true;
+
+    private javafx.scene.image.Image bombIcon;
+    private javafx.scene.image.Image flagIcon;
 
     /**
      * Constructor for the GamePage class, taking account if it is a new or continued game.
@@ -69,6 +75,13 @@ public class GamePage {
      */
     public void show() {
 
+        Image appIcon = resourceManager.loadAppIcon();
+        if (appIcon != null) {
+            primaryStage.getIcons().add(appIcon);
+        }
+
+        bombIcon = resourceManager.loadBombIcon();
+        flagIcon = resourceManager.loadFlagIcon();
         timerLabel = new Label(customTimer.displayTimeMinSecs());
 
         Button homeBtn = new Button("\u2190 Home");
@@ -359,20 +372,47 @@ public class GamePage {
                 Button btn = cellButtons[row][col];
 
                 if (box.getFlag()) {
-                    btn.setText("F");
+                    setButtonIcon(btn, flagIcon, "F");
                     btn.setDisable(false);
                 } else if (box.getReveal()) {
-                    int adj = box.getAdjacentBombs();
-                    btn.setText(box.getBomb() ? "B" : (adj == 0 ? "" : String.valueOf(adj)));
+                    if (box.getBomb()) {
+                        setButtonIcon(btn, bombIcon, "B");
+                    } else {
+                        int adj = box.getAdjacentBombs();
+                        btn.setGraphic(null);
+                        btn.setText(adj == 0 ? "" : String.valueOf(adj));
+                    }
                     btn.setDisable(true);
                 } else {
+                    btn.setGraphic(null);
                     btn.setText(" ");
                     btn.setDisable(false);
                 }
             }
         }
-
         hintBtn.setText("Hint (" + gameboard.getHintsRemaining() + " left)");
+    }
+
+    /**
+     * Sets a button's graphic to an icon, falling back to text if the icon is null.
+     *
+     * @param btn      the button to update
+     * @param image    the image to display, or null to fall back to text
+     * @param fallback the text to show if image is null
+     */
+    private void setButtonIcon(Button btn,
+            javafx.scene.image.Image image, String fallback) {
+        if (image != null) {
+            javafx.scene.image.ImageView iv =
+                    new javafx.scene.image.ImageView(image);
+            iv.setFitWidth(24);
+            iv.setFitHeight(24);
+            btn.setGraphic(iv);
+            btn.setText("");
+        } else {
+            btn.setGraphic(null);
+            btn.setText(fallback);
+        }
     }
 
     /**

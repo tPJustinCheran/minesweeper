@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -50,6 +51,11 @@ public class LosePage {
         loseStage.initOwner(primaryStage);
         loseStage.initModality(Modality.APPLICATION_MODAL);
         loseStage.setResizable(false);
+
+        Image loseIcon = new ResourceManager().loadLosePageIcon();
+        if (loseIcon != null) {
+            loseStage.getIcons().add(loseIcon);
+        }
 
         Label msgLabel = new Label("You hit a bomb!");
         Label timeLabel = new Label("Time: " + finalTime);
