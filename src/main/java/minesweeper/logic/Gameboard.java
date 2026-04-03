@@ -1,9 +1,6 @@
 package minesweeper.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 import minesweeper.Config;
 import minesweeper.Storage;
@@ -57,19 +54,94 @@ public class Gameboard {
     }
 
     /**
-     * Randomly generates up to 20 bomb placements.
+     * Generates List of Neighbours.
      *
-     * @return list of bomb positions
+     * @param bombPlacement position of bomb to be checked.
+     * @return list of neighbours.
+     */
+    public List<Integer> generateNeighbours(int bombPlacement) {
+        int row = bombPlacement / Config.BOARD_SIZE_COL;
+        int col = bombPlacement % Config.BOARD_SIZE_COL;
+        List<Integer> neighbours = new ArrayList<>();
+
+        for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
+            for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
+                if (iterateRow == 0 && iterateCol == 0) {
+                    continue;
+                }
+                int currRow = row + iterateRow;
+                int currCol = col + iterateCol;
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                    int currPos = currRow * Config.BOARD_SIZE_COL + currCol;
+                    neighbours.add(currPos);
+                }
+            }
+        }
+        return neighbours;
+    }
+
+    /**
+     * Given the position of a bomb, checks if that position is valid.
+     *
+     * @param bombPlacement bomb target position.
+     * @param bombPlacements list of current bomb positions.
+     * @return boolean true if valid, false if not valid.
+     */
+    public boolean checkBombNeighbours(int bombPlacement, List<Integer> bombPlacements) {
+        List<Integer> neighbours = generateNeighbours(bombPlacement);
+        boolean isNotValid = new HashSet<>(bombPlacements).containsAll(neighbours);
+        return !isNotValid;
+    }
+
+    /**
+     * Randomly generates position of a bomb, and checks if bomb is valid.
+     * If bomb is not valid, keep generating a new position until it is valid.
+     *
+     * @param bombPlacements list of existing bomb positions.
+     * @return
+     */
+    public int generateSingleBomb(List<Integer> bombPlacements) {
+        Random randomNum = new Random();
+        int singleBombPlacement = randomNum.nextInt(Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL);
+        boolean isValidBomb = checkBombNeighbours(singleBombPlacement, bombPlacements);
+        while (!isValidBomb) {
+            // keep generating bomb until bomb placement is valid
+            singleBombPlacement = randomNum.nextInt(Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL);
+            isValidBomb = checkBombNeighbours(singleBombPlacement, bombPlacements);
+        }
+        return singleBombPlacement;
+    }
+
+    /**
+     * After bomb position is successfully generated, add bomb position to list of bomb positions.
+     *
+     * @return final list of bombs.
      */
     public List<Integer> generateBombPlacements() {
         List<Integer> bombPlacements = new ArrayList<>();
         Random randomNum = new Random();
         int numOfBombs = randomNum.nextInt(Config.MIN_BOMBS, Config.MAX_BOMBS);
         for (int i = 0; i < numOfBombs; i++) {
-            bombPlacements.add(randomNum.nextInt(Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL));
+            int singleBomb = generateSingleBomb(bombPlacements);
+            bombPlacements.add(singleBomb);
         }
         return bombPlacements;
     }
+
+//    /**
+//     * Randomly generates up to 20 bomb placements.
+//     *
+//     * @return list of bomb positions
+//     */
+//    public List<Integer> generateBombPlacements() {
+//        List<Integer> bombPlacements = new ArrayList<>();
+//        Random randomNum = new Random();
+//        int numOfBombs = randomNum.nextInt(Config.MIN_BOMBS, Config.MAX_BOMBS);
+//        for (int i = 0; i < numOfBombs; i++) {
+//            bombPlacements.add(randomNum.nextInt(Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL));
+//        }
+//        return bombPlacements;
+//    }
 
     /**
      * Given a position on the board, find out the number of adjacent bombs to that position.
