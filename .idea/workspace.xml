@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/minesweeper.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/minesweeper.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPlacementTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Ui.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPlacementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPositionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,10 +59,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.BombPlacementOnGameboardTest.executor": "Run",
     "Gradle.GameboardTest.bomb_placement_validation.executor": "Run",
+    "Gradle.GameboardTest.checkBombPlacementsOnGameboard.executor": "Run",
     "Gradle.GameboardTest.correct_bomb_placement_validation_centre_cell.executor": "Run",
     "Gradle.GameboardTest.correct_bomb_placement_validation_corner_cell.executor": "Run",
     "Gradle.GameboardTest.executor": "Run",
+    "Gradle.RestartGameboardTest.executor": "Run",
     "Gradle.ValidateBombPlacementTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -74,7 +73,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "branch-CodeRefactor",
+    "git-widget-placeholder": "branch-UnitTesting",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
     "nodejs_package_manager_path": "npm",
@@ -110,6 +109,33 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;minesweeper.logic.GameboardTest.bomb_placement_validation&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="GameboardTest.checkBombPlacementsOnGameboard" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;minesweeper.logic.GameboardTest.checkBombPlacementsOnGameboard&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -177,11 +203,23 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="minesweeper.test" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="minesweeper.test" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.GameboardTest.checkBombPlacementsOnGameboard" />
+        <item itemvalue="Gradle.GameboardTest.bomb_placement_validation" />
         <item itemvalue="Gradle.GameboardTest.correct_bomb_placement_validation_corner_cell" />
         <item itemvalue="Gradle.GameboardTest.correct_bomb_placement_validation_centre_cell" />
-        <item itemvalue="Gradle.GameboardTest.bomb_placement_validation" />
       </list>
     </recent_temporary>
   </component>

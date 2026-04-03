@@ -128,21 +128,6 @@ public class Gameboard {
         return bombPlacements;
     }
 
-//    /**
-//     * Randomly generates up to 20 bomb placements.
-//     *
-//     * @return list of bomb positions
-//     */
-//    public List<Integer> generateBombPlacements() {
-//        List<Integer> bombPlacements = new ArrayList<>();
-//        Random randomNum = new Random();
-//        int numOfBombs = randomNum.nextInt(Config.MIN_BOMBS, Config.MAX_BOMBS);
-//        for (int i = 0; i < numOfBombs; i++) {
-//            bombPlacements.add(randomNum.nextInt(Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL));
-//        }
-//        return bombPlacements;
-//    }
-
     /**
      * Given a position on the board, find out the number of adjacent bombs to that position.
      *
@@ -324,7 +309,7 @@ public class Gameboard {
         for (int i = 0; i < Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL; i++) {
             int row = i / Config.BOARD_SIZE_COL;
             int col = i % Config.BOARD_SIZE_COL;
-            Box currBox = this.gameboard[row][col];
+            Box currBox = this.getBox(row, col);
             if (!currBox.getBomb() && !currBox.getReveal()) {
                 unrevealedNonBombs.add(i);
             }
