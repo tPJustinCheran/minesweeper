@@ -6,11 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/GamePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/LosePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/LosePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Minesweeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/WinPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/WinPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/ByeCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/CommandType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/FlagCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/HintCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/InputCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/RestartCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/ShowCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/TimeCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/command/UnflagCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/GamePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/HomePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +40,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -64,7 +79,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "clearBranch",
+    "git-widget-placeholder": "branch-CodeRefactor",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
     "nodejs_package_manager_path": "npm",
@@ -72,6 +87,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
   }
@@ -79,6 +95,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chera\Desktop\minesweeper" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="deprecated" />
     </key>
   </component>
   <component name="SharedIndexes">
