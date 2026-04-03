@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import minesweeper.Storage;
 import minesweeper.exception.MinesweeperException;
 
+import java.util.List;
+
 /**
  * Home page UI for the Minesweeper game.
  * Displays navigation options such as starting a new game,
