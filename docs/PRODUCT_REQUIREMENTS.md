@@ -43,33 +43,44 @@ Our Unique Selling Points:
 *** 
 
 ## Functional Requirements 
-|# | Requirement | Priority | Status                | 
-|:----|:-----|:----|:----------------------|
-|FR-01|Start a new classic minesweeper game / board | Must-Have | <input type="checkbox" checked> | 
-|FR-02|Generate a valid minesweeper board| Must-have | Must-Have | <input type="checkbox" checked> | 
-|FR-03|The system shall ensure the first click does not reveal a mine| Must-Have | <input type="checkbox" checked> | 
-|FR-04|The system shall display the number of adjacenet mines when a non-mine cell is revealed | Must-Have | <input type="checkbox" checked> | 
-|FR-05|The system shall automatically reveal adjacent cells if a revealed cell has zero adjacent mines (flood fill behaviour) | Must-Have | <input type="checkbox" checked> | 
-|FR-06|The system allows players to flag and unflag cells | Must-Have | <input type="checkbox" checked> | 
-|FR-07|A flagged cell cannot be revealed when clicked | Must-Have | <input type="checkbox" checked> | 
-|FR-08|The system will declare a 'win' when all non-mine tiles are revealed |Must-Have | <input type="checkbox" checked> | 
-|FR-09|The system will declare a 'lose' when a mine is revealed | Must-Have | <input type="checkbox" checked> | 
-|FR-10|Help Message or window will pop up when Help Button is clicked on | Nice-to-Have | <input type="checkbox" checked> | 
-|FR-11|Save game state on every move; reload on app reopen (Continue Game) | Nice-to-Have | <input type="checkbox" checked> | 
-|FR-12|Allow player to restart the game by clicking on the restart button| Nice-to-Have | <input type="checkbox" checked> | 
-|FR-13|The system records the puzzle's completion time when the player wins|Nice-to-Have | <input type="checkbox" checked> | 
-|FR-14|The player can access the leaderboard window which shows the persistent leaderboard sorted by fastest time | Nice-to-Have | <input type="checkbox" checked> | 
-|FR-15|The player can press a hint button to reveal a safe cell|Nice-to-Have | <input type="checkbox" checked> | 
-|FR-16|Play again from Lose dialog|Nice-to-Have | <input type="checkbox" checked> | 
-|FR-17|Back to Home from Lose dialog |Nice-to-Have | <input type="checkbox" checked> | 
-|FR-18|User accounts with scores tied to account | Nice-to-Have | <input type="checkbox" checked> | 
-
-(Havent included unlikely-to-have)
-
+| #     | Requirement | Priority                          | Status          | 
+|:------|:-----|:----------------------------------|:----------------|
+| FR-01 |Start a new classic minesweeper game / board | Must-Have                         | ✅               | 
+| FR-02 |Generate a valid minesweeper board| Must-have                         | Must-Have       | ✅ | 
+| FR-03 |The system shall ensure the first click does not reveal a mine| Must-Have                         | ✅               | 
+| FR-04 |The system shall display the number of adjacenet mines when a non-mine cell is revealed | Must-Have                         | ✅               | 
+| FR-05 |The system shall automatically reveal adjacent cells if a revealed cell has zero adjacent mines (flood fill behaviour) | Must-Have                         | ✅               | 
+| FR-06 |The system allows players to flag and unflag cells | Must-Have                         | ✅               | 
+| FR-07 |A flagged cell cannot be revealed when clicked | Must-Have                         | ✅               | 
+| FR-08 |The system will declare a 'win' when all non-mine tiles are revealed | Must-Have                         | ✅               | 
+| FR-09 |The system will declare a 'lose' when a mine is revealed | Must-Have                         | ✅               | 
+| FR-10 |Help Message or window will pop up when Help Button is clicked on | Nice-to-Have                      | ✅               | 
+| FR-11 |Save game state on every move; reload on app reopen (Continue Game) | Nice-to-Have                      | ✅               | 
+| FR-12 |Allow player to restart the game by clicking on the restart button| Nice-to-Have                      | ✅               | 
+| FR-13 |The system records the puzzle's completion time when the player wins| Nice-to-Have                      | ✅               | 
+| FR-14 |The player can access the leaderboard window which shows the persistent leaderboard sorted by fastest time | Nice-to-Have                      | ✅               | 
+| FR-15 |The player can press a hint button to reveal a safe cell| Nice-to-Have                      | ✅               | 
+| FR-16 |Play again from Lose dialog| Nice-to-Have                      | ✅               | 
+| FR-17 |Back to Home from Lose dialog | Nice-to-Have                      | ✅               | 
+| FR-18 |User accounts with scores tied to account | Unlikely-to-Have                  | Not Planned     | 
+| FR-19 |Extension 1: The player can click a button on a revealed numbered cell that has adjacent flags more than its own number to reveal all of its non-revealed, non-flag adjacent cells. (chording) | Unlikely-to-Have                  | Not Planned     | 
+|FR-20|Extension 1: The player can change the number of rows, columns, bombs, and hints in a setting. Default is [10, 10, 5-20, 3] respectively |                                   | Unlikely-to-Have | Not Planned |
+|FR-21|Extension 2: Provide the option for the player to start the minesweeper board with gimmicks | Unlikely-to-Have                  | Not Planned     |
+|FR-22|Extension 2: The player can use a shield (shared usage with hints) to protect them from losing in the next cell reveal. | Unlikely-to-Have                  | Not Planned |
+|FR-23|Extension 2: The system designates fog tiles to safe tiles randomly, which hides the number of adjacent mines to it when displayed.| Unlikely-to-Have                  | Not Planned |
+|FR-24|Extension 2: The system generates super mines counts as 2 mines on an adjacent safe cell display. | Unlikely-to-Have                  | Not Planned     |
 
 *** 
 
 ## Non-Functional Requirements
+| #      | Requirement | Notes                                                                                            | 
+|:-------|:-----|:-------------------------------------------------------------------------------------------------|
+| NFR-01 |Good coding standards for maintainability| Javadoc on all public methods; consistent naming conventions observed in codebase                | 
+| NFR-02 |Consistent and clear documentation| Javadoc present; User Guide and Developer Guide to be finalised by Wk 13                         | 
+| NFR-03 |Intuitive UI| JavaFX GUI with colour-coded buttons, clear labels, and modal dialogs                            | 
+| NFR-04 |Game does not crash| Exception Hierarchy                                                                              | 
+| NFR-05| Platform Compatibility| Java 17+; runs on Windows, macOS, Linux via JAR launcher                                         | 
+|NFR-06| Local Data Storage | All saves stored in a local data/ folder (game.txt, solution.txt, time.txt, hint.txt, leaderboard| 
 
 
 
