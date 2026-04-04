@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/minesweeper.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/minesweeper.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPlacementTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Ui.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/CustomTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/CustomTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,10 +60,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.BombPlacementOnGameboardTest.executor": "Run",
     "Gradle.GameboardTest.bomb_placement_validation.executor": "Run",
+    "Gradle.GameboardTest.checkBombPlacementsOnGameboard.executor": "Run",
     "Gradle.GameboardTest.correct_bomb_placement_validation_centre_cell.executor": "Run",
     "Gradle.GameboardTest.correct_bomb_placement_validation_corner_cell.executor": "Run",
     "Gradle.GameboardTest.executor": "Run",
+    "Gradle.GameboardTest.reloadGameboard.executor": "Run",
+    "Gradle.RestartGameboardTest.checkCorrectString_storeGame.executor": "Run",
+    "Gradle.RestartGameboardTest.executor": "Run",
+    "Gradle.TimerTest.executor": "Run",
+    "Gradle.TimerTest.testLoadTime_Constructor.executor": "Run",
+    "Gradle.TimerTest.testNoLoadTime_Constructor.executor": "Run",
     "Gradle.ValidateBombPlacementTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -74,7 +79,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "branch-CodeRefactor",
+    "git-widget-placeholder": "branch-UnitTesting",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
     "nodejs_package_manager_path": "npm",
@@ -95,7 +100,7 @@
       <recent name="deprecated" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.TimerTest.testNoLoadTime_Constructor">
     <configuration name="GameboardTest.bomb_placement_validation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -123,7 +128,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="GameboardTest.correct_bomb_placement_validation_centre_cell" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="GameboardTest.reloadGameboard" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -136,7 +141,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;minesweeper.logic.GameboardTest.correct_bomb_placement_validation_centre_cell&quot;" />
+            <option value="&quot;minesweeper.logic.GameboardTest.reloadGameboard&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -150,7 +155,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="GameboardTest.correct_bomb_placement_validation_corner_cell" type="GradleRunConfiguration" factoryName="Gradle" temporary="true" show_console_on_std_err="true" show_console_on_std_out="true">
+    <configuration name="RestartGameboardTest.checkCorrectString_storeGame" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -163,7 +168,61 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;minesweeper.logic.GameboardTest.correct_bomb_placement_validation_corner_cell&quot;" />
+            <option value="&quot;minesweeper.logic.RestartGameboardTest.checkCorrectString_storeGame&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TimerTest.testLoadTime_Constructor" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;minesweeper.logic.TimerTest.testLoadTime_Constructor&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TimerTest.testNoLoadTime_Constructor" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;minesweeper.logic.TimerTest.testNoLoadTime_Constructor&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -179,8 +238,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.GameboardTest.correct_bomb_placement_validation_corner_cell" />
-        <item itemvalue="Gradle.GameboardTest.correct_bomb_placement_validation_centre_cell" />
+        <item itemvalue="Gradle.TimerTest.testNoLoadTime_Constructor" />
+        <item itemvalue="Gradle.TimerTest.testLoadTime_Constructor" />
+        <item itemvalue="Gradle.GameboardTest.reloadGameboard" />
+        <item itemvalue="Gradle.RestartGameboardTest.checkCorrectString_storeGame" />
         <item itemvalue="Gradle.GameboardTest.bomb_placement_validation" />
       </list>
     </recent_temporary>
@@ -211,6 +272,7 @@
       <workItem from="1774063816345" duration="8465000" />
       <workItem from="1774100423196" duration="3217000" />
       <workItem from="1774620836278" duration="2569000" />
+      <workItem from="1775267872570" duration="13152000" />
     </task>
     <servers />
   </component>
