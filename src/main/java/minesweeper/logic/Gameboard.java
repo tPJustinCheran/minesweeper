@@ -85,7 +85,7 @@ public class Gameboard {
     }
 
     /**
-     * Given the position of a bomb, checks if that position is valid.
+     * Given the prospective position of a bomb, checks if that position is valid.
      *
      * @param bombPlacement bomb target position.
      * @param bombPlacements list of current bomb positions.

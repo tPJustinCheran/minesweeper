@@ -16,6 +16,8 @@ The best part? Everything is locally hosted on your computer!
 ***
 ## Quick Start
 
+TODO
+
 ***
 
 ## GOAL
