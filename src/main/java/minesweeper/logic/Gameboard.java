@@ -407,7 +407,7 @@ public class Gameboard {
      * @param col the column of the cell to flood fill from.
      */
     public void floodfill(int row, int col) {
-        Box currBox = this.gameboard[row][col];
+        Box currBox = this.getBox(row, col);
         if (!currBox.getReveal()) {
             currBox.setReveal(true);
             if (currBox.getAdjacentBombs() == 0) {
@@ -523,4 +523,5 @@ public class Gameboard {
     private boolean checkFlagInGameboard(String marker) {
         return Objects.equals(marker, "F");
     }
+
 }
