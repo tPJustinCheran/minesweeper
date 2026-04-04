@@ -12,4 +12,8 @@
 ## UML Diagram 
 ![Alt Text](images/UMLDiagram.png)
 
+*** 
 
+## Sequence Diagram 
+- Gameboard, Storage, Timer Sequential Diagram 
+![Alt Text](images/GameboardStorageTimerSequential.png)

@@ -23,6 +23,8 @@
 - Standard Minesweeper games offer no hint system, forcing players who are stuck to guess blindly. 
 - The Windows XP version has no leaderboard, so completion times cannot be compared across sessions.
 
+*** 
+
 ## Proposed Solution
 Offer a lightweight, desktop-based Minesweeper game built in Java (JavaFX) that addresses the shortcomings 
 of the classic version while remaining accessible and easy to play.
@@ -33,8 +35,12 @@ Our Unique Selling Points:
 - Records completion times on a persistent leaderboard sorted by fastest time. 
 - First-click safety guarantee. The first cell clicked is never a bomb.
 
+*** 
+
 ## User Flow 
 ![Alt text](images/UserFlow.png)
+
+*** 
 
 ## Functional Requirements 
 |# | Requirement | Priority | Status                | 
@@ -61,9 +67,13 @@ Our Unique Selling Points:
 (Havent included unlikely-to-have)
 
 
+*** 
+
 ## Non-Functional Requirements
 
 
+
+*** 
 
 ## Timeline
 | Week | Release                                                                     | Tasks                                                                                |
@@ -77,10 +87,17 @@ Our Unique Selling Points:
 |      | [v0.3](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.3)     | Bug Fixes & Hint Improvements                                                        | 
 |      | [v0.4](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.4)     | UI Polish, Config, Package Restructure                                               |
 
-
-
+*** 
 
 ## Constraints and Limitations
+- Single-player only. No multiplayer, online, or account system. 
+- Save files are stored locally in a data/ directory adjacent to the JAR. 
+- Requires Java 17+ and JavaFX runtime. 
+- Board size is fixed at 10×10. 
+- Mine count is randomised between 5 and 20 per new game. 
+- Maximum of 3 hints can be used per game session. 
+- Leaderboard entries are stored as plain text (leaderboard.txt), no database. 
+- The hint system reveals a safe cell but does not guarantee the cell is strategically optimal.
 
 
 
