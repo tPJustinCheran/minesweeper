@@ -32,6 +32,8 @@ public class Gameboard {
      * Creates empty 10x10 grid with each cell containing a Box Object.
      * Randomly generates bombs and stores the grid in solution.txt.
      *
+     * @param customTimer customTimer object for keeping time.
+     * @param storage storage object for file read/write.
      * @throws MinesweeperException if initialisation fails.
      */
     public Gameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
@@ -43,8 +45,10 @@ public class Gameboard {
      * Constructor Class if there is pre-existing data from hard disk.
      * Loads Previous Gameplay and Solutions (from game.txt and solution.txt files).
      *
+     * @param customTimer customTimer object for keeping time.
      * @param solutionGrid data from solution.txt.
      * @param gameGrid     data from game.txt.
+     * @param remainingHints integer representing remaining hints left. data taken from hint.txt.
      * @throws MinesweeperException Error Handling.
      */
     public Gameboard(CustomTimer customTimer, List<String> solutionGrid,
@@ -159,6 +163,8 @@ public class Gameboard {
      * Restarts the Gameboard with a new random bomb layout.
      * Stores solution and game state to file, resets timer and hints.
      *
+     * @param customTimer timer object for keeping time.
+     * @param storage storage object for file read/write.
      * @throws MinesweeperException if storing game state fails.
      */
     public void restartGameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
@@ -191,6 +197,7 @@ public class Gameboard {
     /**
      * Clears all saved game data so Continue is disabled on HomePage.
      *
+     * @param storage storage object for file read/write.
      * @throws MinesweeperException if clearing the save files fails.
      */
     public void clearGameboard(Storage storage) throws MinesweeperException {
@@ -203,6 +210,7 @@ public class Gameboard {
      *
      * @param solutionGrid list of strings representing the solution grid.
      * @param gameGrid     list of strings representing the game progress grid.
+     * @param customTimer  timer object for keeping time.
      * @throws MinesweeperException if loading fails.
      */
     public void reloadGameboard(List<String> solutionGrid,
@@ -243,6 +251,7 @@ public class Gameboard {
      * Store Solution (Bombs + adjacent bombs) to solution.txt file.
      * Called upon initialisation of new game board.
      *
+     * @param storage storage object for file read/write.
      * @throws MinesweeperException if storing fails.
      */
     public void storeSolution(Storage storage) throws MinesweeperException {
@@ -260,6 +269,7 @@ public class Gameboard {
      * Store Game Progress. Shows what has been revealed and what has not.
      * Called after every player move.
      *
+     * @param storage storage object for file read/write.
      * @throws MinesweeperException if storing fails.
      */
     public void storeGame(Storage storage) throws MinesweeperException {
@@ -284,6 +294,7 @@ public class Gameboard {
      *
      * @param boxNumber the cell index (0-99)
      * @param isFlag    true to flag, false to unflag
+     * @param storage   storage object for file read/write.
      * @throws MinesweeperException if storing game state fails.
      */
     public void setFlagInGameboard(int boxNumber, boolean isFlag, Storage storage) throws MinesweeperException {
@@ -297,6 +308,7 @@ public class Gameboard {
      * Reveals a random safe unrevealed unflagged cell on the board.
      * Maximum of 3 hints per game. Hint count is stored in hint.txt.
      *
+     * @param storage   storage object for file read/write.
      * @return the box number (0-99) of the revealed cell
      * @throws MinesweeperException if max hints reached or no safe cell found.
      */
@@ -361,6 +373,7 @@ public class Gameboard {
      * Returns a MoveResult indicating what happened.
      *
      * @param boxNumber integer from 0 to 99
+     * @param storage   storage object for file read/write.
      * @return MoveResult — BOMB if bomb, WIN if all safe cells revealed, SAFE otherwise
      * @throws MinesweeperException if the box is flagged or a storage error occurs.
      */
@@ -473,6 +486,8 @@ public class Gameboard {
     /**
      * Stores the current game state and pauses the timer when the player exits.
      *
+     * @param storage   storage object for file read/write.
+     * @param customTimer  timer object for keeping time.
      * @throws MinesweeperException if storing fails.
      */
     public void closeProgram(Storage storage, CustomTimer customTimer) throws MinesweeperException {

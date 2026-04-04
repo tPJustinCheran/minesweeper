@@ -14,7 +14,7 @@ Team Project for CS2103DE
 - [X] All Planned UI goals are met
 
 ### Testing
-- [ ] Write unit tests for `Gameboard` logic
+- [X] Write unit tests for `Gameboard` logic
 - [ ] Write unit tests for `Storage` read/write methods
-- [ ] Write unit tests for `CustomTimer`
+- [X] Write unit tests for `CustomTimer`
 - [ ] Test UI and document the results

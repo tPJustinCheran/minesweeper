@@ -9,19 +9,17 @@ import minesweeper.exception.MinesweeperException;
  * Custom Timer Class for Timing the Gameplay.
  */
 public class CustomTimer {
-    private Timer timer;
+//    private Timer timer;
     private long startTimeMillis;
     private long offsetMillis;
-    private boolean timerRunning = false;
+    private boolean isTimerRunning = false;
 
     /**
-     * Constructor Class to initialise timer and load time from an uncompleted gameplay.
+     * Constructor Class which loads time from an uncompleted gameplay.
      *
      * @param storage minesweeper.Storage class to access time.txt file
-     * @throws MinesweeperException Exception raised when there is no timing stored in time.txt file
      */
-    public CustomTimer(Storage storage) throws MinesweeperException {
-        timer = new Timer();
+    public CustomTimer(Storage storage) {
         try {
             offsetMillis = storage.loadTime();
         } catch (MinesweeperException noOldTiming) {
@@ -34,7 +32,7 @@ public class CustomTimer {
      */
     public void startTime() {
         startTimeMillis = System.currentTimeMillis();
-        timerRunning = true;
+        isTimerRunning = true;
     }
 
     /**
@@ -60,7 +58,7 @@ public class CustomTimer {
      * @return long (time in milliseconds).
      */
     public long getTimeMillis() {
-        if (!timerRunning) {
+        if (!isTimerRunning) {
             return offsetMillis;
         }
         return System.currentTimeMillis() - startTimeMillis + offsetMillis;
@@ -70,10 +68,9 @@ public class CustomTimer {
      * Stop Timer. Used when game ends.
      */
     public void stopTime() {
-        if (this.getTimerRunning()) {
+        if (isTimerRunning) {
             offsetMillis = getTimeMillis();
-            timer.cancel();
-            this.setTimerRunning(false);
+            this.setTimerRunningBoolean(false);
         }
     }
 
@@ -85,9 +82,8 @@ public class CustomTimer {
      */
     public void pauseAndStopTime(Storage storage) throws MinesweeperException {
         offsetMillis = getTimeMillis();
-        if (timerRunning) {
-            timer.cancel();
-            timerRunning = false;
+        if (isTimerRunning) {
+            isTimerRunning = false;
         }
         storage.storeTime(Long.toString(offsetMillis));
     }
@@ -105,11 +101,15 @@ public class CustomTimer {
         return String.format("%02d:%02d.%03d", mins, secs, ms);
     }
 
-    public boolean getTimerRunning() {
-        return timerRunning;
+    public void setTimerRunningBoolean(boolean isTimerRunning) {
+        this.isTimerRunning = isTimerRunning;
     }
 
-    public void setTimerRunning(boolean isTimerRunning) {
-        this.timerRunning = isTimerRunning;
+    /**
+     * Used for unit testing
+     * @return offsetMillis
+     */
+    public long getOffsetMillis() {
+        return this.offsetMillis;
     }
 }
