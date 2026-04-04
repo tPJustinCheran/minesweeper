@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.storage;
 
 /**
  * Holds game configuration settings.

@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import minesweeper.Storage;
+import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 
 @ExtendWith(MockitoExtension.class)

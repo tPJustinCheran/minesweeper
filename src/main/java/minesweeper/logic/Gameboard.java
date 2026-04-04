@@ -2,8 +2,8 @@ package minesweeper.logic;
 
 import java.util.*;
 
-import minesweeper.Config;
-import minesweeper.Storage;
+import minesweeper.storage.Config;
+import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
 

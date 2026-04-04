@@ -10,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import minesweeper.Storage;
+import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 
 /**

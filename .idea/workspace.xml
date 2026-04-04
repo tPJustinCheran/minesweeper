@@ -6,6 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UserFlow.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/images/UserFlow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/storage/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/storage/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/exception/ParserException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/CustomTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/CustomTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/GamePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/LeaderboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/LeaderboardPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/WinPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/WinPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/minesweeper/logic/GameboardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/GameboardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/minesweeper/logic/TimerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/TimerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPositionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPositionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +108,7 @@
       <recent name="C:\Users\chera\Desktop\minesweeper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\chera\Desktop\minesweeper\docs\images" />
       <recent name="C:\Users\chera\Desktop\minesweeper\docs" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">

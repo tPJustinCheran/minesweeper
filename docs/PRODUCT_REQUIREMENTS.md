@@ -33,7 +33,7 @@ Our Unique Selling Points:
 - First-click safety guarantee. The first cell clicked is never a bomb.
 
 ## User Flow 
-![Alt text](UserFlow.png)
+![Alt text](images/UserFlow.png)
 
 ## Functional Requirements 
 |# | Requirement | Priority | Status                | 

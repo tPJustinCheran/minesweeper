@@ -1,8 +1,6 @@
 package minesweeper.logic;
 
-import java.util.Timer;
-
-import minesweeper.Storage;
+import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 
 /**
@@ -17,7 +15,7 @@ public class CustomTimer {
     /**
      * Constructor Class which loads time from an uncompleted gameplay.
      *
-     * @param storage minesweeper.Storage class to access time.txt file
+     * @param storage minesweeper.storage.Storage class to access time.txt file
      */
     public CustomTimer(Storage storage) {
         try {
@@ -77,7 +75,7 @@ public class CustomTimer {
     /**
      * Pause Timer. Store time into time.txt for future use. Used when player exits program.
      *
-     * @param storage minesweeper.Storage class to access time.txt file
+     * @param storage minesweeper.storage.Storage class to access time.txt file
      * @throws MinesweeperException Exception raised when unable to write to time.txt file.
      */
     public void pauseAndStopTime(Storage storage) throws MinesweeperException {
