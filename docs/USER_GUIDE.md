@@ -1,4 +1,5 @@
-# Minesweeper
+# Minesweeper - User Guide
+[User Guide](#) | [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 Minesweeper is a classic logic puzzle game where players must clear a grid of hidden cells while avoiding bombs. Using clues provided by numbers on revealed cells, players deduce the positions of bombs and mark them with flags. The objective is to reveal all non-bomb cells in the shortest possible time.
 
@@ -55,11 +56,11 @@ Left clicking on a cell reveals its contents.
 
 Possible outcomes:
 
-• If the cell contains a number, the number indicates how many bombs are in the surrounding 8 cells.  
+- If the cell contains a number, the number indicates how many bombs are in the surrounding 8 cells.  
 
-• If the cell contains a bomb, the game is lost.  
+- If the cell contains a bomb, the game is lost.  
 
-• If the cell contains no adjacent bombs, the game automatically reveals surrounding cells using a flood fill behaviour.
+- If the cell contains no adjacent bombs, the game automatically reveals surrounding cells using a flood fill behaviour.
 
 Flood fill helps reveal large safe areas quickly.
 
@@ -73,9 +74,9 @@ Flood fill helps reveal large safe areas quickly.
 
 Right clicking allows players to mark suspected bomb locations.
 
-• Right click on an unrevealed cell to place a Flag.  
+- Right click on an unrevealed cell to place a Flag.  
 
-• Right click on a flagged cell to remove the Flag.
+- Right click on a flagged cell to remove the Flag.
 
 Flags help track where bombs are likely located, but placing flags does not affect the win condition unless used correctly.
 
@@ -88,8 +89,9 @@ Flags help track where bombs are likely located, but placing flags does not affe
 The game timer starts only after the first move is made.
 
 This first move can be:
-• Left clicking a cell  
-• Using the Hint button  
+
+- Left clicking a cell  
+- Using the Hint button  
 
 The first revealed cell is guaranteed to never contain a bomb, ensuring the game always starts fairly.
 
@@ -133,9 +135,10 @@ Chording allows experienced players to clear large sections quickly.
 The player wins when all non-bomb cells are revealed.
 
 After winning:
-• The timer stops  
-• The player can enter their name  
-• The result is saved to the leaderboard  
+
+- The timer stops  
+- The player can enter their name  
+- The result is saved to the leaderboard  
 
 Leaderboard rankings are based on fastest completion time.
 
@@ -150,8 +153,9 @@ If a bomb is revealed, the game ends immediately.
 All bomb locations are revealed on the board, allowing players to see where the mistakes occurred.
 
 Players can choose to:
-• Play again  
-• Return to the Home page  
+
+- Play again  
+- Return to the Home page  
 
 *(Insert screenshot of lose dialog)*
 
@@ -162,8 +166,9 @@ Players can choose to:
 The Leaderboard displays records of completed games sorted by completion time.
 
 Each entry includes:
-• Player name  
-• Completion time  
+
+- Player name  
+- Completion time  
 
 Players can view past achievements and compare results.
 
@@ -206,14 +211,15 @@ Yes. Hints are optional and intended as assistance for difficult situations.
 The developer documentation can be found in the project repository:
 
 ```
-docs/DeveloperGuide.md
+[Developer's Guide](./DEVELOPERS_GUIDE.md)
 ```
 
 This guide explains:
-• Architecture design  
-• Class responsibilities  
-• Storage structure  
-• Testing approach  
+
+- Architecture design  
+- Class responsibilities  
+- Storage structure  
+- Testing approach  
 
 ---
 
