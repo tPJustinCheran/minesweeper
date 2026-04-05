@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/USER_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/USER_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/minesweeper/logic/GameboardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/GameboardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPositionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/minesweeper/logic/ValidateBombPositionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +277,8 @@
       <workItem from="1774100423196" duration="3217000" />
       <workItem from="1774620836278" duration="2569000" />
       <workItem from="1775267872570" duration="13152000" />
-      <workItem from="1775302592164" duration="16007000" />
+      <workItem from="1775302592164" duration="17788000" />
+      <workItem from="1775409194834" duration="927000" />
     </task>
     <servers />
   </component>

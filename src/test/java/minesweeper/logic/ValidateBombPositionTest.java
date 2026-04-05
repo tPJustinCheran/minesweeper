@@ -26,30 +26,51 @@ public class ValidateBombPositionTest {
 
     private Gameboard gameboard;
 
+    /**
+     * Set up gameboard for testing before each test case.
+     *
+     * @throws MinesweeperException if gameboard initialisation fails.
+     */
     @BeforeEach
     @SuppressWarnings("unused")
     void setup() throws MinesweeperException {
         gameboard = new Gameboard(mockTimer, mockStorage);
     }
 
+    /**
+     * Tests that checkBombNeighbours can correctly identify that a bomb cannot be placed at a particular position.
+     * Checks with a centre cell (which has 8 neighbours).
+     */
     @Test
     public void errorValidateCentreCell() {
         boolean isValid = gameboard.checkBombNeighbours(43, List.of(32, 33, 34, 42, 44, 52, 53, 54));
         assertEquals(false, isValid);
     }
 
+    /**
+     * Tests that checkBombNeighbours can correctly identify that a bomb cannot be placed at a particular position.
+     * Checks with a corner cell (which has <8 neighbours).
+     */
     @Test
     public void errorValidateCornerCell() {
         boolean isValid = gameboard.checkBombNeighbours(0, List.of(1, 10, 11, 83));
         assertEquals(false, isValid);
     }
 
+    /**
+     * Tests that checkBombNeighbours can correctly identify that a bomb can be placed at a particular position.
+     * Checks with a centre cell (which has <8 neighbours).
+     */
     @Test
     public void correctValidateCornerCell() {
         boolean isValid = gameboard.checkBombNeighbours(0, List.of(1, 10, 83));
         assertEquals(true, isValid);
     }
 
+    /**
+     * Tests that checkBombNeighbours can correctly identify that a bomb can be placed at a particular position.
+     * Checks with a centre cell (which has 8 neighbours).
+     */
     @Test
     public void correctValidateCentreCell() {
         boolean isValid = gameboard.checkBombNeighbours(43,
@@ -57,11 +78,17 @@ public class ValidateBombPositionTest {
         assertEquals(true, isValid);
     }
 
+    /**
+     * Tests that the adjacent bomb count is calculated correctly given a particular position.
+     */
     @Test
     public void checkNumOfAdjacentBombsOne() {
         assertEquals(3, gameboard.numberOfAdjacentBombs(54, List.of(43, 65, 44, 22, 85)));
     }
 
+    /**
+     * Tests that the adjacent bomb count is calculated correctly given a particular position.
+     */
     @Test
     public void checkNumOfAdjacentBombsTwo() {
         assertEquals(0, gameboard.numberOfAdjacentBombs(18, List.of(43, 65, 44, 22, 85)));

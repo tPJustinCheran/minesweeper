@@ -19,6 +19,10 @@ Minesweeper is a classic logic puzzle game where players must clear a grid of hi
 - Note that Java versions higher than 21 may experience issues due to incompatibility with Gradle.
 
 ### Running the app
+1. Download the JAR folder [here] 
+2. Move the JAR File to an empty folder. 
+3. Run the JAR File by double-clicking on the `minesweeper.jar` file. 
+Alternatively, after navigating into the folder with the JAR file in your terminal, run:  
 ```bash
 java -jar minesweeper.jar
 ```
