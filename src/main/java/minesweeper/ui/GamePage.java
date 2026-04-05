@@ -250,12 +250,11 @@ public class GamePage {
                 handleFirstClick(boxNumber);
                 return;
             }
-<<<<<<< HEAD
             int row = boxNumber / Config.BOARD_SIZE_COL;
             int col = boxNumber % Config.BOARD_SIZE_COL;
 
             if (gameboard.getBox(row, col).getReveal()) {
-                Gameboard.MoveResult result = gameboard.chord(boxNumber);
+                Gameboard.MoveResult result = gameboard.chord(boxNumber, this.storage);
                 updateDisplay();
                 switch (result) {
                 case WIN -> handleWin();
@@ -266,10 +265,7 @@ public class GamePage {
                 return;
             }
 
-            Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
-=======
             Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber, this.storage);
->>>>>>> origin/main
             updateDisplay();
             switch (result) {
             case WIN -> handleWin();

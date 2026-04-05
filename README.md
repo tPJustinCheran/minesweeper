@@ -1,7 +1,7 @@
 # tP-Minesweeper
 Team Project for CS2103DE
 
-## To-Do (v0.5)
+## To-Do (v0.6 - Beta)
 
 ### Features
 - [X] All Planned Features are met

@@ -1,6 +1,10 @@
 package minesweeper.logic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 import minesweeper.storage.Config;
 import minesweeper.storage.Storage;
@@ -192,7 +196,7 @@ public class Gameboard {
      * @param storage storage object for file read/write.
      * @throws MinesweeperException if storing game state fails.
      */
-    public void restartGameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
+    public final void restartGameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
         this.gameboard = new Box[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
         List<Integer> bombPlacements = this.generateBombPlacements();
         for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
@@ -238,7 +242,7 @@ public class Gameboard {
      * @param customTimer  timer object for keeping time.
      * @throws MinesweeperException if loading fails.
      */
-    public void reloadGameboard(List<String> solutionGrid,
+    public final void reloadGameboard(List<String> solutionGrid,
             List<String> gameGrid, CustomTimer customTimer) throws MinesweeperException {
         this.gameboard = new Box[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
         for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
@@ -358,8 +362,8 @@ public class Gameboard {
 
         int randomHintBoxReveal = unrevealedNonBombs.get(
                 new Random().nextInt(unrevealedNonBombs.size()));
-        int hintRow = randomHintBoxReveal / 10;
-        int hintCol = randomHintBoxReveal % 10;
+        int hintRow = randomHintBoxReveal / Config.BOARD_SIZE_COL;
+        int hintCol = randomHintBoxReveal % Config.BOARD_SIZE_COL;
         this.floodfill(hintRow, hintCol);
 
         hintsRemaining--;
@@ -427,7 +431,7 @@ public class Gameboard {
      * @return MoveResult — BOMB if a bomb was revealed, WIN if all safe cells revealed, SAFE otherwise
      * @throws MinesweeperException if the cell is not revealed, adjacent flag count does not match, or a storage error occurs.
      */
-    public MoveResult chord(int boxNumber) throws MinesweeperException {
+    public MoveResult chord(int boxNumber, Storage storage) throws MinesweeperException {
         int row = boxNumber / Config.BOARD_SIZE_COL;
         int col = boxNumber % Config.BOARD_SIZE_COL;
         Box currBox = this.gameboard[row][col];
@@ -444,7 +448,7 @@ public class Gameboard {
                 int currCol = col + iterateCol;
                 if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
                     if (!this.gameboard[currRow][currCol].getFlag() && !this.gameboard[currRow][currCol].getReveal()) {
-                        MoveResult result = this.revealBoxInGameboard(currRow * Config.BOARD_SIZE_COL + currCol);
+                        MoveResult result = this.revealBoxInGameboard(currRow * Config.BOARD_SIZE_COL + currCol, storage);
                         if (result == MoveResult.BOMB) {
                             return MoveResult.BOMB;
                         }
@@ -584,6 +588,7 @@ public class Gameboard {
      *
      * @return string representation of the gameboard
      */
+    @Override
     public String toString() {
         String totalStr = "";
         for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
