@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.storage.Config;
 import minesweeper.storage.Storage;
 
 /**
@@ -31,7 +32,6 @@ public class HomePage extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-
         try {
             String home = System.getProperty("user.dir");
             storage = new Storage(home);
@@ -128,7 +128,7 @@ public class HomePage extends Application {
         );
 
         Scene scene = new Scene(layout, 420, 520);
-        primaryStage.setTitle("Minesweeper");
+        primaryStage.setTitle("Minesweeper    " + Config.APP_VERSION);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

@@ -38,6 +38,11 @@ test {
 
 application {
     mainClass.set("minesweeper.Minesweeper")
+    applicationDefaultJvmArgs = [
+        '-XX:+UseG1GC',
+        '-Xmx128m',
+        '-Xms64m'
+    ]
 }
 
 shadowJar {
@@ -55,6 +60,7 @@ checkstyle {
 }
 
 run {
+    jvmArgs = ['-Xmx128m', '-Xms64m']
     standardInput = System.in
 }
 

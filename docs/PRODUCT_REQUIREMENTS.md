@@ -63,8 +63,8 @@ Our Unique Selling Points:
 | FR-16 |Play again from Lose dialog| Nice-to-Have                      | ✅               | 
 | FR-17 |Back to Home from Lose dialog | Nice-to-Have                      | ✅               | 
 | FR-18 |User accounts with scores tied to account | Unlikely-to-Have                  | Not Planned     | 
-| FR-19 |Extension 1: The player can click a button on a revealed numbered cell that has adjacent flags more than its own number to reveal all of its non-revealed, non-flag adjacent cells. (chording) | Unlikely-to-Have                  | Not Planned     | 
-|FR-20|Extension 1: The player can change the number of rows, columns, bombs, and hints in a setting. Default is [10, 10, 5-20, 3] respectively |                                   | Unlikely-to-Have | Not Planned |
+| FR-19 |Extension 1: The player can click a button on a revealed numbered cell that has adjacent flags equal its own number to reveal all of its non-revealed, non-flag adjacent cells. (chording) | Unlikely-to-Have                  | ✅     | 
+|FR-20|Extension 1: The player can change the number of rows, columns, bombs, and hints in a setting. Default is [10, 10, 5-20, 3] respectively | Unlikely-to-Have | Not Planned |
 |FR-21|Extension 2: Provide the option for the player to start the minesweeper board with gimmicks | Unlikely-to-Have                  | Not Planned     |
 |FR-22|Extension 2: The player can use a shield (shared usage with hints) to protect them from losing in the next cell reveal. | Unlikely-to-Have                  | Not Planned |
 |FR-23|Extension 2: The system designates fog tiles to safe tiles randomly, which hides the number of adjacent mines to it when displayed.| Unlikely-to-Have                  | Not Planned |
@@ -97,6 +97,8 @@ Our Unique Selling Points:
 |      | [v0.2](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.2)     | Leaderboard & Post-Game flow                                                         | 
 |      | [v0.3](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.3)     | Bug Fixes & Hint Improvements                                                        | 
 |      | [v0.4](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.4)     | UI Polish, Config, Package Restructure                                               |
+|      | [v0.5](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.5)     | Code Cleanup, Unit Testing, Documentations  
+|      | [v0.6]     | To-be finalised
 
 *** 
 
