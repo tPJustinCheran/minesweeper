@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
+import minesweeper.storage.Config;
+import minesweeper.storage.Storage;
 
 /**
  * Represents the Minesweeper gameboard.
@@ -79,7 +79,8 @@ public class Gameboard {
                 }
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
-                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
                     int currPos = currRow * Config.BOARD_SIZE_COL + currCol;
                     neighbours.add(currPos);
                 }
@@ -152,7 +153,8 @@ public class Gameboard {
             for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
-                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
                     int currPos = currRow * Config.BOARD_SIZE_COL + currCol;
                     if (bombPlacements.contains(currPos)) {
                         count++;
@@ -178,7 +180,8 @@ public class Gameboard {
             for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
-                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
                     if (this.gameboard[currRow][currCol].getFlag()) {
                         count++;
                     }
@@ -429,7 +432,8 @@ public class Gameboard {
      *
      * @param boxNumber integer from 0 to 99
      * @return MoveResult — BOMB if a bomb was revealed, WIN if all safe cells revealed, SAFE otherwise
-     * @throws MinesweeperException if the cell is not revealed, adjacent flag count does not match, or a storage error occurs.
+     * @throws MinesweeperException if the cell is not revealed,
+     *     adjacent flag count does not match, or a storage error occurs.
      */
     public MoveResult chord(int boxNumber, Storage storage) throws MinesweeperException {
         int row = boxNumber / Config.BOARD_SIZE_COL;
@@ -440,15 +444,17 @@ public class Gameboard {
         }
         int adjacentFlags = this.numberOfAdjacentFlags(boxNumber);
         if (adjacentFlags != currBox.getAdjacentBombs()) {
-           return MoveResult.SAFE;
+            return MoveResult.SAFE;
         }
         for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
             for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
-                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
                     if (!this.gameboard[currRow][currCol].getFlag() && !this.gameboard[currRow][currCol].getReveal()) {
-                        MoveResult result = this.revealBoxInGameboard(currRow * Config.BOARD_SIZE_COL + currCol, storage);
+                        MoveResult result = this.revealBoxInGameboard(
+                            currRow * Config.BOARD_SIZE_COL + currCol, storage);
                         if (result == MoveResult.BOMB) {
                             return MoveResult.BOMB;
                         }

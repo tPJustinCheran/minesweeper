@@ -15,12 +15,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.logic.Box;
 import minesweeper.logic.CustomTimer;
 import minesweeper.logic.Gameboard;
+import minesweeper.storage.Config;
+import minesweeper.storage.Storage;
 
 /**
  * GamePage represents the main game screen.

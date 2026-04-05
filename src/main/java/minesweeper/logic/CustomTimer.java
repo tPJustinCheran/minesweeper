@@ -1,13 +1,13 @@
 package minesweeper.logic;
 
-import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.storage.Storage;
 
 /**
  * Custom Timer Class for Timing the Gameplay.
  */
 public class CustomTimer {
-//    private Timer timer;
+    //private Timer timer;
     private long startTimeMillis;
     private long offsetMillis;
     private boolean isTimerRunning = false;
