@@ -8,6 +8,10 @@ import java.util.List;
 
 import minesweeper.exception.StorageException;
 
+/**
+ * Storage class to handle all file read/write operations for the Minesweeper game.
+ * Manages game state, solution, timing, hints, and leaderboard data.
+ */
 public class Storage {
 
     // Constants
@@ -69,7 +73,7 @@ public class Storage {
     /**
      * Check if directory and file exists. If not, create empty directory and file.
      */
-    public void onStartup() throws StorageException {
+    public final void onStartup() throws StorageException {
         checkAndCreateFileFolder(this.folderPath, true);
         checkAndCreateFileFolder(this.gameFilePath, false);
         checkAndCreateFileFolder(this.solutionFilePath, false);
@@ -222,7 +226,7 @@ public class Storage {
     public List<String> loadLeaderboard() throws StorageException {
         try {
             List<String> lines = Files.readAllLines(this.leaderboardFilePath);
-            return lines;  // empty list is valid — no entries yet
+            return lines;
         } catch (IOException loadError) {
             throw new StorageException("Unable to load leaderboard: " + loadError.getMessage());
         }
@@ -276,6 +280,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears all game-related files (game.txt, solution.txt, time.txt, hint.txt) to reset the game state.
+     *
+     * @throws StorageException if any file cannot be cleared
+     */
     public void clearGame() throws StorageException {
         this.clearFile(this.gameFilePath);
         this.clearFile(this.hintFilePath);

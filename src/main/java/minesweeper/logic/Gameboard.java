@@ -1,11 +1,15 @@
 package minesweeper.logic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
-import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
+import minesweeper.storage.Config;
+import minesweeper.storage.Storage;
 
 /**
  * Represents the Minesweeper gameboard.
@@ -75,7 +79,8 @@ public class Gameboard {
                 }
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
-                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
                     int currPos = currRow * Config.BOARD_SIZE_COL + currCol;
                     neighbours.add(currPos);
                 }
@@ -148,9 +153,36 @@ public class Gameboard {
             for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
                 int currRow = row + iterateRow;
                 int currCol = col + iterateCol;
-                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
                     int currPos = currRow * Config.BOARD_SIZE_COL + currCol;
                     if (bombPlacements.contains(currPos)) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Given a position on the board, find out the number of adjacent flags to that position.
+     *
+     * @param position integer from 0 to 99
+     * @return number of adjacent flags
+     */
+    public int numberOfAdjacentFlags(int position) {
+        int count = 0;
+        int row = position / Config.BOARD_SIZE_COL;
+        int col = position % Config.BOARD_SIZE_COL;
+
+        for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
+            for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
+                int currRow = row + iterateRow;
+                int currCol = col + iterateCol;
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                    if (this.gameboard[currRow][currCol].getFlag()) {
                         count++;
                     }
                 }
@@ -167,7 +199,7 @@ public class Gameboard {
      * @param storage storage object for file read/write.
      * @throws MinesweeperException if storing game state fails.
      */
-    public void restartGameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
+    public final void restartGameboard(CustomTimer customTimer, Storage storage) throws MinesweeperException {
         this.gameboard = new Box[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
         List<Integer> bombPlacements = this.generateBombPlacements();
         for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
@@ -213,7 +245,7 @@ public class Gameboard {
      * @param customTimer  timer object for keeping time.
      * @throws MinesweeperException if loading fails.
      */
-    public void reloadGameboard(List<String> solutionGrid,
+    public final void reloadGameboard(List<String> solutionGrid,
             List<String> gameGrid, CustomTimer customTimer) throws MinesweeperException {
         this.gameboard = new Box[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
         for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
@@ -333,8 +365,8 @@ public class Gameboard {
 
         int randomHintBoxReveal = unrevealedNonBombs.get(
                 new Random().nextInt(unrevealedNonBombs.size()));
-        int hintRow = randomHintBoxReveal / 10;
-        int hintCol = randomHintBoxReveal % 10;
+        int hintRow = randomHintBoxReveal / Config.BOARD_SIZE_COL;
+        int hintCol = randomHintBoxReveal % Config.BOARD_SIZE_COL;
         this.floodfill(hintRow, hintCol);
 
         hintsRemaining--;
@@ -388,6 +420,48 @@ public class Gameboard {
         }
         this.floodfill(row, col);
         this.storeGame(storage);
+        if (this.checkWin()) {
+            return MoveResult.WIN;
+        }
+        return MoveResult.SAFE;
+    }
+
+    /**
+     * Performs a chord action on a revealed cell. Reveals all adjacent cells if the number of adjacent flags
+     * matches the number on the cell. If any adjacent cell is a bomb and not flagged, the player loses.
+     *
+     * @param boxNumber integer from 0 to 99
+     * @return MoveResult — BOMB if a bomb was revealed, WIN if all safe cells revealed, SAFE otherwise
+     * @throws MinesweeperException if the cell is not revealed,
+     *     adjacent flag count does not match, or a storage error occurs.
+     */
+    public MoveResult chord(int boxNumber, Storage storage) throws MinesweeperException {
+        int row = boxNumber / Config.BOARD_SIZE_COL;
+        int col = boxNumber % Config.BOARD_SIZE_COL;
+        Box currBox = this.gameboard[row][col];
+        if (!currBox.getReveal()) {
+            return MoveResult.SAFE;
+        }
+        int adjacentFlags = this.numberOfAdjacentFlags(boxNumber);
+        if (adjacentFlags != currBox.getAdjacentBombs()) {
+            return MoveResult.SAFE;
+        }
+        for (int iterateRow = -1; iterateRow <= 1; iterateRow++) {
+            for (int iterateCol = -1; iterateCol <= 1; iterateCol++) {
+                int currRow = row + iterateRow;
+                int currCol = col + iterateCol;
+                if (currRow >= 0 && currRow < Config.BOARD_SIZE_ROW
+                    && currCol >= 0 && currCol < Config.BOARD_SIZE_COL) {
+                    if (!this.gameboard[currRow][currCol].getFlag() && !this.gameboard[currRow][currCol].getReveal()) {
+                        MoveResult result = this.revealBoxInGameboard(
+                            currRow * Config.BOARD_SIZE_COL + currCol, storage);
+                        if (result == MoveResult.BOMB) {
+                            return MoveResult.BOMB;
+                        }
+                    }
+                }
+            }
+        }
         if (this.checkWin()) {
             return MoveResult.WIN;
         }
@@ -520,6 +594,7 @@ public class Gameboard {
      *
      * @return string representation of the gameboard
      */
+    @Override
     public String toString() {
         String totalStr = "";
         for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {

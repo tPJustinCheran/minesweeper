@@ -15,12 +15,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.logic.Box;
 import minesweeper.logic.CustomTimer;
 import minesweeper.logic.Gameboard;
+import minesweeper.storage.Config;
+import minesweeper.storage.Storage;
 
 /**
  * GamePage represents the main game screen.
@@ -250,6 +250,21 @@ public class GamePage {
                 handleFirstClick(boxNumber);
                 return;
             }
+            int row = boxNumber / Config.BOARD_SIZE_COL;
+            int col = boxNumber % Config.BOARD_SIZE_COL;
+
+            if (gameboard.getBox(row, col).getReveal()) {
+                Gameboard.MoveResult result = gameboard.chord(boxNumber, this.storage);
+                updateDisplay();
+                switch (result) {
+                case WIN -> handleWin();
+                case BOMB -> handleLose();
+                default -> {
+                }
+                }
+                return;
+            }
+
             Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber, this.storage);
             updateDisplay();
             switch (result) {
@@ -382,6 +397,10 @@ public class GamePage {
         try {
             int row = boxNumber / Config.BOARD_SIZE_COL;
             int col = boxNumber % Config.BOARD_SIZE_COL;
+            Box box = gameboard.getBox(row, col);
+            if (box.getReveal()) {
+                return;
+            }
             boolean currentlyFlagged = gameboard.getBox(row, col).getFlag();
             gameboard.setFlagInGameboard(boxNumber, !currentlyFlagged, this.storage);
             updateDisplay();
@@ -404,7 +423,7 @@ public class GamePage {
                     setButtonIcon(btn, flagIcon, "F");
                     btn.setDisable(false);
                 } else if (box.getReveal()) {
-                    btn.setDisable(true);
+                    btn.setDisable(false);
                     if (box.getBomb()) {
                         setButtonIcon(btn, bombIcon, "B");
                     } else {

@@ -1,9 +1,13 @@
 package minesweeper.logic;
 
+/**
+ * Class representing each box in the gameboard.
+ * Contains information on whether the box is flagged, revealed, a bomb, and the number of adjacent bombs.
+ */
 public class Box {
     private boolean flag;
-    private int adjacentBombs;
-    private boolean bomb;
+    private final int adjacentBombs;
+    private final boolean bomb;
     private boolean reveal;
 
     /**
@@ -67,6 +71,11 @@ public class Box {
         }
     }
 
+    /**
+     * Print Grid such that each box indicates: 1) Unrevealed ; 2) Flagged ; 3) Revealed with number of adjacent bombs.
+     *
+     */
+    @Override
     public String toString() {
         if (this.getFlag()) {
             return "F";

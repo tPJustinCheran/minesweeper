@@ -10,8 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.storage.Storage;
 
 /**
  * Check that bomb position generation code & num of bombs adjacent code works.
@@ -27,6 +27,7 @@ public class ValidateBombPositionTest {
     private Gameboard gameboard;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void setup() throws MinesweeperException {
         gameboard = new Gameboard(mockTimer, mockStorage);
     }
