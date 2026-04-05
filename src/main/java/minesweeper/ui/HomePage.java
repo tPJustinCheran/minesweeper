@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import minesweeper.Storage;
+import minesweeper.storage.Storage;
 import minesweeper.exception.MinesweeperException;
 
 /**
