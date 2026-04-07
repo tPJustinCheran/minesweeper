@@ -10,12 +10,6 @@ Team Project for CS2103DE
 - [ ] Verify `HomePage` only reads save existence via `Gameboard` or a dedicated method, not `Storage` directly
 - [ ] Run full regression test after refactor to ensure no behaviour change
 
-#### Extension 1: Bomb Counter on GamePage
-- [ ] Add a live bomb counter to the `GamePage` header showing remaining unflagged bombs
-- [ ] Counter decrements when a flag is placed, increments when a flag is removed
-- [ ] `getUnflaggedBombCount()` already exists in `Gameboard`. Wire it to a header label
-- [ ] Update `updateDisplay()` to refresh the counter after every flag action and board reset
-
 #### User Guide
 - [ ] Complete all sections + 1 GIF each feature
 
