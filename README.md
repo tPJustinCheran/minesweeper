@@ -17,7 +17,7 @@ Team Project for CS2103DE
 - [ ] Update `updateDisplay()` to refresh the counter after every flag action and board reset
 
 #### User Guide
-- Complete all sections + 1 GIF each feature
+- [ ] Complete all sections + 1 GIF each feature
 
 #### Developer Guide
 - [ ] Architecture overview diagram: show `ui`, `logic`, `storage` package interaction

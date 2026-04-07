@@ -541,6 +541,40 @@ public class Gameboard {
     }
 
     /**
+     * Returns the total number of bombs on the board.
+     *
+     * @return total bomb count
+     */
+    public int getTotalBombCount() {
+        int count = 0;
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
+                if (this.getBox(i, j).getBomb()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Returns the number of flags currently placed on the board.
+     *
+     * @return flag count
+     */
+    public int getFlagCount() {
+        int count = 0;
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
+                if (this.getBox(i, j).getFlag()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
      * Returns the number of bombs that have not been flagged.
      *
      * @return count of unflagged bombs
