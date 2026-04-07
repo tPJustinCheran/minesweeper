@@ -354,7 +354,7 @@ public class Gameboard {
             int row = i / Config.BOARD_SIZE_COL;
             int col = i % Config.BOARD_SIZE_COL;
             Box currBox = this.getBox(row, col);
-            if (!currBox.getBomb() && !currBox.getReveal()) {
+            if (!currBox.getBomb() && !currBox.getReveal() && !currBox.getFlag()) {
                 unrevealedNonBombs.add(i);
             }
         }
@@ -495,7 +495,7 @@ public class Gameboard {
      */
     public void floodfill(int row, int col) {
         Box currBox = this.getBox(row, col);
-        if (!currBox.getReveal()) {
+        if (!currBox.getReveal() && !currBox.getFlag()) {
             currBox.setReveal(true);
             if (currBox.getAdjacentBombs() == 0) {
                 if (row > 0) {
@@ -538,6 +538,40 @@ public class Gameboard {
                 }
             }
         }
+    }
+
+    /**
+     * Returns the total number of bombs on the board.
+     *
+     * @return total bomb count
+     */
+    public int getTotalBombCount() {
+        int count = 0;
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
+                if (this.getBox(i, j).getBomb()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Returns the number of flags currently placed on the board.
+     *
+     * @return flag count
+     */
+    public int getFlagCount() {
+        int count = 0;
+        for (int i = 0; i < Config.BOARD_SIZE_ROW; i++) {
+            for (int j = 0; j < Config.BOARD_SIZE_COL; j++) {
+                if (this.getBox(i, j).getFlag()) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     /**

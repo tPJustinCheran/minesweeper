@@ -38,6 +38,7 @@ public class GamePage {
     private final ResourceManager resourceManager = new ResourceManager();
 
     private final Button[][] cellButtons = new Button[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
+    private Label bombCountLabel;
     private Button hintBtn;
     private Label timerLabel;
     private Timeline timerTimeline;
@@ -105,6 +106,14 @@ public class GamePage {
         homeBtn.setOnMouseExited(e -> homeBtn.setStyle(
                 homeBtn.getStyle().replace("#37474F", "#607D8B")));
 
+        bombCountLabel = new Label("Bombs: " + (gameboard.getTotalBombCount() - gameboard.getFlagCount()));
+        bombCountLabel.setStyle(
+            "-fx-font-size: 16px;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-text-fill: #1a1a2e;"
+        );
+
+
         hintBtn = new Button("Hint (" + gameboard.getHintsRemaining() + " left)");
         hintBtn.setStyle(
                 "-fx-font-size: 13px;"
@@ -162,7 +171,7 @@ public class GamePage {
 
         HBox rightHeader = new HBox(10);
         rightHeader.setAlignment(Pos.CENTER_RIGHT);
-        rightHeader.getChildren().add(hintBtn);
+        rightHeader.getChildren().addAll(bombCountLabel, hintBtn);
 
         if (Config.DEBUG_MODE) {
             Button winBtn = new Button("Win");
@@ -420,6 +429,13 @@ public class GamePage {
                 Button btn = cellButtons[row][col];
 
                 if (box.getFlag()) {
+                    btn.setStyle(
+                            "-fx-background-color: #bdbdbd;"
+                                    + "-fx-border-color: #9e9e9e;"
+                                    + "-fx-border-width: 1;"
+                                    + "-fx-background-radius: 3;"
+                                    + "-fx-border-radius: 3;"
+                    );
                     setButtonIcon(btn, flagIcon, "F");
                     btn.setDisable(false);
                 } else if (box.getReveal()) {
@@ -448,6 +464,8 @@ public class GamePage {
             }
         }
         hintBtn.setText("Hint (" + gameboard.getHintsRemaining() + " left)");
+        bombCountLabel.setText("\uD83D\uDCA3 " 
+        + (gameboard.getTotalBombCount() - gameboard.getFlagCount()));
     }
 
     /**
