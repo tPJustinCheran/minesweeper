@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.exception.StorageException;
+import minesweeper.logic.StorageTimerUiGateway;
 import minesweeper.storage.Config;
 import minesweeper.storage.Storage;
 
@@ -22,8 +24,9 @@ import minesweeper.storage.Storage;
  */
 public class HomePage extends Application {
 
-    private Storage storage;
+    private StorageTimerUiGateway gateway;
     private boolean hasExistingSave;
+
 
     /**
      * Starts the JavaFX application by setting up the home page UI.
@@ -33,13 +36,10 @@ public class HomePage extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            String home = System.getProperty("user.dir");
-            storage = new Storage(home);
-            storage.loadGame();
-            storage.loadSolution();
-            hasExistingSave = true;
+            this.gateway = new StorageTimerUiGateway();
+            this.hasExistingSave = this.gateway.hasExistingSave();
         } catch (MinesweeperException e) {
-            hasExistingSave = false;
+            this.hasExistingSave = false;
         }
 
         Image appIcon = new ResourceManager().loadAppIcon();
@@ -87,7 +87,7 @@ public class HomePage extends Application {
 
         newGameBtn.setOnAction(e -> {
             try {
-                GamePage gamePage = new GamePage(primaryStage, storage, false);
+                GamePage gamePage = new GamePage(gateway, primaryStage, false);
                 gamePage.show();
             } catch (MinesweeperException ex) {
                 showError(primaryStage, ex.getMessage());
@@ -96,7 +96,7 @@ public class HomePage extends Application {
 
         continueBtn.setOnAction(e -> {
             try {
-                GamePage gamePage = new GamePage(primaryStage, storage, true);
+                GamePage gamePage = new GamePage(gateway, primaryStage, true);
                 gamePage.show();
             } catch (MinesweeperException ex) {
                 showError(primaryStage, ex.getMessage());
@@ -104,7 +104,7 @@ public class HomePage extends Application {
         });
 
         leaderboardBtn.setOnAction(e -> {
-            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage, null);
+            LeaderboardPage leaderboardPage = new LeaderboardPage(gateway, primaryStage,null);
             leaderboardPage.show();
         });
 
