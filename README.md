@@ -1,20 +1,32 @@
 # tP-Minesweeper
 Team Project for CS2103DE
 
-## To-Do (v0.6 - Beta)
+## v0.7 - Release
 
-### Features
-- [X] All Planned Features are met
+#### Refactor: UI/Storage Separation
+- [ ] Audit all UI classes (`GamePage`, `HomePage`, `WinPage`, `LosePage`, `LeaderboardPage`, `HelpPage`) for any direct `Storage` references
+- [ ] Move all `Storage` interactions out of UI layer. Only `logic/` classes should call `Storage` methods
+- [ ] `GamePage` currently holds a `Storage` reference and passes it to `Gameboard` methods. Route all storage calls through `Gameboard` instead
+- [ ] Verify `HomePage` only reads save existence via `Gameboard` or a dedicated method, not `Storage` directly
+- [ ] Run full regression test after refactor to ensure no behaviour change
 
-### Code Quality
-- [X] Fix checkstyle violations across all files
-- [X] Add missing javadocs to methods that lack them
+#### Extension 1: Bomb Counter on GamePage
+- [ ] Add a live bomb counter to the `GamePage` header showing remaining unflagged bombs
+- [ ] Counter decrements when a flag is placed, increments when a flag is removed
+- [ ] `getUnflaggedBombCount()` already exists in `Gameboard`. Wire it to a header label
+- [ ] Update `updateDisplay()` to refresh the counter after every flag action and board reset
 
-### UI Polish
-- [X] All Planned UI goals are met
+#### User Guide
+- Complete all sections + 1 GIF each feature
 
-### Testing
-- [X] Write unit tests for `Gameboard` logic
-- [ ] Write unit tests for `Storage` read/write methods
-- [X] Write unit tests for `CustomTimer`
-- [ ] Test UI and document the results
+#### Developer Guide
+- [ ] Architecture overview diagram: show `ui`, `logic`, `storage` package interaction
+- [ ] Design section: explain method injection decision, callback pattern for win/lose flow
+- [ ] Implementation section: sequence diagrams for first click safety, hint, chording, save/continue
+- [ ] Update class diagram in DrawIO with current class list (if needed)
+- [ ] Testing section: link to docs for UI test MP4s, unit test summary
+- [ ] Appendix: Requirements: paste PRD
+
+#### UI Testing
+- [ ] Record MP4/GIF for each major flow: new game, continue, win, lose, hint, chording, leaderboard, help
+- [ ] Test on other type of devices (linux/macos?)
