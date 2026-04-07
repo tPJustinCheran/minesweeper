@@ -429,6 +429,13 @@ public class GamePage {
                 Button btn = cellButtons[row][col];
 
                 if (box.getFlag()) {
+                    btn.setStyle(
+                            "-fx-background-color: #bdbdbd;"
+                                    + "-fx-border-color: #9e9e9e;"
+                                    + "-fx-border-width: 1;"
+                                    + "-fx-background-radius: 3;"
+                                    + "-fx-border-radius: 3;"
+                    );
                     setButtonIcon(btn, flagIcon, "F");
                     btn.setDisable(false);
                 } else if (box.getReveal()) {

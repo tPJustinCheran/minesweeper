@@ -354,7 +354,7 @@ public class Gameboard {
             int row = i / Config.BOARD_SIZE_COL;
             int col = i % Config.BOARD_SIZE_COL;
             Box currBox = this.getBox(row, col);
-            if (!currBox.getBomb() && !currBox.getReveal()) {
+            if (!currBox.getBomb() && !currBox.getReveal() && !currBox.getFlag()) {
                 unrevealedNonBombs.add(i);
             }
         }
@@ -495,7 +495,7 @@ public class Gameboard {
      */
     public void floodfill(int row, int col) {
         Box currBox = this.getBox(row, col);
-        if (!currBox.getReveal()) {
+        if (!currBox.getReveal() && !currBox.getFlag()) {
             currBox.setReveal(true);
             if (currBox.getAdjacentBombs() == 0) {
                 if (row > 0) {
