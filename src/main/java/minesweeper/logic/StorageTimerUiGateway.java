@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class StorageTimerUiGateway {
 
-    private Storage storage;
-    private CustomTimer customTimer;
+    private final Storage storage;
+    private final CustomTimer customTimer;
 
     /**
      * Initialises storage and customTimer objects

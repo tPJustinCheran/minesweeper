@@ -15,7 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import minesweeper.exception.StorageException;
 import minesweeper.logic.StorageTimerUiGateway;
-import minesweeper.storage.Storage;
 
 /**
  * Displays the leaderboard window containing ranked completion times.

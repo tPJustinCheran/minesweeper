@@ -50,15 +50,15 @@ public class GamePage {
      *
      * @param gateway class that links Storage, CustomTimer and Ui together
      * @param primaryStage the stage to display the game page on
-     * @param isContinue whether to continue an existing game
+     * @param continueGame whether to continue an existing game
      * @throws MinesweeperException if loading or creating the gameboard fails
      */
-    public GamePage(StorageTimerUiGateway gateway, Stage primaryStage, boolean isContinue)
+    public GamePage(StorageTimerUiGateway gateway, Stage primaryStage, boolean continueGame)
             throws MinesweeperException {
         this.primaryStage = primaryStage;
         this.gateway = gateway;
-        if (isContinue) {
-            gameboard = new Gameboard(gateway, isContinue);
+        if (continueGame) {
+            gameboard = new Gameboard(gateway, continueGame);
             isFirstClick = false;
         } else {
             gameboard = new Gameboard(gateway);

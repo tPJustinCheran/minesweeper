@@ -9,7 +9,6 @@ import java.util.Random;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
 import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 
 /**
  * Represents the Minesweeper gameboard.
@@ -49,10 +48,10 @@ public class Gameboard {
      * Constructor Class if there is pre-existing data from hard disk.
      * Loads Previous Gameplay and Solutions (from game.txt and solution.txt files).
      *
-     * @param isContinue always true. used for method overriding.
+     * @param continueGame always true. used for method overriding.
      * @throws MinesweeperException Error Handling.
      */
-    public Gameboard(StorageTimerUiGateway gateway, boolean isContinue) throws MinesweeperException {
+    public Gameboard(StorageTimerUiGateway gateway, boolean continueGame) throws MinesweeperException {
         this.gateway = gateway;
         this.hintsRemaining = gateway.loadHint();
         reloadGameboard();
@@ -374,12 +373,12 @@ public class Gameboard {
      *         or the number of adjacent bombs
      * @throws MinesweeperException if max shields reached.
      */
-    public String giveShield(int boxNumber, Storage storage) throws MinesweeperException {
+    public String giveShield(int boxNumber) throws MinesweeperException {
         if (hintsRemaining <= 0) {
             throw new MinesweeperException("No shields remaining!");
         }
         hintsRemaining--;
-        storage.storeHint(String.valueOf(hintsRemaining));
+        this.gateway.storeHint(String.valueOf(hintsRemaining));
 
         int row = boxNumber / Config.BOARD_SIZE_COL;
         int col = boxNumber % Config.BOARD_SIZE_COL;
@@ -461,7 +460,7 @@ public class Gameboard {
      * @return true if all non-bomb cells are revealed, false otherwise.
      * @throws StorageException if a storage error occurs.
      */
-    public boolean checkWin() { //throws StorageException {
+    public boolean checkWin() {
         for (int i = 0; i < Config.BOARD_SIZE_ROW * Config.BOARD_SIZE_COL; i++) {
             int row = i / Config.BOARD_SIZE_COL;
             int col = i % Config.BOARD_SIZE_COL;

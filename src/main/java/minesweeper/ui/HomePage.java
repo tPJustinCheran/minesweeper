@@ -12,10 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import minesweeper.exception.MinesweeperException;
-import minesweeper.exception.StorageException;
 import minesweeper.logic.StorageTimerUiGateway;
 import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 
 /**
  * Home page UI for the Minesweeper game.

@@ -4,25 +4,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import minesweeper.exception.MinesweeperException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import minesweeper.exception.MinesweeperException;
-import minesweeper.storage.Storage;
-
 /**
- * Check that bomb position generation code & num of bombs adjacent code works.
+ * Check that bomb position generation code and adjacent bomb count code works.
  */
 @ExtendWith(MockitoExtension.class)
 public class ValidateBombPositionTest {
-    @Mock
-    private Storage mockStorage;
 
     @Mock
-    private CustomTimer mockTimer;
+    private StorageTimerUiGateway mockGateway;
 
     private Gameboard gameboard;
 
@@ -34,12 +31,12 @@ public class ValidateBombPositionTest {
     @BeforeEach
     @SuppressWarnings("unused")
     void setup() throws MinesweeperException {
-        gameboard = new Gameboard(mockTimer, mockStorage);
+        gameboard = new Gameboard(mockGateway);
     }
 
     /**
-     * Tests that checkBombNeighbours can correctly identify that a bomb cannot be placed at a particular position.
-     * Checks with a centre cell (which has 8 neighbours).
+     * Tests that checkBombNeighbours correctly identifies that a bomb cannot be placed
+     * at a centre cell (which has 8 neighbours) when all neighbours are already bombs.
      */
     @Test
     public void errorValidateCentreCell() {
@@ -48,8 +45,8 @@ public class ValidateBombPositionTest {
     }
 
     /**
-     * Tests that checkBombNeighbours can correctly identify that a bomb cannot be placed at a particular position.
-     * Checks with a corner cell (which has <8 neighbours).
+     * Tests that checkBombNeighbours correctly identifies that a bomb cannot be placed
+     * at a corner cell (which has fewer than 8 neighbours) when all neighbours are already bombs.
      */
     @Test
     public void errorValidateCornerCell() {
@@ -58,8 +55,8 @@ public class ValidateBombPositionTest {
     }
 
     /**
-     * Tests that checkBombNeighbours can correctly identify that a bomb can be placed at a particular position.
-     * Checks with a centre cell (which has <8 neighbours).
+     * Tests that checkBombNeighbours correctly identifies that a bomb can be placed
+     * at a corner cell when not all neighbours are bombs.
      */
     @Test
     public void correctValidateCornerCell() {
@@ -68,8 +65,8 @@ public class ValidateBombPositionTest {
     }
 
     /**
-     * Tests that checkBombNeighbours can correctly identify that a bomb can be placed at a particular position.
-     * Checks with a centre cell (which has 8 neighbours).
+     * Tests that checkBombNeighbours correctly identifies that a bomb can be placed
+     * at a centre cell when not all neighbours are bombs.
      */
     @Test
     public void correctValidateCentreCell() {
@@ -79,7 +76,7 @@ public class ValidateBombPositionTest {
     }
 
     /**
-     * Tests that the adjacent bomb count is calculated correctly given a particular position.
+     * Tests that the adjacent bomb count is correctly calculated for a cell with 3 adjacent bombs.
      */
     @Test
     public void checkNumOfAdjacentBombsOne() {
@@ -87,12 +84,10 @@ public class ValidateBombPositionTest {
     }
 
     /**
-     * Tests that the adjacent bomb count is calculated correctly given a particular position.
+     * Tests that the adjacent bomb count is correctly calculated for a cell with 0 adjacent bombs.
      */
     @Test
     public void checkNumOfAdjacentBombsTwo() {
         assertEquals(0, gameboard.numberOfAdjacentBombs(18, List.of(43, 65, 44, 22, 85)));
     }
-
-
 }
