@@ -263,7 +263,7 @@ public class Storage {
      * @param entries list of leaderboard entries to save
      * @throws StorageException
      */
-    public void saveLeaderboard(List<String> entries) throws StorageException {
+    private void saveLeaderboard(List<String> entries) throws StorageException {
         try {
             Files.write(this.leaderboardFilePath, entries);
         } catch (IOException writeError) {

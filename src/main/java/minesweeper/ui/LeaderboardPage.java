@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import minesweeper.exception.StorageException;
+import minesweeper.logic.StorageTimerUiGateway;
 import minesweeper.storage.Storage;
 
 /**
@@ -23,7 +24,7 @@ public class LeaderboardPage {
 
     private final Stage primaryStage;
     private final Stage leaderboardStage;
-    private final Storage storage;
+    private final StorageTimerUiGateway gateway;
     private final Runnable onClose;
 
     /**
@@ -31,11 +32,11 @@ public class LeaderboardPage {
      * Call show() to display it.
      *
      * @param primaryStage the owner stage
-     * @param storage      the storage object to load leaderboard entries
+     * @param gateway      object linking Storage, CustomTimer, Ui
      */
-    public LeaderboardPage(Stage primaryStage, Storage storage, Runnable onClose) {
+    public LeaderboardPage(StorageTimerUiGateway gateway, Stage primaryStage, Runnable onClose) {
         this.primaryStage = primaryStage;
-        this.storage = storage;
+        this.gateway = gateway;
         this.onClose = onClose;
 
         leaderboardStage = new Stage();
@@ -115,7 +116,7 @@ public class LeaderboardPage {
         content.getChildren().add(header);
 
         try {
-            List<String> entries = storage.loadLeaderboard();
+            List<String> entries = gateway.loadLeaderboard();
 
             if (entries.isEmpty()) {
                 Label emptyLabel = new Label(

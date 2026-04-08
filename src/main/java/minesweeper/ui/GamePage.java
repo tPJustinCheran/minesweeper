@@ -17,10 +17,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.logic.Box;
-import minesweeper.logic.CustomTimer;
 import minesweeper.logic.Gameboard;
+import minesweeper.logic.StorageTimerUiGateway;
 import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 
 /**
  * GamePage represents the main game screen.
@@ -30,10 +29,9 @@ import minesweeper.storage.Storage;
 public class GamePage {
 
     private final Stage primaryStage;
-    private final Storage storage;
 
     private final Gameboard gameboard;
-    private final CustomTimer customTimer;
+    private final StorageTimerUiGateway gateway;
 
     private final ResourceManager resourceManager = new ResourceManager();
 
@@ -50,23 +48,20 @@ public class GamePage {
     /**
      * Constructor for the GamePage class, taking account if it is a new or continued game.
      *
+     * @param gateway class that links Storage, CustomTimer and Ui together
      * @param primaryStage the stage to display the game page on
-     * @param storage the storage object to load/save game data
      * @param isContinue whether to continue an existing game
      * @throws MinesweeperException if loading or creating the gameboard fails
      */
-    public GamePage(Stage primaryStage, Storage storage, boolean isContinue)
+    public GamePage(StorageTimerUiGateway gateway, Stage primaryStage, boolean isContinue)
             throws MinesweeperException {
         this.primaryStage = primaryStage;
-        this.storage = storage;
-
-        customTimer = new CustomTimer(storage);
-
+        this.gateway = gateway;
         if (isContinue) {
-            gameboard = new Gameboard(customTimer, storage.loadSolution(), storage.loadGame(), storage.loadHint());
+            gameboard = new Gameboard(gateway, isContinue);
             isFirstClick = false;
         } else {
-            gameboard = new Gameboard(customTimer, storage);
+            gameboard = new Gameboard(gateway);
         }
     }
 
@@ -83,7 +78,7 @@ public class GamePage {
 
         bombIcon = resourceManager.loadBombIcon();
         flagIcon = resourceManager.loadFlagIcon();
-        timerLabel = new Label(customTimer.displayTimeMinSecs());
+        timerLabel = new Label(gateway.displayTimeMinSecs());
         timerLabel.setStyle(
             "-fx-font-size: 16px;"
                     + "-fx-font-weight: bold;"
@@ -133,9 +128,9 @@ public class GamePage {
         homeBtn.setOnAction(e -> {
             try {
                 if (isFirstClick) {
-                    gameboard.clearGameboard(this.storage);
+                    gameboard.clearGameboard();
                 } else {
-                    gameboard.closeProgram(this.storage, this.customTimer);
+                    gameboard.closeProgram();
                 }
             } catch (MinesweeperException ex) {
                 System.out.println("Error saving: " + ex.getMessage());
@@ -152,10 +147,10 @@ public class GamePage {
             try {
                 if (isFirstClick) {
                     isFirstClick = false;
-                    customTimer.restartTime();
+                    gateway.restartTime();
                     timerTimeline.play();
                 }
-                gameboard.giveHint(this.storage);
+                gameboard.giveHint();
                 updateDisplay();
                 if (gameboard.checkWin()) {
                     handleWin();
@@ -223,7 +218,7 @@ public class GamePage {
 
         timerTimeline = new Timeline(
             new KeyFrame(Duration.millis(50), e ->
-                timerLabel.setText(customTimer.displayTimeMinSecs())
+                timerLabel.setText(gateway.displayTimeMinSecs())
             )
         );
         timerTimeline.setCycleCount(Timeline.INDEFINITE);
@@ -235,9 +230,9 @@ public class GamePage {
         primaryStage.setOnCloseRequest(e -> {
             try {
                 if (isFirstClick) {
-                    gameboard.clearGameboard(this.storage);
+                    gameboard.clearGameboard();
                 } else {
-                    gameboard.closeProgram(this.storage, this.customTimer);
+                    gameboard.closeProgram();
                 }
             } catch (MinesweeperException ex) {
                 System.out.println("Error saving: " + ex.getMessage());
@@ -263,7 +258,7 @@ public class GamePage {
             int col = boxNumber % Config.BOARD_SIZE_COL;
 
             if (gameboard.getBox(row, col).getReveal()) {
-                Gameboard.MoveResult result = gameboard.chord(boxNumber, this.storage);
+                Gameboard.MoveResult result = gameboard.chord(boxNumber);
                 updateDisplay();
                 switch (result) {
                 case WIN -> handleWin();
@@ -274,7 +269,7 @@ public class GamePage {
                 return;
             }
 
-            Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber, this.storage);
+            Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
             updateDisplay();
             switch (result) {
             case WIN -> handleWin();
@@ -299,15 +294,15 @@ public class GamePage {
         int col = boxNumber % Config.BOARD_SIZE_COL;
 
         while (gameboard.getBox(row, col).getBomb()) {
-            gameboard.restartGameboard(this.customTimer, this.storage);
-            customTimer.stopTime();
+            gameboard.restartGameboard();
+            gateway.stopTime();
         }
 
         isFirstClick = false;
-        customTimer.restartTime();
+        gateway.restartTime();
         timerTimeline.play();
 
-        Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber, this.storage);
+        Gameboard.MoveResult result = gameboard.revealBoxInGameboard(boxNumber);
         updateDisplay();
         switch (result) {
         case WIN -> handleWin();
@@ -324,22 +319,22 @@ public class GamePage {
      */
     private void handleWin() {
         timerTimeline.stop();
-        customTimer.stopTime();
-        long finalMillis = customTimer.getTimeMillis();
-        String finalTime = customTimer.displayTimeMinSecs();
+        gateway.stopTime();
+        long finalMillis = gateway.getTimeMillis();
+        String finalTime = gateway.displayTimeMinSecs();
         timerLabel.setText(finalTime);
 
-        new WinPage(primaryStage, storage, finalTime, finalMillis, () -> {
+        new WinPage(gateway, primaryStage, finalTime, finalMillis, () -> {
             try {
-                gameboard.restartGameboard(this.customTimer, this.storage);
-                customTimer.stopTime();
-                gameboard.clearGameboard(this.storage);
+                gameboard.restartGameboard();
+                gateway.stopTime();
+                gameboard.clearGameboard();
             } catch (MinesweeperException ex) {
                 showAlert("Error", ex.getMessage());
             }
             isFirstClick = true;
-            customTimer.zeroTime();
-            timerLabel.setText(customTimer.displayTimeMinSecs());
+            gateway.zeroTime();
+            timerLabel.setText(gateway.displayTimeMinSecs());
             updateDisplay();
         }).show();
     }
@@ -350,8 +345,8 @@ public class GamePage {
      */
     private void handleLose() {
         timerTimeline.stop();
-        customTimer.stopTime();
-        String finalTime = customTimer.displayTimeMinSecs();
+        gateway.stopTime();
+        String finalTime = gateway.displayTimeMinSecs();
         timerLabel.setText(finalTime);
 
         gameboard.revealAllBombs();
@@ -378,10 +373,10 @@ public class GamePage {
      * @throws MinesweeperException if restarting the gameboard fails
      */
     private void onPlayAgain() throws MinesweeperException {
-        gameboard.restartGameboard(this.customTimer, this.storage);
-        customTimer.stopTime();
+        gameboard.restartGameboard();
+        gateway.stopTime();
         isFirstClick = true;
-        timerLabel.setText(customTimer.displayTimeMinSecs());
+        timerLabel.setText(gateway.displayTimeMinSecs());
         updateDisplay();
     }
 
@@ -391,9 +386,9 @@ public class GamePage {
      * @throws MinesweeperException if clearing the gameboard fails
      */
     private void onHomeButton() throws MinesweeperException {
-        gameboard.clearGameboard(this.storage);
-        customTimer.stopTime();
-        customTimer.zeroTime();
+        gameboard.clearGameboard();
+        gateway.stopTime();
+        gateway.zeroTime();
         timerTimeline.stop();
     }
 
@@ -411,7 +406,7 @@ public class GamePage {
                 return;
             }
             boolean currentlyFlagged = gameboard.getBox(row, col).getFlag();
-            gameboard.setFlagInGameboard(boxNumber, !currentlyFlagged, this.storage);
+            gameboard.setFlagInGameboard(boxNumber, !currentlyFlagged);
             updateDisplay();
         } catch (MinesweeperException ex) {
             showAlert("Error", ex.getMessage());

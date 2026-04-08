@@ -48,7 +48,7 @@ public class GameboardTest {
     }
 
     /**
-     * Tests that bomb placements are correctly set after restarting the gameboard.
+     * Tests that all bomb placements are correctly set after restarting the gameboard.
      *
      * @throws MinesweeperException if gameboard operation fails
      */
@@ -80,7 +80,7 @@ public class GameboardTest {
     }
 
     /**
-     * Tests that reloading the gameboard correctly restores reveal, flag and adjacent bomb state.
+     * Tests that reloading the gameboard correctly restores reveal, flag and adjacent bomb state to gameboard.
      *
      * @throws MinesweeperException if gameboard operation fails
      */
@@ -123,7 +123,7 @@ public class GameboardTest {
     }
 
     /**
-     * Tests that the correct solution string is stored after restarting the gameboard.
+     * Tests that the correct solution string is sent to storage class after restarting the gameboard.
      *
      * @throws StorageException if storage operation fails
      */
@@ -145,7 +145,7 @@ public class GameboardTest {
     }
 
     /**
-     * Tests that the correct game string is stored after revealing and flagging cells.
+     * Tests that the correct game string is sent to storage class after revealing and flagging cells.
      *
      * @throws MinesweeperException if gameboard operation fails
      */

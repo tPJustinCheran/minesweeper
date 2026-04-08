@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/StorageTimerUiGateway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/logic/Gameboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/storage/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/storage/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/GamePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/LeaderboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/LeaderboardPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/minesweeper/ui/WinPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/minesweeper/ui/WinPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +65,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Gradle.BombPlacementOnGameboardTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.GameboardTest.bomb_placement_validation.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.GameboardTest.checkBombPlacementsOnGameboard.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.GameboardTest.correct_bomb_placement_validation_centre_cell.executor&quot;: &quot;Run&quot;,
@@ -76,7 +84,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;branch-RefactorStorage&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/chera/Desktop/minesweeper&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -274,7 +282,11 @@
       <workItem from="1774100423196" duration="3217000" />
       <workItem from="1774620836278" duration="2569000" />
       <workItem from="1775267872570" duration="13152000" />
-      <workItem from="1775302592164" duration="16007000" />
+      <workItem from="1775302592164" duration="17788000" />
+      <workItem from="1775409194834" duration="1059000" />
+      <workItem from="1775448788321" duration="977000" />
+      <workItem from="1775524917819" duration="4811000" />
+      <workItem from="1775573979173" duration="5659000" />
     </task>
     <servers />
   </component>
