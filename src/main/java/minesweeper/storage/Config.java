@@ -6,8 +6,8 @@ package minesweeper.storage;
  */
 public class Config {
 
-    public static final String APP_VERSION = "v0.6";
-    public static final boolean DEBUG_MODE = true;
+    public static final String APP_VERSION = "test-branch-v0.7";
+    public static final boolean DEBUG_MODE = false;
 
     public static final int BOARD_SIZE_ROW = 10;
     public static final int BOARD_SIZE_COL = 10;
