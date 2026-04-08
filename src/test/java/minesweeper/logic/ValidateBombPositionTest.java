@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import minesweeper.exception.MinesweeperException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import minesweeper.exception.MinesweeperException;
 
 /**
  * Check that bomb position generation code and adjacent bomb count code works.

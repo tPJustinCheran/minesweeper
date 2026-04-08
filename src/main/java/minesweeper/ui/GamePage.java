@@ -459,8 +459,8 @@ public class GamePage {
             }
         }
         hintBtn.setText("Hint (" + gameboard.getHintsRemaining() + " left)");
-        bombCountLabel.setText("\uD83D\uDCA3 " 
-        + (gameboard.getTotalBombCount() - gameboard.getFlagCount()));
+        bombCountLabel.setText("\uD83D\uDCA3 "
+            + (gameboard.getTotalBombCount() - gameboard.getFlagCount()));
     }
 
     /**

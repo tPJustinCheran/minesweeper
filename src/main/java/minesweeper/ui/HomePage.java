@@ -102,7 +102,7 @@ public class HomePage extends Application {
         });
 
         leaderboardBtn.setOnAction(e -> {
-            LeaderboardPage leaderboardPage = new LeaderboardPage(gateway, primaryStage,null);
+            LeaderboardPage leaderboardPage = new LeaderboardPage(gateway, primaryStage, null);
             leaderboardPage.show();
         });
 

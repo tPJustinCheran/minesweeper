@@ -1,10 +1,10 @@
 package minesweeper.logic;
 
+import java.util.List;
+
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
 import minesweeper.storage.Storage;
-
-import java.util.List;
 
 /**
  * Class to bridge Storage, Timer and UI objects.
