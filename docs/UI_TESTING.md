@@ -1,5 +1,7 @@
 # UI Testing
 
+[User Guide](./USER_GUIDE.md) | [Developer's Guide](./DEVELOPERS_GUIDE.md)  
+
 ## 1. Normal UI Tests
 Start the UI tests from a fresh build (no saves available)
 
@@ -65,16 +67,16 @@ Start the UI tests from a fresh build (no saves available)
 
 ### 1.7 GamePage: Continue with Pre-Made Data
 
-B|B|B|B|B|B|B|B|B|2|
-B|8|B|7|B|6|B|5|B|2|
-B|B|B|4|B|3|1|2|1|1|
-2|3|2|2|1|1| | | | |
- | | | | | | | | | |
- | | | | | | | | | |
- | | | | | | | | | |
- | | | | | | | | | |
- | | | | | | | | | |
- | | | | | | | | | |
+B|B|B|B|B|B|B|B|B|2|  
+B|8|B|7|B|6|B|5|B|2|  
+B|B|B|4|B|3|1|2|1|1|  
+2|3|2|2|1|1| | | | |  
+ | | | | | | | | | |  
+ | | | | | | | | | |  
+ | | | | | | | | | |  
+ | | | | | | | | | |  
+ | | | | | | | | | |  
+ | | | | | | | | | |  
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|

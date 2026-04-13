@@ -1,5 +1,7 @@
 # 📖 Product Requirement Document
 
+[User Guide](./USER_GUIDE.md) | [Developer's Guide](./DEVELOPERS_GUIDE.md)  
+
 ## Product Overview 
 **Product Goal:** Develop a lightweight, locally-hosted minesweeper game that improves on the classic Windows XP experience. 
 
