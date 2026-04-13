@@ -4,9 +4,9 @@ Team Project for CS2103DE
 ## v0.7 - Release
 
 #### Refactor: UI/Storage Separation
-- [ ] Audit all UI classes (`GamePage`, `HomePage`, `WinPage`, `LosePage`, `LeaderboardPage`, `HelpPage`) for any direct `Storage` references
+- [X] Audit all UI classes (`GamePage`, `HomePage`, `WinPage`, `LosePage`, `LeaderboardPage`, `HelpPage`) for any direct `Storage` references
 - [ ] Move all `Storage` interactions out of UI layer. Only `logic/` classes should call `Storage` methods
-- [ ] `GamePage` currently holds a `Storage` reference and passes it to `Gameboard` methods. Route all storage calls through `Gameboard` instead
+- [X] `GamePage` currently holds a `Storage` reference and passes it to `Gameboard` methods. Route all storage calls through `Gameboard` instead
 - [ ] Verify `HomePage` only reads save existence via `Gameboard` or a dedicated method, not `Storage` directly
 - [ ] Run full regression test after refactor to ensure no behaviour change
 
@@ -18,9 +18,9 @@ Team Project for CS2103DE
 - [ ] Design section: explain method injection decision, callback pattern for win/lose flow
 - [ ] Implementation section: sequence diagrams for first click safety, hint, chording, save/continue
 - [ ] Update class diagram in DrawIO with current class list (if needed)
-- [ ] Testing section: link to docs for UI test MP4s, unit test summary
-- [ ] Appendix: Requirements: paste PRD
+- [X] Testing section: link to docs for UI test MP4s, unit test summary
+- [X] Requirements: link PRD
 
 #### UI Testing
-- [ ] Record MP4/GIF for each major flow: new game, continue, win, lose, hint, chording, leaderboard, help
+- [X] Record MP4/GIF for each major flow: new game, continue, win, lose, hint, chording, leaderboard, help
 - [ ] Test on other type of devices (linux/macos?)
