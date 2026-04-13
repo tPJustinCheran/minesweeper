@@ -65,14 +65,25 @@ Start the UI tests from a fresh build (no saves available)
 
 ### 1.7 GamePage: Continue with Pre-Made Data
 
+B|B|B|B|B|B|B|B|B|2|
+B|8|B|7|B|6|B|5|B|2|
+B|B|B|4|B|3|1|2|1|1|
+2|3|2|2|1|1| | | | |
+ | | | | | | | | | |
+ | | | | | | | | | |
+ | | | | | | | | | |
+ | | | | | | | | | |
+ | | | | | | | | | |
+ | | | | | | | | | |
+
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Overwrite data/game.txt and data/solution.txt with pre-made data | | |
-| Launch app, click Continue | | |
-| Cells 1-8 display correctly (numbers with correct colours) | | |
-| Flagged cells show flag icon with grey background | | |
-| Bomb counter is correct | | |
-| Timer resumes | | |
+| Overwrite data/game.txt and data/solution.txt with pre-made data | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
+| Launch app, click Continue | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
+| Cells 1-8 display correctly (numbers with correct colours) | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
+| Flagged cells show flag icon with grey background | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
+| Bomb counter is correct | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
+| Timer resumes | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
 
 ### 1.8 GamePage: Right Click on Revealed Cell
 
@@ -112,40 +123,40 @@ Start the UI tests from a fresh build (no saves available)
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Start new game, flag some cells | | |
-| Click a bomb: board reveals all bombs | | |
-| LosePage shows correct time and unflagged bomb count | | |
-| Click Back to Home: Continue is greyed out | | |
+| Start new game, flag some cells | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click a bomb: board reveals all bombs | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| LosePage shows correct time and unflagged bomb count | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click Back to Home: Continue is greyed out | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 2.2 Lose → Play Again
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Click a bomb: LosePage appears | | |
-| Click Play Again: fresh board, timer resets, hints reset to 3, bomb counter resets | | |
+| Click a bomb: LosePage appears | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click Play Again: fresh board, timer resets, hints reset to 3, bomb counter resets | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 2.3 Lose → Play Again → Lose Again
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Use 2 hints, then click a bomb | | |
-| LosePage appears | | |
-| Click Play Again: hints reset to 3 on new game | | |
+| Use 2 hints, then click a bomb | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| LosePage appears | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click Play Again: hints reset to 3 on new game | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 2.4 Lose → Close X Button
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Click a bomb: LosePage appears | | |
-| Close LosePage with X button: Play Again behaviour triggers (board resets) | | |
+| Click a bomb: LosePage appears | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Close LosePage with X button: Play Again behaviour triggers (board resets) | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 2.5 Chord Triggering Lose
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Reveal a numbered cell, place flags equal to its number | | |
-| Left click the numbered cell: adjacent unflagged bomb revealed | | |
-| LosePage appears | | |
+| Reveal a numbered cell, place flags equal to its number | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Left click the numbered cell: adjacent unflagged bomb revealed | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| LosePage appears | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ---
 
@@ -155,41 +166,41 @@ Start the UI tests from a fresh build (no saves available)
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Win a game | | |
-| Close WinPage with X button: returns to Home, Continue greyed out | | |
-| Click Leaderboard: no entry was added | | |
+| Win a game | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Close WinPage with X button: returns to Home, Continue greyed out | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Click Leaderboard: no entry was added | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
 
 ### 3.2 Win → Submit Name → Leaderboard → X → Verify Board Resets
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Win a game, submit name on WinPage | | |
-| Leaderboard appears: entry shown | | |
-| Close Leaderboard with X: GamePage shows fresh empty board | | |
-| Timer at 00:00.000, hints reset to 3 | | |
+| Win a game, submit name on WinPage | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Leaderboard appears: entry shown | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Close Leaderboard with X: GamePage shows fresh empty board | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Timer at 00:00.000, hints reset to 3 | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
 
 ### 3.3 Win → Submit Name → Leaderboard → Home → Continue Greyed Out
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Win a game, submit name | | |
-| On Leaderboard, click ← Home | | |
-| Home shows Continue greyed out | | |
+| Win a game, submit name | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| On Leaderboard, click ← Home | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Home shows Continue greyed out | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
 
 ### 3.4 Win via Hint Only
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Keep clicking Hint until all safe cells are revealed | | |
-| WinPage appears automatically after hint triggers win | | |
+| Keep clicking Hint until all safe cells are revealed | ✓ | [▶](ui_test/UI_TEST_3_13042026.mp4) |
+| WinPage appears automatically after hint triggers win | ✓ | [▶](ui_test/UI_TEST_3_13042026.mp4) |
 
 ### 3.5 Win via Continue
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Close app mid-game, overwrite save with pre-made near-win state | | |
-| Continue game, reveal last safe cell | | |
-| WinPage appears | | |
+| Close app mid-game, overwrite save with pre-made near-win state | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
+| Continue game, reveal last safe cell | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
+| WinPage appears | ✓ | [▶](ui_test/UI_TEST_4_13042026.mp4) |
 
 ---
 
@@ -199,26 +210,26 @@ Start the UI tests from a fresh build (no saves available)
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Right click unrevealed cell: flag appears, bomb counter decrements | | |
-| Right click flagged cell: flag removed, bomb counter increments | | |
-| Left click flagged cell: nothing happens (no reveal) | | |
-| Reveal a cell, right click it: nothing happens | | |
+| Right click unrevealed cell: flag appears, bomb counter decrements | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Right click flagged cell: flag removed, bomb counter increments | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Left click flagged cell: nothing happens (no reveal) | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Reveal a cell, right click it: nothing happens | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 4.2 Floodfill Behaviour
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Click a cell with 0 adjacent bombs: all connected empty cells revealed | | |
-| Flagged cells adjacent to empty area are NOT revealed by floodfill | | |
-| Flagged cells can still be unflagged after floodfill | | |
+| Click a cell with 0 adjacent bombs: all connected empty cells revealed | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Flagged cells adjacent to empty area are NOT revealed by floodfill | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Flagged cells can still be unflagged after floodfill | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 4.3 Chording Behaviour
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Reveal a numbered cell, place flags equal to its number, left click: adjacent cells revealed | | |
-| Place fewer flags than the number, left click: nothing happens | | |
-| Place flags on wrong cells, chord: lose triggers if unflagged bomb adjacent | | |
+| Reveal a numbered cell, place flags equal to its number, left click: adjacent cells revealed | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Place fewer flags than the number, left click: nothing happens | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Place flags on wrong cells, chord: lose triggers if unflagged bomb adjacent | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ---
 
@@ -232,8 +243,8 @@ Start the UI tests from a fresh build (no saves available)
 | Item | Working as Intended | Link |
 |------|-------------------|------|
 | MIN=0, MAX=1: app handles 0 bomb board | | |
-| MIN=MAX=99: near-full bomb board works | | |
-| MIN=MAX=100: fully bombed board (no safe cells) | | |
+| MIN=98, MAX=99: near-full bomb board works | | |
+| MIN=100, MAX=101: fully bombed board (no safe cells) | | |
 
 ### E2. Grid Size Edge Cases
 *(Modify `Config.BOARD_SIZE_ROW` and `Config.BOARD_SIZE_COL`)*

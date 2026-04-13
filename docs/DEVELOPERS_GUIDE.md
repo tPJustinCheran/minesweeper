@@ -37,10 +37,16 @@ Sections to write:
 
 ---
 
-## 6. Testing: link to UI test MP4s in docs/ui-tests/, unit test summary
+## 6. Testing
+
+Unit Testing  
+
+See [UI Testing](./UI_TESTING.md) for the full UI test checklist and recordings.
 
 ---
 
 ## 7. Requirements: link PRD content
+
+See [Product Requirements Document](./PRODUCT_REQUIREMENTS.md).
 
 ---
