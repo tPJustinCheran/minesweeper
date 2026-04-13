@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -111,6 +112,12 @@ public class HomePage extends Application {
             new HelpPage(primaryStage, resourceManager).show();
         });
 
+        Label versionLabel = new Label("Version: " + Config.APP_VERSION);
+        versionLabel.setStyle(
+                "-fx-font-size: 11px;"
+                        + "-fx-text-fill: #9e9e9e;"
+        );
+
         VBox layout = new VBox(16);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(60, 60, 60, 60));
@@ -125,8 +132,15 @@ public class HomePage extends Application {
             helpBtn
         );
 
-        Scene scene = new Scene(layout, 420, 520);
-        primaryStage.setTitle("Minesweeper    " + Config.APP_VERSION);
+        BorderPane root = new BorderPane();
+        root.setStyle("-fx-background-color: #f0f0f5;");
+        root.setCenter(layout);
+        root.setBottom(versionLabel);
+        BorderPane.setAlignment(versionLabel, Pos.BOTTOM_LEFT);
+        BorderPane.setMargin(versionLabel, new Insets(0, 0, 10, 10));
+        
+        Scene scene = new Scene(root, 420, 520);
+        primaryStage.setTitle("Minesweeper");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

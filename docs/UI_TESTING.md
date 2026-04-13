@@ -1,65 +1,67 @@
 # UI Testing
 
 ## 1. Normal UI Tests
+Start the UI tests from a fresh build (no saves available)
 
 ### 1.1 Home Page
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Launch app | | |
-| Title shows "Minesweeper v0.x" | | |
-| New Game, Continue, Leaderboard, Help buttons visible | | |
-| Continue is greyed out (no save exists) | | |
+| Launch app | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Title shows "Minesweeper" | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| New Game, Continue, Leaderboard, Help buttons visible | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Version visible at bottom left corner | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Continue is greyed out (no save exists) | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
 
 ### 1.2 Leaderboard Page (empty)
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| From Home, click Leaderboard | | |
-| "No entries yet" message shown | | |
-| Click ← Home, verify returns to Home | | |
+| From Home, click Leaderboard | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| "No entries yet" message shown | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Click ← Home, verify returns to Home | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
 
 ### 1.3 Leaderboard Page (with entries)
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Win a game and submit a name | | |
-| Win another game and submit a different name with a faster time | | |
-| Entries are sorted fastest first | | |
-| Top 3 have gold, silver, bronze styling | | |
+| Win a game and submit a name | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Win another game and submit a different name with a faster time | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Entries are sorted fastest first | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Top 3 have gold, silver, bronze styling | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
 
 ### 1.4 Help Page
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| From Home, click Help | | |
-| All sections visible: GOAL, CONTROLS, NUMBERS, HINTS, WIN, LOSE | | |
-| Scroll works if content overflows | | |
-| Click ← Home, verify help page closes | | |
+| From Home, click Help | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| All sections visible: GOAL, CONTROLS, NUMBERS, HINTS, WIN, LOSE | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Scroll works if content overflows | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
+| Click ← Home, verify help page closes | ✓ | [▶](ui_test/UI_TEST_1_13042026.mp4) |
 
 ### 1.5 GamePage: Basic Navigation
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Click New Game | | |
-| 10x10 grid shown, timer at 00:00.000 | | |
-| Bomb counter shows total bomb count | | |
-| Hint button shows "Hint (3 left)" | | |
-| Click ← Home, returns to Home | | |
-| Continue is greyed out (no game started) | | |
+| Click New Game | ✓ |  [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| 10x10 grid shown, timer at 00:00.000 | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Bomb counter shows total bomb count | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Hint button shows "Hint (3 left)" | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click ← Home, returns to Home | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Continue is greyed out (no game started) | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 1.6 GamePage: Save and Continue
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Left click a cell: timer starts | | |
-| Right click 2 cells to flag: bomb counter decrements by 2 | | |
-| Click Hint: cell revealed, hint shows "Hint (2 left)" | | |
-| Click ← Home: Continue enabled on Home | | |
-| Click Continue: board state restored (flags, revealed cells, timer, hint count) | | |
-| Open more cells, flag one more, click X to close app | | |
-| Relaunch app: Continue is enabled | | |
-| Click Continue: board state fully restored | | |
+| Left click a cell: timer starts | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Right click 2 cells to flag: bomb counter decrements by 2 | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click Hint: cell revealed, hint shows "Hint (2 left)" | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click ← Home: Continue enabled on Home | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click Continue: board state restored (flags, revealed cells, timer, hint count) | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Open more cells, flag one more, click X to close app | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Relaunch app: Continue is enabled | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click Continue: board state fully restored | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 1.7 GamePage: Continue with Pre-Made Data
 
@@ -76,31 +78,31 @@
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Start new game, reveal a cell | | |
-| Right click the revealed cell: nothing happens (no flag placed) | | |
+| Start new game, reveal a cell | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Right click the revealed cell: nothing happens (no flag placed) | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 1.9 GamePage: Over-Flagging
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Place more flags than there are bombs | | |
-| Bomb counter goes negative | | |
-| Game does not crash | | |
+| Place more flags than there are bombs | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Bomb counter goes negative | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Game does not crash | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 1.10 GamePage: Hint Exhaustion
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Click Hint 3 times: hint button shows "Hint (0 left)" | | |
-| Click Hint again: error alert "No more hints remaining!" | | |
+| Click Hint 3 times: hint button shows "Hint (0 left)" | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
+| Click Hint again: error alert "No more hints remaining!" | ✓ | [▶](ui_test/UI_TEST_2_13042026.mp4) |
 
 ### 1.11 GamePage: Name Validation on WinPage
 
 | Item | Working as Intended | Link |
 |------|-------------------|------|
-| Win a game | | |
-| Enter name containing \| character: error message shown | | |
-| Clear name, submit empty: "Anonymous" is used | | |
+| Win a game | ✓ | [▶](ui_test/UI_TEST_3_13042026.mp4) |
+| Enter name containing a `&#124;` character: error message shown | ✓ | [▶](ui_test/UI_TEST_3_13042026.mp4) |
+| Clear name, submit empty: "Anonymous" is used | ✓ | [▶](ui_test/UI_TEST_3_13042026.mp4) |
 
 ---
 
