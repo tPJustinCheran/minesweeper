@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import minesweeper.exception.StorageException;
-import minesweeper.storage.Storage;
+import minesweeper.logic.StorageTimerUiGateway;
 
 /**
  * The WinPage class represents the dialog shown when the player wins the game.
@@ -22,7 +22,7 @@ import minesweeper.storage.Storage;
 public class WinPage {
 
     private final Stage primaryStage;
-    private final Storage storage;
+    private final StorageTimerUiGateway gateway;
     private final String finalTime;
     private final long timeMillis;
     private final Runnable onClose;
@@ -31,18 +31,17 @@ public class WinPage {
      * Constructor for the WinPage class.
      *
      * @param primaryStage the owner stage
-     * @param storage      the storage object to save leaderboard entry
      * @param finalTime    the formatted completion time string to display
      * @param timeMillis   the completion time in milliseconds to save
      * @param onClose      callback to run after the player submits their name
      */
-    public WinPage(Stage primaryStage, Storage storage,
+    public WinPage(StorageTimerUiGateway gateway, Stage primaryStage,
             String finalTime, long timeMillis, Runnable onClose) {
         this.primaryStage = primaryStage;
-        this.storage = storage;
         this.finalTime = finalTime;
         this.timeMillis = timeMillis;
         this.onClose = onClose;
+        this.gateway = gateway;
     }
 
     /**
@@ -133,14 +132,14 @@ public class WinPage {
             }
 
             try {
-                storage.addEntry(name, timeMillis);
+                gateway.addEntry(name, timeMillis);
             } catch (StorageException ex) {
                 errorLabel.setText("Could not save: " + ex.getMessage());
                 return;
             }
 
             winStage.close();
-            new LeaderboardPage(primaryStage, storage, onClose).showAndWait();
+            new LeaderboardPage(gateway, primaryStage, onClose).showAndWait();
             onClose.run();
         });
 

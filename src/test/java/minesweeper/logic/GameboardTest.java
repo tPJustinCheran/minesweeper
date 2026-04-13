@@ -18,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
-import minesweeper.storage.Storage;
 
 /**
  * Unit tests for the Gameboard class.
@@ -27,10 +26,7 @@ import minesweeper.storage.Storage;
 public class GameboardTest {
 
     @Mock
-    private Storage mockStorage;
-
-    @Mock
-    private CustomTimer mockTimer;
+    private StorageTimerUiGateway mockGateway;
 
     private Gameboard gameboard;
 
@@ -42,9 +38,9 @@ public class GameboardTest {
     @BeforeEach
     @SuppressWarnings("unused")
     void setup() throws MinesweeperException {
-        gameboard = Mockito.spy(new Gameboard(mockTimer, mockStorage));
+        gameboard = Mockito.spy(new Gameboard(mockGateway));
         doReturn(List.of(24, 43, 54, 59, 80)).when(gameboard).generateBombPlacements();
-        gameboard.restartGameboard(mockTimer, mockStorage);
+        gameboard.restartGameboard();
     }
 
     /**
@@ -80,7 +76,7 @@ public class GameboardTest {
     }
 
     /**
-     * Tests that reloading the gameboard correctly restores reveal, flag and adjacent bomb state to gameboard.
+     * Tests that reloading the gameboard correctly restores reveal, flag and adjacent bomb state.
      *
      * @throws MinesweeperException if gameboard operation fails
      */
@@ -114,16 +110,19 @@ public class GameboardTest {
                 """;
         List<String> gameArray = gameString.lines().toList();
 
-        gameboard.reloadGameboard(solutionArray, gameArray, mockTimer);
+        doReturn(solutionArray).when(mockGateway).loadSolution();
+        doReturn(gameArray).when(mockGateway).loadGame();
+        gameboard.reloadGameboard();
         assertTrue(gameboard.getBox(8, 7).getReveal());
         assertFalse(gameboard.getBox(2, 4).getReveal());
         assertEquals(2, gameboard.getBox(4, 4).getAdjacentBombs());
-        assertThrows(MinesweeperException.class, () ->
-                gameboard.revealBoxInGameboard(54, mockStorage));
+        MinesweeperException thrown = assertThrows(MinesweeperException.class, () ->
+                gameboard.revealBoxInGameboard(54));
+        assertEquals("Box has been flagged. Select a different Box!", thrown.getMessage());
     }
 
     /**
-     * Tests that the correct solution string is sent to storage class after restarting the gameboard.
+     * Tests that the correct solution string is sent to the gateway after restarting the gameboard.
      *
      * @throws StorageException if storage operation fails
      */
@@ -141,19 +140,19 @@ public class GameboardTest {
                 B|1| | | | | | | | |
                 1|1| | | | | | | | |
                 """;
-        verify(mockStorage).storeSolution(expected);
+        verify(mockGateway).storeSolution(expected);
     }
 
     /**
-     * Tests that the correct game string is sent to storage class after revealing and flagging cells.
+     * Tests that the correct game string is sent to the gateway after revealing and flagging cells.
      *
      * @throws MinesweeperException if gameboard operation fails
      */
     @Test
     public void checkCorrectString_storeGame() throws MinesweeperException {
-        gameboard.revealBoxInGameboard(33, mockStorage);
-        gameboard.revealBoxInGameboard(88, mockStorage);
-        gameboard.setFlagInGameboard(54, true, mockStorage);
+        gameboard.revealBoxInGameboard(33);
+        gameboard.revealBoxInGameboard(88);
+        gameboard.setFlagInGameboard(54, true);
         String expected = """
                 R|R|R|R|R|R|R|R|R|R|
                 R|R|R|R|R|R|R|R|R|R|
@@ -166,7 +165,7 @@ public class GameboardTest {
                 N|R|R|R|R|R|R|R|R|R|
                 N|R|R|R|R|R|R|R|R|R|
                 """;
-        verify(mockStorage).storeGame(expected);
+        verify(mockGateway).storeGame(expected);
     }
 
     /**
@@ -176,7 +175,7 @@ public class GameboardTest {
      */
     @Test
     public void checkSetFlag_setFlagInGameboard() throws MinesweeperException {
-        gameboard.setFlagInGameboard(24, true, mockStorage);
+        gameboard.setFlagInGameboard(24, true);
         assertTrue(gameboard.getBox(24 / 10, 24 % 10).getFlag());
     }
 
@@ -187,7 +186,7 @@ public class GameboardTest {
      */
     @Test
     public void checkUnsetFlag_setFlagInGameboard() throws MinesweeperException {
-        gameboard.setFlagInGameboard(24, false, mockStorage);
+        gameboard.setFlagInGameboard(24, false);
         assertFalse(gameboard.getBox(24 / 10, 24 % 10).getFlag());
     }
 
@@ -198,12 +197,12 @@ public class GameboardTest {
      */
     @Test
     public void checkRevealBox_revealBoxInGameboard() throws MinesweeperException {
-        gameboard.setFlagInGameboard(59, true, mockStorage);
-        assertEquals(Gameboard.MoveResult.BOMB, gameboard.revealBoxInGameboard(54, mockStorage));
+        gameboard.setFlagInGameboard(59, true);
+        assertEquals(Gameboard.MoveResult.BOMB, gameboard.revealBoxInGameboard(54));
         MinesweeperException thrown = assertThrows(MinesweeperException.class, () ->
-                gameboard.revealBoxInGameboard(59, mockStorage));
+                gameboard.revealBoxInGameboard(59));
         assertEquals("Box has been flagged. Select a different Box!", thrown.getMessage());
-        assertEquals(Gameboard.MoveResult.SAFE, gameboard.revealBoxInGameboard(60, mockStorage));
+        assertEquals(Gameboard.MoveResult.SAFE, gameboard.revealBoxInGameboard(60));
     }
 
     /**
@@ -213,7 +212,7 @@ public class GameboardTest {
      */
     @Test
     public void returnFalse_safeCellHidden_checkWin() throws MinesweeperException {
-        gameboard.revealBoxInGameboard(20, mockStorage);
+        gameboard.revealBoxInGameboard(20);
         assertFalse(gameboard.checkWin());
     }
 
@@ -227,7 +226,7 @@ public class GameboardTest {
         List<Integer> bombs = List.of(24, 43, 54, 59, 80);
         for (int i = 0; i < 100; i++) {
             if (!bombs.contains(i)) {
-                gameboard.revealBoxInGameboard(i, mockStorage);
+                gameboard.revealBoxInGameboard(i);
             }
         }
         assertTrue(gameboard.checkWin());
@@ -264,11 +263,11 @@ public class GameboardTest {
      */
     @Test
     public void checkUnflaggedBombCount_getUnflaggedBombCount() throws MinesweeperException {
-        gameboard.setFlagInGameboard(24, true, mockStorage);
-        gameboard.setFlagInGameboard(43, true, mockStorage);
-        gameboard.setFlagInGameboard(59, true, mockStorage);
-        gameboard.setFlagInGameboard(80, true, mockStorage);
-        gameboard.setFlagInGameboard(43, false, mockStorage);
+        gameboard.setFlagInGameboard(24, true);
+        gameboard.setFlagInGameboard(43, true);
+        gameboard.setFlagInGameboard(59, true);
+        gameboard.setFlagInGameboard(80, true);
+        gameboard.setFlagInGameboard(43, false);
         assertEquals(2, gameboard.getUnflaggedBombCount());
     }
 }

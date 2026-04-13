@@ -8,12 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import minesweeper.exception.MinesweeperException;
+import minesweeper.logic.StorageTimerUiGateway;
 import minesweeper.storage.Config;
-import minesweeper.storage.Storage;
 
 /**
  * Home page UI for the Minesweeper game.
@@ -22,8 +23,9 @@ import minesweeper.storage.Storage;
  */
 public class HomePage extends Application {
 
-    private Storage storage;
+    private StorageTimerUiGateway gateway;
     private boolean hasExistingSave;
+
 
     /**
      * Starts the JavaFX application by setting up the home page UI.
@@ -33,13 +35,10 @@ public class HomePage extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            String home = System.getProperty("user.dir");
-            storage = new Storage(home);
-            storage.loadGame();
-            storage.loadSolution();
-            hasExistingSave = true;
+            this.gateway = new StorageTimerUiGateway();
+            this.hasExistingSave = this.gateway.hasExistingSave();
         } catch (MinesweeperException e) {
-            hasExistingSave = false;
+            this.hasExistingSave = false;
         }
 
         Image appIcon = new ResourceManager().loadAppIcon();
@@ -87,7 +86,7 @@ public class HomePage extends Application {
 
         newGameBtn.setOnAction(e -> {
             try {
-                GamePage gamePage = new GamePage(primaryStage, storage, false);
+                GamePage gamePage = new GamePage(gateway, primaryStage, false);
                 gamePage.show();
             } catch (MinesweeperException ex) {
                 showError(primaryStage, ex.getMessage());
@@ -96,7 +95,7 @@ public class HomePage extends Application {
 
         continueBtn.setOnAction(e -> {
             try {
-                GamePage gamePage = new GamePage(primaryStage, storage, true);
+                GamePage gamePage = new GamePage(gateway, primaryStage, true);
                 gamePage.show();
             } catch (MinesweeperException ex) {
                 showError(primaryStage, ex.getMessage());
@@ -104,7 +103,7 @@ public class HomePage extends Application {
         });
 
         leaderboardBtn.setOnAction(e -> {
-            LeaderboardPage leaderboardPage = new LeaderboardPage(primaryStage, storage, null);
+            LeaderboardPage leaderboardPage = new LeaderboardPage(gateway, primaryStage, null);
             leaderboardPage.show();
         });
 
@@ -112,6 +111,12 @@ public class HomePage extends Application {
             ResourceManager resourceManager = new ResourceManager();
             new HelpPage(primaryStage, resourceManager).show();
         });
+
+        Label versionLabel = new Label("Version: " + Config.APP_VERSION);
+        versionLabel.setStyle(
+                "-fx-font-size: 11px;"
+                        + "-fx-text-fill: #9e9e9e;"
+        );
 
         VBox layout = new VBox(16);
         layout.setAlignment(Pos.CENTER);
@@ -127,8 +132,15 @@ public class HomePage extends Application {
             helpBtn
         );
 
-        Scene scene = new Scene(layout, 420, 520);
-        primaryStage.setTitle("Minesweeper    " + Config.APP_VERSION);
+        BorderPane root = new BorderPane();
+        root.setStyle("-fx-background-color: #f0f0f5;");
+        root.setCenter(layout);
+        root.setBottom(versionLabel);
+        BorderPane.setAlignment(versionLabel, Pos.BOTTOM_LEFT);
+        BorderPane.setMargin(versionLabel, new Insets(0, 0, 10, 10));
+        
+        Scene scene = new Scene(root, 420, 520);
+        primaryStage.setTitle("Minesweeper");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

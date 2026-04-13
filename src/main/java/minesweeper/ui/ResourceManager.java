@@ -1,6 +1,7 @@
 package minesweeper.ui;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class ResourceManager {
     public Image loadAppIcon() {
         try (InputStream is = getClass().getResourceAsStream("/" + APP_ICON)) {
             return is != null ? new Image(is) : null;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -43,7 +44,7 @@ public class ResourceManager {
     public Image loadLosePageIcon() {
         try (InputStream is = getClass().getResourceAsStream("/" + LOSE_PAGE_ICON)) {
             return is != null ? new Image(is) : null;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -56,7 +57,7 @@ public class ResourceManager {
     public Image loadWinPageIcon() {
         try (InputStream is = getClass().getResourceAsStream("/" + WIN_PAGE_ICON)) {
             return is != null ? new Image(is) : null;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -69,7 +70,7 @@ public class ResourceManager {
     public Image loadLeaderboardPageIcon() {
         try (InputStream is = getClass().getResourceAsStream("/" + LEADERBOARD_PAGE_ICON)) {
             return is != null ? new Image(is) : null;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -82,7 +83,7 @@ public class ResourceManager {
     public Image loadHelpPageIcon() {
         try (InputStream is = getClass().getResourceAsStream("/" + HELP_PAGE_ICON)) {
             return is != null ? new Image(is) : null;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -95,7 +96,7 @@ public class ResourceManager {
     public Image loadBombIcon() {
         try (InputStream is = getClass().getResourceAsStream("/" + BOMB_ICON)) {
             return is != null ? new Image(is) : null;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -108,7 +109,7 @@ public class ResourceManager {
     public Image loadFlagIcon() {
         try (InputStream is = getClass().getResourceAsStream("/" + FLAG_ICON)) {
             return is != null ? new Image(is) : null;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
@@ -125,7 +126,7 @@ public class ResourceManager {
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             return reader.lines().collect(Collectors.joining("\n"));
-        } catch (Exception e) {
+        } catch (IOException e) {
             return "Unable to load help.";
         }
     }
