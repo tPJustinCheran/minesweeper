@@ -3,7 +3,7 @@
 Minesweeper is a desktop application for users to play the classic minesweeper game.
 The best part? Everything is locally hosted on your computer!
 
-📖 [User Guide](./USER_GUIDE.md) | 🛠️ [Developer's Guide](./DEVELOPER_GUIDE.md)
+📖 [User Guide](./USER_GUIDE.md) | 🛠️ [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 - [Quick Start](#quick-start)
 - [Goal](#goal)
