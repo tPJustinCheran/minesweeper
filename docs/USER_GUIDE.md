@@ -214,9 +214,7 @@ Yes. Hints are optional and intended as assistance for difficult situations.
 ### Developer Guide
 The developer documentation can be found in the project repository:
 
-```
 [Developer's Guide](./DEVELOPERS_GUIDE.md)
-```
 
 This guide explains:
 
