@@ -4,6 +4,7 @@ import java.util.List;
 
 import minesweeper.exception.MinesweeperException;
 import minesweeper.exception.StorageException;
+import minesweeper.storage.Config;
 import minesweeper.storage.Storage;
 
 /**
@@ -183,8 +184,23 @@ public class StorageTimerUiGateway {
      *
      * @return time in min and seconds.
      */
-    public String displayTimeMinSecs() {
+    public final String displayTimeMinSecs() {
         return customTimer.displayTimeMinSecs();
     }
 
+    public static String getVersion(){
+        return Config.APP_VERSION;
+    }
+
+    public static Boolean getDebugMode() {
+        return Config.DEBUG_MODE;
+    }
+
+    public static int getBoardSizeRow() {
+        return Config.BOARD_SIZE_ROW;
+    }
+
+    public static int getBoardSizeCol() {
+        return Config.BOARD_SIZE_COL;
+    }
 }
