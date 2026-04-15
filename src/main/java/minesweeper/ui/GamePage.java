@@ -19,7 +19,6 @@ import minesweeper.exception.MinesweeperException;
 import minesweeper.logic.Box;
 import minesweeper.logic.Gameboard;
 import minesweeper.logic.StorageTimerUiGateway;
-import minesweeper.storage.Config;
 
 /**
  * GamePage represents the main game screen.
@@ -35,7 +34,7 @@ public class GamePage {
 
     private final ResourceManager resourceManager = new ResourceManager();
 
-    private final Button[][] cellButtons = new Button[Config.BOARD_SIZE_ROW][Config.BOARD_SIZE_COL];
+    private final Button[][] cellButtons = new Button[StorageTimerUiGateway.getBoardSizeRow()][StorageTimerUiGateway.getBoardSizeCol()];
     private Label bombCountLabel;
     private Button hintBtn;
     private Label timerLabel;
@@ -168,7 +167,7 @@ public class GamePage {
         rightHeader.setAlignment(Pos.CENTER_RIGHT);
         rightHeader.getChildren().addAll(bombCountLabel, hintBtn);
 
-        if (Config.DEBUG_MODE) {
+        if (StorageTimerUiGateway.getDebugMode()) {
             Button winBtn = new Button("Win");
             winBtn.setOnAction(e -> handleWin());
             rightHeader.getChildren().add(winBtn);
@@ -190,9 +189,9 @@ public class GamePage {
         grid.setVgap(3);
         grid.setPadding(new Insets(10));
 
-        for (int row = 0; row < Config.BOARD_SIZE_ROW; row++) {
-            for (int col = 0; col < Config.BOARD_SIZE_COL; col++) {
-                final int boxNumber = row * Config.BOARD_SIZE_COL + col;
+        for (int row = 0; row < StorageTimerUiGateway.getBoardSizeRow(); row++) {
+            for (int col = 0; col < StorageTimerUiGateway.getBoardSizeCol(); col++) {
+                final int boxNumber = row * StorageTimerUiGateway.getBoardSizeCol() + col;
                 Button btn = new Button(" ");
                 btn.setMinSize(46, 46);
 
@@ -254,8 +253,8 @@ public class GamePage {
                 handleFirstClick(boxNumber);
                 return;
             }
-            int row = boxNumber / Config.BOARD_SIZE_COL;
-            int col = boxNumber % Config.BOARD_SIZE_COL;
+            int row = boxNumber / StorageTimerUiGateway.getBoardSizeCol();
+            int col = boxNumber % StorageTimerUiGateway.getBoardSizeCol();
 
             if (gameboard.getBox(row, col).getReveal()) {
                 Gameboard.MoveResult result = gameboard.chord(boxNumber);
@@ -290,8 +289,8 @@ public class GamePage {
      * @throws MinesweeperException if revealing the cell or restarting the board fails
      */
     private void handleFirstClick(int boxNumber) throws MinesweeperException {
-        int row = boxNumber / Config.BOARD_SIZE_COL;
-        int col = boxNumber % Config.BOARD_SIZE_COL;
+        int row = boxNumber / StorageTimerUiGateway.getBoardSizeCol();
+        int col = boxNumber % StorageTimerUiGateway.getBoardSizeCol();
 
         while (gameboard.getBox(row, col).getBomb()) {
             gameboard.restartGameboard();
@@ -399,8 +398,8 @@ public class GamePage {
      */
     private void onCellRightClick(int boxNumber) {
         try {
-            int row = boxNumber / Config.BOARD_SIZE_COL;
-            int col = boxNumber % Config.BOARD_SIZE_COL;
+            int row = boxNumber / StorageTimerUiGateway.getBoardSizeCol();
+            int col = boxNumber % StorageTimerUiGateway.getBoardSizeCol();
             Box box = gameboard.getBox(row, col);
             if (box.getReveal()) {
                 return;
@@ -418,8 +417,8 @@ public class GamePage {
      * Also updates the hint button label with remaining hints.
      */
     private void updateDisplay() {
-        for (int row = 0; row < Config.BOARD_SIZE_ROW; row++) {
-            for (int col = 0; col < Config.BOARD_SIZE_COL; col++) {
+        for (int row = 0; row < StorageTimerUiGateway.getBoardSizeRow(); row++) {
+            for (int col = 0; col < StorageTimerUiGateway.getBoardSizeCol(); col++) {
                 Box box = gameboard.getBox(row, col);
                 Button btn = cellButtons[row][col];
 

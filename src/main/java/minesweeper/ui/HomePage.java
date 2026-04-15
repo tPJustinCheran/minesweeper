@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import minesweeper.exception.MinesweeperException;
 import minesweeper.logic.StorageTimerUiGateway;
-import minesweeper.storage.Config;
 
 /**
  * Home page UI for the Minesweeper game.
@@ -112,7 +111,7 @@ public class HomePage extends Application {
             new HelpPage(primaryStage, resourceManager).show();
         });
 
-        Label versionLabel = new Label("Version: " + Config.APP_VERSION);
+        Label versionLabel = new Label("Version: " + StorageTimerUiGateway.getVersion());
         versionLabel.setStyle(
                 "-fx-font-size: 11px;"
                         + "-fx-text-fill: #9e9e9e;"
