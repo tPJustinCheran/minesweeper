@@ -386,7 +386,7 @@ Chording allows a player to left click a revealed numbered cell to auto-reveal a
 
 #### New Game Sequence Diagram
 
-![New Game Sequence Diagram](../images/NewGame_SequenceDiagram.png)
+![New Game Sequence Diagram](images/NewGame_SequenceDiagram.png)
 
 If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
 
@@ -398,7 +398,7 @@ The first cell the player clicks is guaranteed to never be a bomb. This is imple
 
 #### First Click Safety Sequence Diagram
 
-![First Click Sequence Diagram](../images/FirstClick_SequenceDiagram.png)
+![First Click Sequence Diagram](images/FirstClick_SequenceDiagram.png)
 
 The board is regenerated with a new random bomb layout on each iteration until the clicked cell is safe. The timer is stopped and zeroed on each restart to ensure it only starts once the player has a valid first click.
 
@@ -410,7 +410,7 @@ The board is regenerated with a new random bomb layout on each iteration until t
 
 #### Hint System Sequence Diagram
 
-![Hint Sequence Diagram](../images/Hint_SequenceDiagram.png)
+![Hint Sequence Diagram](images/Hint_SequenceDiagram.png)
 
 Flagged cells are excluded from candidates, this prevents a hint from landing on a flagged cell and making it permanently stuck (since `floodfill` would mark it as revealed and right click would then no-op).
 
@@ -422,7 +422,7 @@ Chording allows a player to left click a revealed numbered cell to auto-reveal a
 
 #### Chording Sequence Diagram
 
-![Chording Sequence Diagram](../images/Chording_SequenceDiagram.png)
+![Chording Sequence Diagram](images/Chording_SequenceDiagram.png)
 
 If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
 
@@ -438,7 +438,7 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 
 #### Continue Game Sequence Diagram
 
-![Continue Game Sequence Diagram](../images/ContinueGame_SequenceDiagram.png)
+![Continue Game Sequence Diagram](images/ContinueGame_SequenceDiagram.png)
 
 The `game.txt` format stores `R` (revealed), `F` (flagged), or `N` (neither) per cell, pipe-delimited per row. The `solution.txt` stores the bomb position (`B`), adjacent bomb count (`1`-`8`), or empty cell (` `).
 
