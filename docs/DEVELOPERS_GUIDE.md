@@ -137,6 +137,7 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 
 ---
 
+<a id="package-minesweeperlogic"></a>
 <details markdown="1"><summary><strong>Package: minesweeper.logic</strong></summary>
 
 #### `Gameboard`
@@ -226,6 +227,7 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 
 ---
 
+<a id="package-minesweeperstorage"></a>
 <details markdown="1"><summary><strong>Package: minesweeper.storage</strong></summary>
 
 #### `Storage`
@@ -270,6 +272,7 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 
 ---
 
+<a id="package-minesweeperui"></a>
 <details markdown="1"><summary><strong>Package: minesweeper.ui</strong></summary>
 
 #### `HomePage`
@@ -433,53 +436,58 @@ If `game.txt` or `solution.txt` cannot be parsed (e.g. corrupted data, wrong num
 
 ## 6. Implementation
 
-### New Game
+<a id="new-game"></a>
+<details markdown="1"><summary><strong>New Game</strong></summary>
 
 When the player clicks New Game on `HomePage`, a `GamePage` is created and `Gameboard` generates a random bomb layout, stores it to disk, and displays the empty grid ready for the first click.
 
-#### New Game Sequence Diagram
-
 ![New Game Sequence Diagram](images/NewGameSequenceDiagram.png)
+
+</details>
 
 ---
 
-### First Click Safety
+<a id="first-click-safety"></a>
+<details markdown="1"><summary><strong>First Click Safety</strong></summary>
 
 The first cell the player clicks is guaranteed to never be a bomb. This is implemented in `GamePage.handleFirstClick()`:
-
-#### First Click Safety Sequence Diagram
 
 ![First Click Sequence Diagram](images/FirstClickSequenceDiagram.png)
 
 The board is regenerated with a new random bomb layout on each iteration until the clicked cell is safe. The timer is stopped and zeroed on each restart to ensure it only starts once the player has a valid first click.
 
+</details>
+
 ---
 
-### Hint System
+<a id="hint-system"></a>
+<details markdown="1"><summary><strong>Hint System</strong></summary>
 
 `Gameboard.giveHint()` reveals a random safe cell and flood fills from it:
-
-#### Hint System Sequence Diagram
 
 ![Hint Sequence Diagram](images/HintSequenceDiagram.png)
 
 Flagged cells are excluded from candidates, this prevents a hint from landing on a flagged cell and making it permanently stuck (since `floodfill` would mark it as revealed and right click would then no-op).
 
+</details>
+
 ---
 
-### Chording
+<a id="chording"></a>
+<details markdown="1"><summary><strong>Chording</strong></summary>
 
 Chording allows a player to left click a revealed numbered cell to auto-reveal all adjacent unrevealed unflagged cells, provided the number of adjacent flags matches the cell's number.
-
-#### Chording Sequence Diagram
 
 ![Chording Sequence Diagram](images/ChordingSequenceDiagram.png)
 
 If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
 
+</details>
+
 ---
 
-### Save / Continue Game
+<a id="save--continue-game"></a>
+<details markdown="1"><summary><strong>Save / Continue Game</strong></summary>
 
 **Saving:**
 
@@ -487,12 +495,11 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 
 **Continuing:**
 
-#### Continue Game Sequence Diagram
-
 ![Continue Game Sequence Diagram](images/ContinueGameSequenceDiagram.png)
 
 The `game.txt` format stores `R` (revealed), `F` (flagged), or `N` (neither) per cell, pipe-delimited per row. The `solution.txt` stores the bomb position (`B`), adjacent bomb count (`1`-`8`), or empty cell (` `).
 
+</details>
 ---
 
 ## 7. Testing

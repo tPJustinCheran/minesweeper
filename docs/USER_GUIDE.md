@@ -39,13 +39,18 @@ Minesweeper is a classic logic puzzle game where players must clear a grid of hi
 ## Getting Started
  
 ### Prerequisites
+
 - Java 21 ([Download here](https://adoptium.net/temurin/releases/?version=21))
 - Note that Java versions higher than 21 may experience issues due to incompatibility with Gradle.
+
 ### Running the app
+
 1. Download the JAR folder [here] 
 2. Move the JAR File to an empty folder. 
 3. Run the JAR File by double-clicking on the `minesweeper.jar` file. 
+
 Alternatively, after navigating into the folder with the JAR file in your terminal, run:  
+
 ```bash
 java -jar minesweeper.jar
 ```
@@ -85,6 +90,7 @@ Possible outcomes:
 - If the cell contains a number, the number indicates how many bombs are in the surrounding 8 cells.  
 - If the cell contains a bomb, the game is lost.  
 - If the cell contains no adjacent bombs, the game automatically reveals surrounding cells using a flood fill behaviour.
+
 Flood fill helps reveal large safe areas quickly.
  
 ![Reveal Box](images/userguide/RevealBox.gif)
@@ -99,6 +105,7 @@ Right clicking allows players to mark suspected bomb locations.
  
 - Right click on an unrevealed cell to place a Flag.  
 - Right click on a flagged cell to remove the Flag.
+
 Flags help track where bombs are likely located, but placing flags does not affect the win condition unless used correctly.
  
 ![Flag and Unflag](images/userguide/FlagUnflag.gif)
@@ -113,6 +120,7 @@ This first move can be:
  
 - Left clicking a cell  
 - Using the Hint button  
+
 The first revealed cell is guaranteed to never contain a bomb, ensuring the game always starts fairly.
  
 The timer continues running until the player wins or loses.
@@ -157,6 +165,7 @@ After winning:
 - The timer stops  
 - The player can enter their name  
 - The result is saved to the leaderboard  
+
 Leaderboard rankings are based on fastest completion time.
  
 ![Win Page](images/userguide/WinPage.gif)
@@ -173,6 +182,7 @@ Players can choose to:
  
 - Play again  
 - Return to the Home page  
+
 ![Lose Page](images/userguide/LosePage.gif)
  
 ---
@@ -185,6 +195,7 @@ Each entry includes:
  
 - Player name  
 - Completion time  
+
 Players can view past achievements and compare results.
  
 ![Leaderboard Page](images/userguide/LeaderboardPage.gif)
@@ -233,6 +244,7 @@ This guide explains:
 - Class responsibilities  
 - Storage structure  
 - Testing approach  
+
 ---
  
 ### Tech Stack
@@ -243,13 +255,17 @@ This guide explains:
 - Mockito
 - Gradle
 - Shadow plugin (fat JAR packaging)
+
 ---
  
 ## Acknowledgments & Credits
  
 ### Character & Aesthetic
-* **Visual Assets:** Icons and visual elements were sourced from open asset libraries and adapted for educational use.
+
+**Visual Assets:** Icons and visual elements were sourced from open asset libraries and adapted for educational use.
+
 ### Technical Credits
+
 This project was developed as part of a software engineering module at the **National University of Singapore (NUS)**.
  
 Minesweeper is inspired by the original game popularised by Microsoft Windows.
