@@ -48,7 +48,7 @@ Our Unique Selling Points:
 | #     | Requirement | Priority                          | Status          | 
 |:------|:-----|:----------------------------------|:----------------|
 | FR-01 |Start a new classic minesweeper game / board | Must-Have                         | ✅               | 
-| FR-02 |Generate a valid minesweeper board| Must-have                         | Must-Have       | ✅ | 
+| FR-02 |Generate a valid minesweeper board| Must-have          | ✅ | 
 | FR-03 |The system shall ensure the first click does not reveal a mine| Must-Have                         | ✅               | 
 | FR-04 |The system shall display the number of adjacenet mines when a non-mine cell is revealed | Must-Have                         | ✅               | 
 | FR-05 |The system shall automatically reveal adjacent cells if a revealed cell has zero adjacent mines (flood fill behaviour) | Must-Have                         | ✅               | 
