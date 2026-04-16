@@ -63,7 +63,13 @@ java -jar build/libs/minesweeper.jar
 
 ---
 
-## 3. Design
+## 3. Class Diagram
+
+![Class Diagram](images/UMLDiagram.png)
+
+---
+
+## 4. Design
 
 ### Architecture Overview
 
@@ -80,14 +86,6 @@ minesweeper.ui  →  minesweeper.logic  →  minesweeper.storage
 This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, which acts as the single entry point for all storage and timer operations. UI classes receive a `StorageTimerUiGateway` object and call it for any data persistence or time tracking needs.
 
 ![Architecture Diagram](images/SystemArchitecture.png)
-
-### Design Decisions
-
-**Gateway pattern:** One facade in logic keeps UI fully decoupled from storage concerns.
-
-**Layered architecture over MVC:** JavaFX blurs MVC boundaries; three layers are simpler and more testable.
-
-**File-based storage over database:** Five small files need no database, are zero dependency, human readable, and portable.
 
 ---
 
@@ -362,7 +360,7 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 
 ---
 
-## 4. Error Handling
+## 5. Error Handling
 
 **Storage (`minesweeper.storage`):**
 All file read/write operations in `Storage` throw `StorageException` (a subclass of `MinesweeperException`) on failure. This includes missing files, unreadable directories, and malformed data. `StorageException` propagates up through `StorageTimerUiGateway` to `Gameboard`, and finally to the UI layer where it is caught and shown as an alert dialog. No storage error silently swallows the exception.
@@ -439,12 +437,6 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 ![Continue Game Sequence Diagram](images/ContinueGameSequenceDiagram.png)
 
 The `game.txt` format stores `R` (revealed), `F` (flagged), or `N` (neither) per cell, pipe-delimited per row. The `solution.txt` stores the bomb position (`B`), adjacent bomb count (`1`-`8`), or empty cell (` `).
-
----
-
-## 6. Class Diagram
-
-![Class Diagram](images/UMLDiagram.png)
 
 ---
 
