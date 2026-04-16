@@ -35,7 +35,7 @@
 4. [Error Handling](#4-error-handling)
 5. [Implementation](#5-implementation)
 
-   <details><summary>Sequence & Activity Diagrams</summary>
+   <details><summary>Sequence & Activity Diagrams**</summary>
 
    - [New Game](#new-game)
    - [First Click Safety](#first-click-safety)
