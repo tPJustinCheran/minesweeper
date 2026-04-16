@@ -91,10 +91,7 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 
 ---
 
-<details>
-<summary><strong>Package: minesweeper.logic</strong></summary>
-
-<br>
+### Package: minesweeper.logic
 
 #### `Gameboard`
 
@@ -179,14 +176,9 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 - Wraps all `CustomTimer` method calls including start, stop, restart, zero, and display
 - `hasExistingSave()` checks if `game.txt` and `solution.txt` exist and are readable
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Package: minesweeper.storage</strong></summary>
-
-<br>
+### Package: minesweeper.storage
 
 #### `Storage`
 
@@ -225,14 +217,9 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 | `MAX_BOMBS` | `20` | Maximum bombs per game |
 | `MAX_HINTS` | `3` | Hints allowed per game |
 
-</details>
-
 ---
 
-<details>
-<summary><strong>Package: minesweeper.ui</strong></summary>
-
-<br>
+### Package: minesweeper.ui
 
 #### `HomePage`
 
@@ -373,8 +360,6 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 
 **Navigation:** N/A, utility class with no navigation.
 
-</details>
-
 ---
 
 ## 4. Error Handling
@@ -399,14 +384,9 @@ If `game.txt` or `solution.txt` cannot be parsed (e.g. corrupted data, wrong num
 
 Chording allows a player to left click a revealed numbered cell to auto-reveal all adjacent unrevealed unflagged cells, provided the number of adjacent flags matches the cell's number.
 
-<details>
-<summary>New Game Sequence Diagram</summary>
-
-<br>
+#### New Game Sequence Diagram
 
 ![New Game Sequence Diagram](../images/NewGame_SequenceDiagram.png)
-
-</details>
 
 If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
 
@@ -416,14 +396,9 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 
 The first cell the player clicks is guaranteed to never be a bomb. This is implemented in `GamePage.handleFirstClick()`:
 
-<details>
-<summary>First Click Safety Sequence Diagram</summary>
-
-<br>
+#### First Click Safety Sequence Diagram
 
 ![First Click Sequence Diagram](../images/FirstClick_SequenceDiagram.png)
-
-</details>
 
 The board is regenerated with a new random bomb layout on each iteration until the clicked cell is safe. The timer is stopped and zeroed on each restart to ensure it only starts once the player has a valid first click.
 
@@ -433,14 +408,9 @@ The board is regenerated with a new random bomb layout on each iteration until t
 
 `Gameboard.giveHint()` reveals a random safe cell and flood fills from it:
 
-<details>
-<summary>Hint System Sequence Diagram</summary>
-
-<br>
+#### Hint System Sequence Diagram
 
 ![Hint Sequence Diagram](../images/Hint_SequenceDiagram.png)
-
-</details>
 
 Flagged cells are excluded from candidates, this prevents a hint from landing on a flagged cell and making it permanently stuck (since `floodfill` would mark it as revealed and right click would then no-op).
 
@@ -450,14 +420,9 @@ Flagged cells are excluded from candidates, this prevents a hint from landing on
 
 Chording allows a player to left click a revealed numbered cell to auto-reveal all adjacent unrevealed unflagged cells, provided the number of adjacent flags matches the cell's number.
 
-<details>
-<summary>Chording Sequence Diagram</summary>
-
-<br>
+#### Chording Sequence Diagram
 
 ![Chording Sequence Diagram](../images/Chording_SequenceDiagram.png)
-
-</details>
 
 If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
 
@@ -471,14 +436,9 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 
 **Continuing:**
 
-<details>
-<summary>Continue Game Sequence Diagram</summary>
-
-<br>
+#### Continue Game Sequence Diagram
 
 ![Continue Game Sequence Diagram](../images/ContinueGame_SequenceDiagram.png)
-
-</details>
 
 The `game.txt` format stores `R` (revealed), `F` (flagged), or `N` (neither) per cell, pipe-delimited per row. The `solution.txt` stores the bomb position (`B`), adjacent bomb count (`1`-`8`), or empty cell (` `).
 
