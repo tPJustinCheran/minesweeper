@@ -3,6 +3,7 @@
 🏠 [Home](./README.md) | 📖 [User Guide](./USER_GUIDE.md) |️️ 🛠️ [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 ## Product Overview 
+
 **Product Goal:** Develop a lightweight, locally-hosted minesweeper game that improves on the classic Windows XP minesweeper experience. 
 
 **Target Audience:** Solo Players on Windows / macOS / Linux desktops running Java 17+. Suitable for all ages!
@@ -10,6 +11,7 @@
 **Minimum-Viable Product (MVP):** Fully Playable JavaFX Application with progress saving, a hint system, and a leaderboard. 
 
 --- 
+
 - [Problem](#problem)
 - [Proposed Solution](#proposed-solution)
 - [User Flow](#user-flow)
@@ -21,6 +23,7 @@
 ---
 
 ## Problem 
+
 - The classic Windows XP Minesweeper has no progress-saving feature. Closing the app loses all progress. 
 - Standard Minesweeper games offer no hint system, forcing players who are stuck to guess blindly. 
 - The Windows XP version has no leaderboard, so completion times cannot be compared across sessions.
@@ -28,6 +31,7 @@
 ---
 
 ## Proposed Solution
+
 Offer a lightweight, desktop-based Minesweeper game built in Java (JavaFX) that addresses the shortcomings 
 of the classic version while remaining accessible and easy to play.
 
@@ -40,11 +44,13 @@ Our Unique Selling Points:
 ---
 
 ## User Flow 
+
 ![Alt text](images/UserFlow.png)
 
 ---
 
 ## Functional Requirements 
+
 | #     | Requirement | Priority                          | Status          | 
 |:------|:-----|:----------------------------------|:----------------|
 | FR-01 |Start a new classic minesweeper game / board | Must-have                         | ✅               | 
@@ -75,6 +81,7 @@ Our Unique Selling Points:
 ---
 
 ## Non-Functional Requirements
+
 | #      | Requirement | Notes                                                                                            | 
 |:-------|:-----|:-------------------------------------------------------------------------------------------------|
 | NFR-01 |Good coding standards for maintainability| Javadoc on all public methods; consistent naming conventions observed in codebase                | 
@@ -89,6 +96,7 @@ Our Unique Selling Points:
 ---
 
 ## Timeline
+
 | Week | Release                                                                     | Tasks                                                                                |
 |:-----|:----------------------------------------------------------------------------|:-------------------------------------------------------------------------------------|
 | 5-7  | -                                                                           | Formation of Problem Statement<br>Defining of Functional/Non-Functional Requirements |
@@ -106,6 +114,7 @@ Our Unique Selling Points:
 ---
 
 ## Constraints and Limitations
+
 - Single-player only. No multiplayer, online, or account system. 
 - Save files are stored locally in a data/ directory adjacent to the JAR. 
 - Requires Java 17+ and JavaFX runtime. 
