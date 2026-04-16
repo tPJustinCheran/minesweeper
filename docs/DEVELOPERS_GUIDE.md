@@ -395,11 +395,31 @@ If `game.txt` or `solution.txt` cannot be parsed (e.g. corrupted data, wrong num
 
 ## 5. Implementation
 
+### New Game
+
+Chording allows a player to left click a revealed numbered cell to auto-reveal all adjacent unrevealed unflagged cells, provided the number of adjacent flags matches the cell's number.
+
+<details>
+<summary>New Game Sequence Diagram</summary>
+
+![New Game Sequence Diagram](../images/NewGame_SequenceDiagram.png)
+
+</details>
+
+If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
+
+---
+
 ### First Click Safety
 
 The first cell the player clicks is guaranteed to never be a bomb. This is implemented in `GamePage.handleFirstClick()`:
 
-`Insert First Click Safety Activity Diagram`
+<details>
+<summary>First Click Safety Sequence Diagram</summary>
+
+![First Click Sequence Diagram](../images/FirstClick_SequenceDiagram.png)
+
+</details>
 
 The board is regenerated with a new random bomb layout on each iteration until the clicked cell is safe. The timer is stopped and zeroed on each restart to ensure it only starts once the player has a valid first click.
 
@@ -409,9 +429,14 @@ The board is regenerated with a new random bomb layout on each iteration until t
 
 `Gameboard.giveHint()` reveals a random safe cell and flood fills from it:
 
-`Insert Hint System Activity Diagram`
+<details>
+<summary>Hint System Sequence Diagram</summary>
 
-Flagged cells are excluded from candidates — this prevents a hint from landing on a flagged cell and making it permanently stuck (since `floodfill` would mark it as revealed and right click would then no-op).
+![Hint Sequence Diagram](../images/Hint_SequenceDiagram.png)
+
+</details>
+
+Flagged cells are excluded from candidates, this prevents a hint from landing on a flagged cell and making it permanently stuck (since `floodfill` would mark it as revealed and right click would then no-op).
 
 ---
 
@@ -419,13 +444,18 @@ Flagged cells are excluded from candidates — this prevents a hint from landing
 
 Chording allows a player to left click a revealed numbered cell to auto-reveal all adjacent unrevealed unflagged cells, provided the number of adjacent flags matches the cell's number.
 
-`Insert Chording Activity Diagram`
+<details>
+<summary>Chording Sequence Diagram</summary>
+
+![Chording Sequence Diagram](../images/Chording_SequenceDiagram.png)
+
+</details>
 
 If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
 
 ---
 
-### Save / Continue Game Flow
+### Save / Continue Game
 
 **Saving (on every move):**
 
@@ -433,7 +463,12 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 
 **Continuing:**
 
-`Insert Continuing Activity Diagram`
+<details>
+<summary>Continue Game Sequence Diagram</summary>
+
+![Continue Game Sequence Diagram](../images/ContinueGame_SequenceDiagram.png)
+
+</details>
 
 The `game.txt` format stores `R` (revealed), `F` (flagged), or `N` (neither) per cell, pipe-delimited per row. The `solution.txt` stores the bomb position (`B`), adjacent bomb count (`1`-`8`), or empty cell (` `).
 
