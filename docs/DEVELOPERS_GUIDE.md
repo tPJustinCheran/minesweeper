@@ -4,6 +4,53 @@
 
 ---
 
+# Table of Contents 
+1. [Acknowledgements](#1-acknowledgements)
+2. [Setting Up](#2-setting-up)
+3. [Design](#3-design)
+    - [Architecture Overview](#architecture-overview)
+    - **Packages & Classes**
+        <details><summary><a href="#package-minesweeperlogic">minesweeper.logic</a></summary>
+          
+        - [Gameboard](#gameboard)
+        - [Box](#box)
+        - [CustomTimer](#customtimer)
+        - [StorageTimerUiGateway](#storagetimeruigateway)
+        </details>
+        <details><summary><a href="#package-minesweeperstorage">minesweeper.storage</a></summary>
+          
+        - [Storage](#storage)
+        - [Config](#config)
+        </details>
+        <details><summary><a href="#package-minesweeperui">minesweeper.ui</a></summary>
+          
+        - [HomePage](#homepage)
+        - [GamePage](#gamepage)
+        - [WinPage](#winpage)
+        - [LosePage](#losepage)
+        - [LeaderboardPage](#leaderboardpage)
+        - [HelpPage](#helppage)
+        - [ResourceManager](#resourcemanager)
+        </details>
+4. [Error Handling](#4-error-handling)
+5. [Implementation](#5-implementation)
+
+   <details><summary>Sequence & Activity Diagrams**</summary>
+
+   - [New Game](#new-game)
+   - [First Click Safety](#first-click-safety)
+   - [Hint System](#hint-system)
+   - [Chording](#chording)
+   - [Save / Continue Game](#save--continue-game)
+   </details>
+
+6. [Class Diagram](#6-class-diagram)
+7. [Testing](#7-testing)
+8. [Functional and Non-Functional Requirements](#8-functional-and-non-functional-requirements)
+
+---
+
+
 ## 1. Acknowledgements
 
 | Library | Version | Purpose |
