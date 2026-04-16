@@ -7,11 +7,6 @@
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/DEVELOPERS_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DEVELOPERS_GUIDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PRODUCT_REQUIREMENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/SYSTEM_ARCHITECTURE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/SYSTEM_ARCHITECTURE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/images/GameboardStorageTimerSequential.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/images/SystemArchitecture.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/images/UMLDiagram.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +45,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="update-docs-branch" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$/settings.gradle" gradleHome="C:\Users\chera\.gradle\wrapper\dists\gradle-9.0.0-bin\d6wjpkvcgsg3oed0qlfss3wgl\gradle-9.0.0" javaHome="C:\Users\chera\.jdks\openjdk-25.0.1" gradleVersion="9.0.0" />
@@ -61,41 +61,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.BombPlacementOnGameboardTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GameboardTest.bomb_placement_validation.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GameboardTest.checkBombPlacementsOnGameboard.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GameboardTest.correct_bomb_placement_validation_centre_cell.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GameboardTest.correct_bomb_placement_validation_corner_cell.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GameboardTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.GameboardTest.reloadGameboard.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RestartGameboardTest.checkCorrectString_storeGame.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.RestartGameboardTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TimerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TimerTest.testLoadTime_Constructor.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TimerTest.testNoLoadTime_Constructor.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ValidateBombPlacementTest.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/chera/Desktop/minesweeper&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/chera/Desktop/minesweeper/settings.gradle/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.BombPlacementOnGameboardTest.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.GameboardTest.bomb_placement_validation.executor": "Run",
+    "Gradle.GameboardTest.checkBombPlacementsOnGameboard.executor": "Run",
+    "Gradle.GameboardTest.correct_bomb_placement_validation_centre_cell.executor": "Run",
+    "Gradle.GameboardTest.correct_bomb_placement_validation_corner_cell.executor": "Run",
+    "Gradle.GameboardTest.executor": "Run",
+    "Gradle.GameboardTest.reloadGameboard.executor": "Run",
+    "Gradle.RestartGameboardTest.checkCorrectString_storeGame.executor": "Run",
+    "Gradle.RestartGameboardTest.executor": "Run",
+    "Gradle.TimerTest.executor": "Run",
+    "Gradle.TimerTest.testLoadTime_Constructor.executor": "Run",
+    "Gradle.TimerTest.testNoLoadTime_Constructor.executor": "Run",
+    "Gradle.ValidateBombPlacementTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "branch-Fix-Dropdown",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/chera/Desktop/minesweeper/settings.gradle/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chera\Desktop\minesweeper" />
@@ -248,8 +248,8 @@
       <list>
         <item itemvalue="Gradle.TimerTest.testNoLoadTime_Constructor" />
         <item itemvalue="Gradle.TimerTest.testLoadTime_Constructor" />
-        <item itemvalue="Gradle.GameboardTest.reloadGameboard" />
         <item itemvalue="Gradle.RestartGameboardTest.checkCorrectString_storeGame" />
+        <item itemvalue="Gradle.GameboardTest.reloadGameboard" />
         <item itemvalue="Gradle.GameboardTest.bomb_placement_validation" />
       </list>
     </recent_temporary>
