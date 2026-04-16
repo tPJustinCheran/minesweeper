@@ -1,7 +1,29 @@
 # Minesweeper - User Guide
-[User Guide](#) | [Developer's Guide](./DEVELOPERS_GUIDE.md)
+
+[Home](./README.md) | [User Guide](#) | [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 Minesweeper is a classic logic puzzle game where players must clear a grid of hidden cells while avoiding bombs. Using clues provided by numbers on revealed cells, players deduce the positions of bombs and mark them with flags. The objective is to reveal all non-bomb cells in the shortest possible time.
+
+## Table of Contents
+
+- [Download](#download)
+- [Getting Started](#getting-started)
+- [Features](#features)
+  - [Starting a New Game](#starting-a-new-game)
+  - [Continuing a Saved Game](#continuing-a-saved-game)
+  - [Left Click - Revealing a Cell](#left-click---revealing-a-cell)
+  - [Right Click - Flag/Unflag](#right-click---flagunflag)
+  - [Timer & First Click Safety](#timer--first-click-safety)
+  - [Hint Button](#hint-button)
+  - [Chording](#chording)
+  - [Win Condition & Leaderboard Entry](#win-condition--leaderboard-entry)
+  - [Lose Condition](#lose-condition)
+  - [Leaderboard Page](#leaderboard-page)
+  - [Help Page](#help-page)
+- [FAQ](#faq)
+- [For Developers](#for-developers)
+- [Acknowledgments & Credits](#acknowledgments--credits)
+- [License](#license)
 
 ![UI](images/userguide/MinesweeperUI.png)
 
