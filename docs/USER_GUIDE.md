@@ -1,13 +1,36 @@
 # Minesweeper - User Guide
-[User Guide](#) | [Developer's Guide](./DEVELOPERS_GUIDE.md)
+
+[Home](./README.md) | [User Guide](#) | [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 Minesweeper is a classic logic puzzle game where players must clear a grid of hidden cells while avoiding bombs. Using clues provided by numbers on revealed cells, players deduce the positions of bombs and mark them with flags. The objective is to reveal all non-bomb cells in the shortest possible time.
+
+## Table of Contents
+
+- [Download](#download)
+- [Getting Started](#getting-started)
+- [Features](#features)
+  - [Starting a New Game](#starting-a-new-game)
+  - [Continuing a Saved Game](#continuing-a-saved-game)
+  - [Left Click - Revealing a Cell](#left-click---revealing-a-cell)
+  - [Right Click - Flag/Unflag](#right-click---flagunflag)
+  - [Timer & First Click Safety](#timer--first-click-safety)
+  - [Hint Button](#hint-button)
+  - [Chording](#chording)
+  - [Win Condition & Leaderboard Entry](#win-condition--leaderboard-entry)
+  - [Lose Condition](#lose-condition)
+  - [Leaderboard Page](#leaderboard-page)
+  - [Help Page](#help-page)
+- [FAQ](#faq)
+- [For Developers](#for-developers)
+- [Acknowledgments & Credits](#acknowledgments--credits)
+- [License](#license)
 
 ![UI](images/userguide/MinesweeperUI.png)
 
 ---
  
 ## Download
+
 [Latest Release](https://github.com/tPJustinCheran/minesweeper/releases/latest)
  
 ---
@@ -15,13 +38,18 @@ Minesweeper is a classic logic puzzle game where players must clear a grid of hi
 ## Getting Started
  
 ### Prerequisites
+
 - Java 21 ([Download here](https://adoptium.net/temurin/releases/?version=21))
 - Note that Java versions higher than 21 may experience issues due to incompatibility with Gradle.
+
 ### Running the app
+
 1. Download the JAR folder [here] 
 2. Move the JAR File to an empty folder. 
 3. Run the JAR File by double-clicking on the `minesweeper.jar` file. 
+
 Alternatively, after navigating into the folder with the JAR file in your terminal, run:  
+
 ```bash
 java -jar minesweeper.jar
 ```
@@ -61,6 +89,7 @@ Possible outcomes:
 - If the cell contains a number, the number indicates how many bombs are in the surrounding 8 cells.  
 - If the cell contains a bomb, the game is lost.  
 - If the cell contains no adjacent bombs, the game automatically reveals surrounding cells using a flood fill behaviour.
+
 Flood fill helps reveal large safe areas quickly.
  
 ![Reveal Box](images/userguide/RevealBox.gif)
@@ -75,6 +104,7 @@ Right clicking allows players to mark suspected bomb locations.
  
 - Right click on an unrevealed cell to place a Flag.  
 - Right click on a flagged cell to remove the Flag.
+
 Flags help track where bombs are likely located, but placing flags does not affect the win condition unless used correctly.
  
 ![Flag and Unflag](images/userguide/FlagUnflag.gif)
@@ -89,6 +119,7 @@ This first move can be:
  
 - Left clicking a cell  
 - Using the Hint button  
+
 The first revealed cell is guaranteed to never contain a bomb, ensuring the game always starts fairly.
  
 The timer continues running until the player wins or loses.
@@ -161,6 +192,7 @@ Each entry includes:
  
 - Player name  
 - Completion time  
+
 Players can view past achievements and compare results.
  
 ![Leaderboard Page](images/userguide/LeaderboardPage.gif)
@@ -209,6 +241,7 @@ This guide explains:
 - Class responsibilities  
 - Storage structure  
 - Testing approach  
+
 ---
  
 ### Tech Stack
@@ -218,14 +251,18 @@ This guide explains:
 - JUnit 5
 - Mockito
 - Gradle
-- Shadow plugin (fat JAR packaging)
+- Shadow plugin (fat JAR packaging)  
+
 ---
  
 ## Acknowledgments & Credits
  
 ### Character & Aesthetic
-* **Visual Assets:** Icons and visual elements were sourced from open asset libraries and adapted for educational use.
+
+**Visual Assets:** Icons and visual elements were sourced from open asset libraries and adapted for educational use.
+
 ### Technical Credits
+
 This project was developed as part of a software engineering module at the **National University of Singapore (NUS)**.
  
 Minesweeper is inspired by the original game popularised by Microsoft Windows.

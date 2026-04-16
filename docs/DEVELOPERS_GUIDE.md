@@ -1,6 +1,28 @@
 # Minesweeper - Developer's Guide
 
-[User Guide](./USER_GUIDE.md) | [Developer's Guide](#)
+[Home](./README.md) | [User Guide](./USER_GUIDE.md) | [Developer's Guide](#)
+
+---
+
+## Table of Contents
+
+- [1. Acknowledgements](#1-acknowledgements)
+- [2. Setting Up](#2-setting-up)
+- [3. Class Diagram](#3-class-diagram)
+- [4. Design](#4-design)
+  - [Architecture Overview](#architecture-overview)
+  - [Package: minesweeper.logic](#package-minesweeperlogic)
+  - [Package: minesweeper.storage](#package-minesweeperstorage)
+  - [Package: minesweeper.ui](#package-minesweeperui)
+- [5. Error Handling](#5-error-handling)
+- [6. Implementation](#6-implementation)
+  - [New Game](#new-game)
+  - [First Click Safety](#first-click-safety)
+  - [Hint System](#hint-system)
+  - [Chording](#chording)
+  - [Save / Continue Game](#save--continue-game)
+- [7. Testing](#7-testing)
+- [8. Functional and Non-Functional Requirements](#8-functional-and-non-functional-requirements)
 
 ---
 
@@ -376,7 +398,7 @@ If `game.txt` or `solution.txt` cannot be parsed (e.g. corrupted data, wrong num
 
 ---
 
-## 5. Implementation
+## 6. Implementation
 
 ### New Game
 
