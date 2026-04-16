@@ -3,29 +3,29 @@
 🏠 [Home](./README.md) | 📖 [User Guide](./USER_GUIDE.md) |️️ 🛠️ [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 ## Product Overview 
-**Product Goal:** Develop a lightweight, locally-hosted minesweeper game that improves on the classic Windows XP experience. 
+**Product Goal:** Develop a lightweight, locally-hosted minesweeper game that improves on the classic Windows XP minesweeper experience. 
 
 **Target Audience:** Solo Players on Windows / macOS / Linux desktops running Java 17+. Suitable for all ages!
 
 **Minimum-Viable Product (MVP):** Fully Playable JavaFX Application with progress saving, a hint system, and a leaderboard. 
 
-*** 
-- [Problem](#problem-)
+--- 
+- [Problem](#problem)
 - [Proposed Solution](#proposed-solution)
-- [User Flow](#user-flow-)
-- [Functional Requirements](#functional-requirements-)
+- [User Flow](#user-flow)
+- [Functional Requirements](#functional-requirements)
 - [Non-Functional Requirements](#non-functional-requirements)
-- [Timeline](#timeline-)
+- [Timeline](#timeline)
 - [Constraints and Limitations](#constraints-and-limitations)
 
-***
+---
 
 ## Problem 
-- The classic Windows XP Minesweeper has no progress-saving feature — closing the app loses all progress. 
+- The classic Windows XP Minesweeper has no progress-saving feature. Closing the app loses all progress. 
 - Standard Minesweeper games offer no hint system, forcing players who are stuck to guess blindly. 
 - The Windows XP version has no leaderboard, so completion times cannot be compared across sessions.
 
-*** 
+---
 
 ## Proposed Solution
 Offer a lightweight, desktop-based Minesweeper game built in Java (JavaFX) that addresses the shortcomings 
@@ -37,25 +37,25 @@ Our Unique Selling Points:
 - Records completion times on a persistent leaderboard sorted by fastest time. 
 - First-click safety guarantee. The first cell clicked is never a bomb.
 
-*** 
+---
 
 ## User Flow 
 ![Alt text](images/UserFlow.png)
 
-*** 
+---
 
 ## Functional Requirements 
 | #     | Requirement | Priority                          | Status          | 
 |:------|:-----|:----------------------------------|:----------------|
-| FR-01 |Start a new classic minesweeper game / board | Must-Have                         | ✅               | 
+| FR-01 |Start a new classic minesweeper game / board | Must-have                         | ✅               | 
 | FR-02 |Generate a valid minesweeper board| Must-have          | ✅ | 
-| FR-03 |The system shall ensure the first click does not reveal a mine| Must-Have                         | ✅               | 
-| FR-04 |The system shall display the number of adjacenet mines when a non-mine cell is revealed | Must-Have                         | ✅               | 
-| FR-05 |The system shall automatically reveal adjacent cells if a revealed cell has zero adjacent mines (flood fill behaviour) | Must-Have                         | ✅               | 
-| FR-06 |The system allows players to flag and unflag cells | Must-Have                         | ✅               | 
-| FR-07 |A flagged cell cannot be revealed when clicked | Must-Have                         | ✅               | 
-| FR-08 |The system will declare a 'win' when all non-mine tiles are revealed | Must-Have                         | ✅               | 
-| FR-09 |The system will declare a 'lose' when a mine is revealed | Must-Have                         | ✅               | 
+| FR-03 |The system shall ensure the first click does not reveal a mine| Must-have                         | ✅               | 
+| FR-04 |The system shall display the number of adjacent mines when a non-mine cell is revealed | Must-have                         | ✅               | 
+| FR-05 |The system shall automatically reveal adjacent cells if a revealed cell has zero adjacent mines (flood fill behaviour) | Must-have                         | ✅               | 
+| FR-06 |The system allows players to flag and unflag cells | Must-have                         | ✅               | 
+| FR-07 |A flagged cell cannot be revealed when clicked | Must-have                         | ✅               | 
+| FR-08 |The system will declare a 'win' when all non-mine tiles are revealed | Must-have                         | ✅               | 
+| FR-09 |The system will declare a 'lose' when a mine is revealed | Must-have                         | ✅               | 
 | FR-10 |Help Message or window will pop up when Help Button is clicked on | Nice-to-Have                      | ✅               | 
 | FR-11 |Save game state on every move; reload on app reopen (Continue Game) | Nice-to-Have                      | ✅               | 
 | FR-12 |Allow player to restart the game by clicking on the restart button| Nice-to-Have                      | ✅               | 
@@ -66,13 +66,13 @@ Our Unique Selling Points:
 | FR-17 |Back to Home from Lose dialog | Nice-to-Have                      | ✅               | 
 | FR-18 |User accounts with scores tied to account | Unlikely-to-Have                  | Not Planned     | 
 | FR-19 |Extension 1: The player can click a button on a revealed numbered cell that has adjacent flags equal its own number to reveal all of its non-revealed, non-flag adjacent cells. (chording) | Unlikely-to-Have                  | ✅     | 
-|FR-20|Extension 1: The player can change the number of rows, columns, bombs, and hints in a setting. Default is [10, 10, 5-20, 3] respectively | Unlikely-to-Have | Not Planned |
-|FR-21|Extension 2: Provide the option for the player to start the minesweeper board with gimmicks | Unlikely-to-Have                  | Not Planned     |
-|FR-22|Extension 2: The player can use a shield (shared usage with hints) to protect them from losing in the next cell reveal. | Unlikely-to-Have                  | Not Planned |
-|FR-23|Extension 2: The system designates fog tiles to safe tiles randomly, which hides the number of adjacent mines to it when displayed.| Unlikely-to-Have                  | Not Planned |
-|FR-24|Extension 2: The system generates super mines counts as 2 mines on an adjacent safe cell display. | Unlikely-to-Have                  | Not Planned     |
+| FR-20 |Extension 1: The player can change the number of rows, columns, bombs, and hints in a setting. Default is [10, 10, 5-20, 3] respectively | Unlikely-to-Have | Not Planned |
+| FR-21 |Extension 2: Provide the option for the player to start the minesweeper board with gimmicks | Unlikely-to-Have                  | Not Planned     |
+| FR-22 |Extension 2: The player can use a shield (shared usage with hints) to protect them from losing in the next cell reveal. | Unlikely-to-Have                  | Not Planned |
+| FR-23 |Extension 2: The system designates fog tiles to safe tiles randomly, which hides the number of adjacent mines to it when displayed.| Unlikely-to-Have                  | Not Planned |
+| FR-24 |Extension 2: The system generates super mines counts as 2 mines on an adjacent safe cell display. | Unlikely-to-Have                  | Not Planned     |
 
-*** 
+---
 
 ## Non-Functional Requirements
 | #      | Requirement | Notes                                                                                            | 
@@ -82,11 +82,11 @@ Our Unique Selling Points:
 | NFR-03 |Intuitive UI| JavaFX GUI with colour-coded buttons, clear labels, and modal dialogs                            | 
 | NFR-04 |Game does not crash| Exception Hierarchy                                                                              | 
 | NFR-05| Platform Compatibility| Java 17+; runs on Windows, macOS, Linux via JAR launcher                                         | 
-|NFR-06| Local Data Storage | All saves stored in a local data/ folder (game.txt, solution.txt, time.txt, hint.txt, leaderboard| 
+|NFR-06| Local Data Storage | All saves stored in a local data/ folder (game.txt, solution.txt, time.txt, hint.txt, leaderboard.txt)| 
 
 
 
-*** 
+---
 
 ## Timeline
 | Week | Release                                                                     | Tasks                                                                                |
@@ -103,7 +103,7 @@ Our Unique Selling Points:
 |      | [v0.6](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.6)     | Chording, Checkstyle & Test Fixes                                                    |
 |      | [v1.0](https://github.com/tPJustinCheran/minesweeper/releases/tag/v1.0)     | Bomb Counter, Flag Display Fix, Floodfill & Hint Bug Fixes, UI/Storage Separation via Gateway, Version Label, User Guide, Developer Guide, UI Testing |
 
-*** 
+---
 
 ## Constraints and Limitations
 - Single-player only. No multiplayer, online, or account system. 
