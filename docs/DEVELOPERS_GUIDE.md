@@ -14,19 +14,19 @@ This guide is intended for developers who wish to understand, maintain, or exten
 4. [Design](#4-design)
     - [Architecture Overview](#architecture-overview)
     - **Packages & Classes**
-        <details><summary><a href="#package-minesweeperlogic">minesweeper.logic</a></summary>
+        <details markdown="1"><summary><a href="#package-minesweeperlogic">minesweeper.logic</a></summary>
 
         - [Gameboard](#gameboard)
         - [Box](#box)
         - [CustomTimer](#customtimer)
         - [StorageTimerUiGateway](#storagetimeruigateway)
         </details>
-        <details><summary><a href="#package-minesweeperstorage">minesweeper.storage</a></summary>
+        <details markdown="1"><summary><a href="#package-minesweeperstorage">minesweeper.storage</a></summary>
 
         - [Storage](#storage)
         - [Config](#config)
         </details>
-        <details><summary><a href="#package-minesweeperui">minesweeper.ui</a></summary>
+        <details markdown="1"><summary><a href="#package-minesweeperui">minesweeper.ui</a></summary>
 
         - [HomePage](#homepage)
         - [GamePage](#gamepage)
@@ -38,7 +38,7 @@ This guide is intended for developers who wish to understand, maintain, or exten
         </details>
 5. [Error Handling](#5-error-handling)
 6. [Implementation](#6-implementation)
-   <details><summary>Sequence & Activity Diagrams</summary>
+   <details markdown="1"><summary>Sequence & Activity Diagrams</summary>
 
    - [New Game](#new-game)
    - [First Click Safety](#first-click-safety)
