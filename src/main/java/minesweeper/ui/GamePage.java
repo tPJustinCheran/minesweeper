@@ -34,7 +34,8 @@ public class GamePage {
 
     private final ResourceManager resourceManager = new ResourceManager();
 
-    private final Button[][] cellButtons = new Button[StorageTimerUiGateway.getBoardSizeRow()][StorageTimerUiGateway.getBoardSizeCol()];
+    private final Button[][] cellButtons =
+        new Button[StorageTimerUiGateway.getBoardSizeRow()][StorageTimerUiGateway.getBoardSizeCol()];
     private Label bombCountLabel;
     private Button hintBtn;
     private Label timerLabel;
