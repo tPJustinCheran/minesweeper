@@ -137,7 +137,7 @@ public class HomePage extends Application {
         root.setBottom(versionLabel);
         BorderPane.setAlignment(versionLabel, Pos.BOTTOM_LEFT);
         BorderPane.setMargin(versionLabel, new Insets(0, 0, 10, 10));
-        
+
         Scene scene = new Scene(root, 420, 520);
         primaryStage.setTitle("Minesweeper");
         primaryStage.setScene(scene);

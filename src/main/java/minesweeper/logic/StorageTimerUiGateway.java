@@ -188,7 +188,7 @@ public class StorageTimerUiGateway {
         return customTimer.displayTimeMinSecs();
     }
 
-    public static String getVersion(){
+    public static String getVersion() {
         return Config.APP_VERSION;
     }
 
