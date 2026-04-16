@@ -1,4 +1,4 @@
-# Minesweeper — Developer's Guide
+# Minesweeper - Developer's Guide
 
 [User Guide](./USER_GUIDE.md) | [Developer's Guide](#)
 
@@ -79,7 +79,7 @@ minesweeper.ui  →  minesweeper.logic  →  minesweeper.storage
 
 This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, which acts as the single entry point for all storage and timer operations. UI classes receive a `StorageTimerUiGateway` object and call it for any data persistence or time tracking needs.
 
-`Insert architecture diagram here`
+![Architecture Diagram](images/SystemArchitecture.png)
 
 ### Design Decisions
 
@@ -368,7 +368,7 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 All file read/write operations in `Storage` throw `StorageException` (a subclass of `MinesweeperException`) on failure. This includes missing files, unreadable directories, and malformed data. `StorageException` propagates up through `StorageTimerUiGateway` to `Gameboard`, and finally to the UI layer where it is caught and shown as an alert dialog. No storage error silently swallows the exception.
 
 **Invalid save files:**
-If `game.txt` or `solution.txt` cannot be parsed (e.g. corrupted data, wrong number of rows), `reloadGameboard()` will throw a `MinesweeperException`. `HomePage` catches this via `hasExistingSave()` returning false, disabling the Continue button so the player cannot enter a broken game state.
+If `game.txt` or `solution.txt` cannot be parsed (e.g. corrupted data, wrong number of rows), loading the saved game will throw a `MinesweeperException`. `HomePage` catches this via `hasExistingSave()` returning false, disabling the Continue button so the player cannot enter a broken game state.
 
 **Timer edge cases:**
 `CustomTimer` reads elapsed time from `time.txt` as a `long`. If the file contains a non-numeric value or a negative number, `Storage.loadTime()` throws a `StorageException` and the timer defaults to zero. This prevents a corrupted time file from crashing the app.
@@ -382,13 +382,11 @@ If `game.txt` or `solution.txt` cannot be parsed (e.g. corrupted data, wrong num
 
 ### New Game
 
-Chording allows a player to left click a revealed numbered cell to auto-reveal all adjacent unrevealed unflagged cells, provided the number of adjacent flags matches the cell's number.
+When the player clicks New Game on `HomePage`, a `GamePage` is created and `Gameboard` generates a random bomb layout, stores it to disk, and displays the empty grid ready for the first click.
 
 #### New Game Sequence Diagram
 
-![New Game Sequence Diagram](images/NewGame_SequenceDiagram.png)
-
-If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
+![New Game Sequence Diagram](images/NewGameSequenceDiagram.png)
 
 ---
 
@@ -398,7 +396,7 @@ The first cell the player clicks is guaranteed to never be a bomb. This is imple
 
 #### First Click Safety Sequence Diagram
 
-![First Click Sequence Diagram](images/FirstClick_SequenceDiagram.png)
+![First Click Sequence Diagram](images/FirstClickSequenceDiagram.png)
 
 The board is regenerated with a new random bomb layout on each iteration until the clicked cell is safe. The timer is stopped and zeroed on each restart to ensure it only starts once the player has a valid first click.
 
@@ -410,7 +408,7 @@ The board is regenerated with a new random bomb layout on each iteration until t
 
 #### Hint System Sequence Diagram
 
-![Hint Sequence Diagram](images/Hint_SequenceDiagram.png)
+![Hint Sequence Diagram](images/HintSequenceDiagram.png)
 
 Flagged cells are excluded from candidates, this prevents a hint from landing on a flagged cell and making it permanently stuck (since `floodfill` would mark it as revealed and right click would then no-op).
 
@@ -422,7 +420,7 @@ Chording allows a player to left click a revealed numbered cell to auto-reveal a
 
 #### Chording Sequence Diagram
 
-![Chording Sequence Diagram](images/Chording_SequenceDiagram.png)
+![Chording Sequence Diagram](images/ChordingSequenceDiagram.png)
 
 If the player has incorrectly flagged a non-bomb cell and chords, the unflagged adjacent bomb will be revealed and the player loses.
 
@@ -430,15 +428,15 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 
 ### Save / Continue Game
 
-**Saving (on every move):**
+**Saving:**
 
-`Insert Saving Activity Diagram`
+![Save Activity Diagram](images/SaveActivityDiagram.png)
 
 **Continuing:**
 
 #### Continue Game Sequence Diagram
 
-![Continue Game Sequence Diagram](images/ContinueGame_SequenceDiagram.png)
+![Continue Game Sequence Diagram](images/ContinueGameSequenceDiagram.png)
 
 The `game.txt` format stores `R` (revealed), `F` (flagged), or `N` (neither) per cell, pipe-delimited per row. The `solution.txt` stores the bomb position (`B`), adjacent bomb count (`1`-`8`), or empty cell (` `).
 
@@ -446,7 +444,7 @@ The `game.txt` format stores `R` (revealed), `F` (flagged), or `N` (neither) per
 
 ## 6. Class Diagram
 
-`Insert DrawIO export picture of the class diagram`
+![Class Diagram](images/UMLDiagram.png)
 
 ---
 
