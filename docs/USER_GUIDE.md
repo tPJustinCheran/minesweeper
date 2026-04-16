@@ -3,7 +3,7 @@
 
 Minesweeper is a classic logic puzzle game where players must clear a grid of hidden cells while avoiding bombs. Using clues provided by numbers on revealed cells, players deduce the positions of bombs and mark them with flags. The objective is to reveal all non-bomb cells in the shortest possible time.
 
-![UI](userguide/MinesweeperUI.png)
+![UI](images/userguide/MinesweeperUI.png)
 
 ---
  
