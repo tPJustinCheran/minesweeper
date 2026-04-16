@@ -1,6 +1,6 @@
-# 📖 Product Requirement Document
+# Product Requirement Document
 
-[User Guide](./USER_GUIDE.md) | [Developer's Guide](./DEVELOPERS_GUIDE.md)  
+🏠 [Home](./README.md) | 📖 [User Guide](./USER_GUIDE.md) |️️ 🛠️ [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 ## Product Overview 
 **Product Goal:** Develop a lightweight, locally-hosted minesweeper game that improves on the classic Windows XP experience. 
@@ -99,8 +99,9 @@ Our Unique Selling Points:
 |      | [v0.2](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.2)     | Leaderboard & Post-Game flow                                                         | 
 |      | [v0.3](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.3)     | Bug Fixes & Hint Improvements                                                        | 
 |      | [v0.4](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.4)     | UI Polish, Config, Package Restructure                                               |
-|      | [v0.5](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.5)     | Code Cleanup, Unit Testing, Documentations  
-|      | [v0.6]     | To-be finalised
+|      | [v0.5](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.5)     | Code Cleanup, Unit Testing, Documentations                                           |
+|      | [v0.6](https://github.com/tPJustinCheran/minesweeper/releases/tag/v0.6)     | Chording, Checkstyle & Test Fixes                                                    |
+|      | [v1.0](https://github.com/tPJustinCheran/minesweeper/releases/tag/v1.0)     | Bomb Counter, Flag Display Fix, Floodfill & Hint Bug Fixes, UI/Storage Separation via Gateway, Version Label, User Guide, Developer Guide, UI Testing |
 
 *** 
 

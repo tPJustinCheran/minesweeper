@@ -1,6 +1,6 @@
 # UI Testing
 
-[User Guide](./USER_GUIDE.md) | [Developer's Guide](./DEVELOPERS_GUIDE.md)  
+🏠 [Home](./README.md) | 📖 [User Guide](./USER_GUIDE.md) |️️ 🛠️ [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 ## 1. Normal UI Tests
 Start the UI tests from a fresh build (no saves available)
