@@ -402,6 +402,8 @@ Chording allows a player to left click a revealed numbered cell to auto-reveal a
 <details>
 <summary>New Game Sequence Diagram</summary>
 
+<br>
+
 ![New Game Sequence Diagram](../images/NewGame_SequenceDiagram.png)
 
 </details>
@@ -416,6 +418,8 @@ The first cell the player clicks is guaranteed to never be a bomb. This is imple
 
 <details>
 <summary>First Click Safety Sequence Diagram</summary>
+
+<br>
 
 ![First Click Sequence Diagram](../images/FirstClick_SequenceDiagram.png)
 
@@ -432,6 +436,8 @@ The board is regenerated with a new random bomb layout on each iteration until t
 <details>
 <summary>Hint System Sequence Diagram</summary>
 
+<br>
+
 ![Hint Sequence Diagram](../images/Hint_SequenceDiagram.png)
 
 </details>
@@ -446,6 +452,8 @@ Chording allows a player to left click a revealed numbered cell to auto-reveal a
 
 <details>
 <summary>Chording Sequence Diagram</summary>
+
+<br>
 
 ![Chording Sequence Diagram](../images/Chording_SequenceDiagram.png)
 
@@ -465,6 +473,8 @@ If the player has incorrectly flagged a non-bomb cell and chords, the unflagged 
 
 <details>
 <summary>Continue Game Sequence Diagram</summary>
+
+<br>
 
 ![Continue Game Sequence Diagram](../images/ContinueGame_SequenceDiagram.png)
 
