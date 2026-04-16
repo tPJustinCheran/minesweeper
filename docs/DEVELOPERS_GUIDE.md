@@ -137,7 +137,7 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 
 ---
 
-### Package: minesweeper.logic
+<details markdown="1"><summary><strong>Package: minesweeper.logic</strong></summary>
 
 #### `Gameboard`
 
@@ -222,9 +222,11 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 - Wraps all `CustomTimer` method calls including start, stop, restart, zero, and display
 - `hasExistingSave()` checks if `game.txt` and `solution.txt` exist and are readable
 
+</details>
+
 ---
 
-### Package: minesweeper.storage
+<details markdown="1"><summary><strong>Package: minesweeper.storage</strong></summary>
 
 #### `Storage`
 
@@ -263,9 +265,12 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 | `MAX_BOMBS` | `20` | Maximum bombs per game |
 | `MAX_HINTS` | `3` | Hints allowed per game |
 
+
+</details>
+
 ---
 
-### Package: minesweeper.ui
+<details markdown="1"><summary><strong>Package: minesweeper.ui</strong></summary>
 
 #### `HomePage`
 
@@ -405,6 +410,8 @@ This is enforced via the `StorageTimerUiGateway` class in `minesweeper.logic`, w
 - All call sites check for `null` before using the asset, falling back to text labels if icons are missing
 
 **Navigation:** N/A, utility class with no navigation.
+
+</details>
 
 ---
 
