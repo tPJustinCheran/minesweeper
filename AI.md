@@ -2,10 +2,13 @@
 
 ## Tool Used
 Claude (claude.ai) — conversational AI assistant
+ChatGPT - conversational AI assistant
+StackOverflow 
 
 ## Increments Assisted
 
-| Increment | How AI Was Used |
+| Increment | How AI / Stack Overflow Was Used |
+| v0.1 | Floodfill function developed with reference to StackOverflow | 
 | v0.1.1 | Assist in suggesting colours for UI and buttons |
 | v0.4 | Assist in suggesting colours for UI and buttons |
 | v0.5 | Finding and explaining bugs for flagging |

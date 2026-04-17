@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/docs/USER_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/USER_GUIDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/demo/MinesweeperDemoCompressed.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/demo/DEMO_VIDEO.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/demo/Put_video_here.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI.md" beforeDir="false" afterPath="$PROJECT_DIR$/AI.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +84,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "branch-DemoVideo",
+    "git-widget-placeholder": "branch-cheran-docs-edits",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
     "nodejs_package_manager_path": "npm",
@@ -290,6 +290,7 @@
       <workItem from="1775573979173" duration="5659000" />
       <workItem from="1776328101978" duration="140000" />
       <workItem from="1776328263452" duration="389000" />
+      <workItem from="1776409879251" duration="2082000" />
     </task>
     <servers />
   </component>
