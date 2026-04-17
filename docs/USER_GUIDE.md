@@ -29,7 +29,7 @@ Minesweeper is a classic logic puzzle game where players must clear a grid of hi
 
 ![UI](images/userguide/MinesweeperUI.png)
 
-![Demo](demo/ `insert demo here`)
+Refer to the demonstration video here: [Demonstration Video](demo/DEMO_VIDEO.mp4)
 
 ---
  

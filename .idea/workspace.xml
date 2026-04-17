@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d931737a-ce97-4cfd-9c73-24c57389f93e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/DEVELOPERS_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DEVELOPERS_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/USER_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/USER_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/demo/MinesweeperDemoCompressed.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/docs/demo/DEMO_VIDEO.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/demo/Put_video_here.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +84,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "branch-Fix-Dropdown",
+    "git-widget-placeholder": "branch-DemoVideo",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chera/Desktop/minesweeper",
     "nodejs_package_manager_path": "npm",
@@ -101,6 +102,7 @@
       <recent name="C:\Users\chera\Desktop\minesweeper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\chera\Desktop\minesweeper\docs\demo" />
       <recent name="C:\Users\chera\Desktop\minesweeper\docs\images" />
       <recent name="C:\Users\chera\Desktop\minesweeper\docs" />
     </key>
