@@ -1,6 +1,6 @@
 # Product Requirement Document
 
-🏠 [Home](./README.md) | 📖 [User Guide](./USER_GUIDE.md) |️️ 🛠️ [Developer's Guide](./DEVELOPERS_GUIDE.md)
+🏠 [Home](../README.md) | 📖 [User Guide](./USER_GUIDE.md) |️️ 🛠️ [Developer's Guide](./DEVELOPERS_GUIDE.md)
 
 ## Product Overview 
 

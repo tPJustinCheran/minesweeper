@@ -1,6 +1,6 @@
 # Minesweeper - Developer's Guide
 
-🏠 [Home](./README.md) | 📖 [User Guide](./USER_GUIDE.md) | 🛠️ [Developer's Guide](#)
+🏠 [Home](../README.md) | 📖 [User Guide](./USER_GUIDE.md) | 🛠️ [Developer's Guide](#)
 
 This guide is intended for developers who wish to understand, maintain, or extend the Minesweeper codebase. It covers the architecture, class responsibilities, implementation details of key features, and testing approach.
 
